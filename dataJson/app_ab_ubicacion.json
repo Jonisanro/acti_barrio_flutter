@@ -1,0 +1,357 @@
+{"results":[{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93bd"
+  },
+  "descripcion": "Estadio Ruca Che",
+  "direccion": "Concordia 4000-4048, Q8302LMD Neuquén, Argentina",
+  "latitud": -38.9466,
+  "longitud": -68.1147,
+  "activo": true,
+  "telefono": "No especificado",
+  "tipo":"Sociales"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93be"
+  },
+  "descripcion": "Infotecnología",
+  "direccion": "Maestro Thames Alderete 400-408, Neuquén, Argentina",
+  "latitud": -38.9508,
+  "longitud": -68.0533,
+  "activo": true,
+  "telefono": "NULL",
+  "tipo":"Deporte"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93bf"
+  },
+  "descripcion": "Casa de Gobierno",
+  "direccion": "La Rioja 300-398, Q8302AUL Neuquén, Argentina",
+  "latitud": -38.9517,
+  "longitud": -68.0635,
+  "activo": true,
+  "telefono": "NULL",
+  "tipo":"Arte"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93c0"
+  },
+  "descripcion": "Monumento",
+  "direccion": "Julio Argentino Roca 25, Neuquén, Argentina",
+  "latitud": -38.9519,
+  "longitud": -68.0591,
+  "activo": true,
+  "telefono": "NULL",
+  "tipo":"Deporte"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93c1"
+  },
+  "descripcion": "Cine Teatro Español",
+  "direccion": "Av. Argentina 261, 8300 Neuquén, Argentina",
+  "latitud": -38.9525,
+  "longitud": -68.0588,
+  "activo": true,
+  "telefono": "299 5848844",
+  "tipo":"Deporte"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93c2"
+  },
+  "descripcion": "Plaza Ministro Gonzalez",
+  "direccion": "Córdoba 199-299, Q8302LZR Neuquén, Argentina",
+  "latitud": -38.9524,
+  "longitud": -68.0541,
+  "activo": true,
+  "telefono": "No corresponde",
+  "tipo":"Deporte"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93c3"
+  },
+  "descripcion": "Prisión Regional del Sur",
+  "direccion": "Maestro Thames Alderete 699-799, Neuquén, Argentina",
+  "latitud": -38.9519,
+  "longitud": -68.0482,
+  "activo": true,
+  "telefono": "No corresponde",
+  "tipo":"Sociales"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93c4"
+  },
+  "descripcion": "Y.P.F. Sala de Reuniones",
+  "direccion": "Talero Eduardo 360, 8300 Neuquén, Argentina",
+  "latitud": -38.9495,
+  "longitud": -68.0539,
+  "activo": true,
+  "telefono": "No corresponde"
+  ,"tipo":"Otros"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93c5"
+  },
+  "descripcion": "Comisión Vecinal Barrio Limay",
+  "direccion": "Plaza Literaria 623-649, Neuquén, Argentina",
+  "latitud": -38.9726,
+  "longitud": -68.0682,
+  "activo": true,
+  "telefono": "0299 442-7401"
+  ,"tipo":"Sociales"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93c6"
+  },
+  "descripcion": "Subsecretaria de Ciudades Saludables y Prevencion de Consumos Problematicos",
+  "direccion": "Perito Moreno 334, Neuquén, Argentina",
+  "latitud": -38.9582,
+  "longitud": -68.0545,
+  "activo": true,
+  "telefono": "299-4498060"
+  ,"tipo":"Otros"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93c7"
+  },
+  "descripcion": "Centro de Salud SLN",
+  "direccion": "Cayastá y Castelli, Q8300MMT Neuquén, Argentina",
+  "latitud": -38.9437,
+  "longitud": -68.1258,
+  "activo": true,
+  "tipo":"Deporte"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93c8"
+  },
+  "descripcion": "Centro Cultural Oeste (CCO)",
+  "direccion": "Dr. Luis Ramón 5200, Q8300 Neuquén, Argentina",
+  "latitud": -38.9422,
+  "longitud": -68.1311,
+  "activo": true,
+  "tipo":"Deporte"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93c9"
+  },
+  "descripcion": "Asociación Adultos Mayores \"Amancay\"",
+  "direccion": "cerro catedral 1156 , Neuquén, Argentina",
+  "latitud": -38.9661,
+  "longitud": -68.0398,
+  "activo": true,
+  "telefono": "299-5046509"
+  ,"tipo":"Otros"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93ca"
+  },
+  "descripcion": "Casa de Atención y Acompañamiento Comunitario",
+  "direccion": "Lago Epulafquen y Las Grutas, Q8304GLP Neuquén, Argentina",
+  "latitud": -38.9719,
+  "longitud": -68.0261,
+  "activo": true
+  ,"tipo":"Otros"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93cb"
+  },
+  "descripcion": "Centro de Salud - Armando Cala Lesina",
+  "direccion": "Tandil 700, Neuquén, Argentina",
+  "latitud": -38.9617,
+  "longitud": -68.0333,
+  "activo": true,
+  "telefono": "299-4402375"
+  ,"tipo":"Arte"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93cc"
+  },
+  "descripcion": "Dirección Provincial de prevención y asistencia de las violencias y admisión",
+  "direccion": "Juan Julián Lastra & Remiggio Bosch, Q8300HXW Neuquén, Argentina",
+  "latitud": -38.9595,
+  "longitud": -68.0763,
+  "activo": true,
+  "telefono": "148"
+  ,"tipo":"Otros"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93cd"
+  },
+  "descripcion": "Servicio de prevención de violencia familiar",
+  "direccion": "Tucumán 302, Q8300PMH Neuquén, Argentina",
+  "latitud": -38.9517,
+  "longitud": -68.0522,
+  "activo": true,
+  "telefono": "4474892"
+  ,"tipo":"Otros"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93ce"
+  },
+  "descripcion": "Comision Vecinal - Barrio Confluencia Urbana",
+  "direccion": "Cerro Catedral 1445, Neuquén, Argentina",
+  "latitud": -38.9661,
+  "longitud": -68.0385,
+  "activo": true
+  ,"tipo":"Arte"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93cf"
+  },
+  "descripcion": "Club Deportivo confluencia",
+  "direccion": "Moquehue 417, Q8300 Neuquén, Argentina",
+  "latitud": -38.9597,
+  "longitud": -68.0314,
+  "activo": true
+  ,"tipo":"Otros"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93d0"
+  },
+  "descripcion": "Centro de Salud Confluencia",
+  "direccion": "Tandil 731, Neuquén, Argentina",
+  "latitud": -38.9618,
+  "longitud": -68.0327,
+  "activo": true,
+  "telefono": "0299 440-2375"
+  ,"tipo":"Otros"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93d1"
+  },
+  "descripcion": "U9",
+  "direccion": "Entre Ríos 336, Q8300 Neuquén, Argentina",
+  "latitud": -38.9515,
+  "longitud": -68.051,
+  "activo": true
+   ,"tipo":"Deporte"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93d2"
+  },
+  "descripcion": "Salón de Provincias Unidas",
+  "direccion": "Manuel Alberti 1800, Q8300 Neuquén, Argentina",
+  "latitud": -38.9472,
+  "longitud": -68.0338,
+  "activo": true
+  ,"tipo":"Otros"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93d3"
+  },
+  "descripcion": "Polideportivo Barrio Provincias Unidas",
+  "direccion": "Islas Malvinas 1900, Q8300 Neuquén, Argentina",
+  "latitud": -38.9478,
+  "longitud": -68.0319,
+  "activo": true
+  ,"tipo":"Otros"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93d4"
+  },
+  "descripcion": "Sede Alberti",
+  "direccion": "Manuel Alberti 1800, Q8300 Neuquén, Argentina",
+  "latitud": -38.9472,
+  "longitud": -68.0338,
+  "activo": true
+  ,"tipo":"Otros"},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93d5"
+  },
+  "descripcion": "Centro de Salud \" Almafuerte\"",
+  "direccion": "Calle Dr. Jorge Gervasoni 6431, Q8304JBB Neuquén, Argentina",
+  "latitud": -38.9303,
+  "longitud": -68.1469,
+  "activo": true,
+  "telefono": "299-4494778"
+  ,"tipo":"Arte"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93d6"
+  },
+  "descripcion": "Escuela 348",
+  "direccion": "Casimiro Gómez 2220, Q8300JFF Neuquén, Argentina",
+  "latitud": -38.9316,
+  "longitud": -68.1317,
+  "activo": true,
+  "telefono": "299-4450508"
+  ,"tipo":"Otros"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93d7"
+  },
+  "descripcion": "Manzana 18 Casa 8 Cuenca XV",
+  "direccion": "Cabellera del Frio, Neuquén, Argentina",
+  "latitud": -38.9276,
+  "longitud": -68.1302,
+  "activo": true
+  ,"tipo":"Arte"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93d8"
+  },
+  "descripcion": "SUM Cuenca XV",
+  "direccion": "Cabellera del Frio, Neuquén, Argentina",
+  "latitud": -38.9277,
+  "longitud": -68.1285,
+  "activo": true
+  ,"tipo":"Arte"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93d9"
+  },
+  "descripcion": "Los Zorzales 525",
+  "direccion": "Avenida Argentina 347, Neuquén, Argentina",
+  "latitud": -38.9517,
+  "longitud": -68.0592,
+  "activo": true
+  ,"tipo":"Otros"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93da"
+  },
+  "descripcion": "Cancha de fútbol \"Buscadores de sueño\" ",
+  "direccion": "Cnel. Racedo Eduardo 2116, Q8302GCB Neuquén, Argentina",
+  "latitud": -38.9323,
+  "longitud": -68.1282,
+  "activo": true
+  ,"tipo":"Otros"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93db"
+  },
+  "descripcion": "Comisión vecinal Cuenca XV",
+  "direccion": "Almonacid y Casimiro Gomez, Neuquén, Argentina",
+  "latitud": -38.9296,
+  "longitud": -68.1304,
+  "activo": true
+  ,"tipo":"Otros"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93dc"
+  },
+  "descripcion": "Oficina OJO (Melipal)",
+  "direccion": "Primero de Mayo 3998, Q8300 Neuquén, Argentina",
+  "latitud": -38.9348,
+  "longitud": -68.1139,
+  "activo": true
+  ,"tipo":"Cursos"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93dd"
+  },
+  "descripcion": "Organización OJO",
+  "direccion": "1 de Enero 5007, Q8300 Neuquén, Argentina",
+  "latitud": -38.9307,
+  "longitud": -68.1284,
+  "activo": true
+  ,"tipo":"Cursos"
+},{
+  "_id": {
+    "$oid": "62697f9d3bb568661cff93de"
+  },
+  "descripcion": "Escuela 312",
+  "direccion": "Venado Tuerto 2119, Q8300 Neuquén, Argentina",
+  "latitud": -38.9323,
+  "longitud": -68.1239,
+  "activo": true
+  ,"tipo":"Cursos"
+}]}
