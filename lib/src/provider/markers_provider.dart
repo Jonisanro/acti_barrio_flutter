@@ -45,10 +45,29 @@ class MarkersProviders extends ChangeNotifier {
     notifyListeners();
   }
 
+  //*Mapa de filtros activos/inactivos
+  Map<String, bool> _filtrosEstado = {
+    'Deporte': true,
+    'Arte': true,
+    'Cursos': true,
+    'Sociales': true,
+    'Bici': true,
+    'Mercado': true,
+    'Otros': true,
+  };
+
+  Map<String, bool> get filtrosEstado => _filtrosEstado;
+
+  set filtrosEstado(Map<String, bool> value) {
+    _filtrosEstado = value;
+
+    notifyListeners();
+  }
+
   //*Agregado de marcadores por filtro
 
   addMarkers(String filtro) async {
-    for (var e in markers) {
+    markers.forEach((e) async {
       if (e.tipo == filtro) {
         BitmapDescriptor bitmap =
             await getAssetImageMarker('images/actibarrio_otros.png');
@@ -73,6 +92,13 @@ class MarkersProviders extends ChangeNotifier {
           case 'Cursos':
             bitmap = await getAssetImageMarker('images/actibarrio_cursos.png');
             break;
+          case 'Bici':
+            bitmap = await getAssetImageMarker('images/actibarrio_bici.png');
+            break;
+
+          case 'Mercado':
+            bitmap = await getAssetImageMarker('images/actibarrio_mercado.png');
+            break;
           default:
             await getAssetImageMarker('images/actibarrio_otros.png');
         }
@@ -93,17 +119,22 @@ class MarkersProviders extends ChangeNotifier {
         markersMap.addAll({
           (e.id.oid + e.tipo).toString(): tempMarker,
         });
-        notifyListeners();
       }
-    }
+      notifyListeners();
+    });
+    Future.delayed(const Duration(milliseconds: 500), () {}).then((_) {
+      notifyListeners();
+    });
   }
-
   //*Eliminacion de marcadores por filtro
+
   removeMarkers(String filtro) async {
     final tempMarkersMap = markersMap;
     tempMarkersMap.removeWhere((key, value) => key.contains(filtro));
     markersMap = tempMarkersMap;
-    notifyListeners();
+    Future.delayed(const Duration(milliseconds: 500), () {}).then((_) {
+      notifyListeners();
+    });
   }
 
   //*Carga de Marcadores
@@ -130,6 +161,14 @@ class MarkersProviders extends ChangeNotifier {
 
         case 'Cursos':
           bitmap = await getAssetImageMarker('images/actibarrio_cursos.png');
+          break;
+
+        case 'Bici':
+          bitmap = await getAssetImageMarker('images/actibarrio_bici.png');
+          break;
+
+        case 'Mercado':
+          bitmap = await getAssetImageMarker('images/actibarrio_mercado.png');
           break;
         default:
       }
