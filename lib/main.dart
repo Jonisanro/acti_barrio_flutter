@@ -1,4 +1,5 @@
 import 'package:acti_barrio_flutter/src/pages/event_descriptor.dart';
+import 'package:acti_barrio_flutter/src/pages/google_maps_page.dart';
 import 'package:acti_barrio_flutter/src/pages/home_page.dart';
 import 'package:acti_barrio_flutter/src/pages/splash_screen.dart';
 import 'package:acti_barrio_flutter/src/provider/barrios_info.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         routes: {
           '/home': (BuildContext context) => const HomePage(),
+          '/googl_maps': (BuildContext context) => const GoogleMapsPage(),
           '/splash': (BuildContext context) => const SplashScreen(),
           '/eventDescriptor': (BuildContext context) => const EventDescriptor(),
         },

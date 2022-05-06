@@ -58,8 +58,8 @@ class MarkerP {
         latitud: json["latitud"].toDouble(),
         longitud: json["longitud"].toDouble(),
         activo: json["activo"],
-        telefono: json["telefono"] == null ? '' : json["telefono"],
-        tipo: json["tipo"] == null ? '' : json["tipo"],
+        telefono: json["telefono"] ?? '',
+        tipo: json["tipo"] ?? '',
       );
 
   Map<String, dynamic> toMap() => {
@@ -69,8 +69,8 @@ class MarkerP {
         "latitud": latitud,
         "longitud": longitud,
         "activo": activo,
-        "telefono": telefono == null ? '' : telefono,
-        "tipo": tipo == null ? '' : tipo,
+        "telefono": telefono,
+        "tipo": tipo,
       };
 }
 

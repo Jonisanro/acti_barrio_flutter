@@ -20,21 +20,10 @@ class ShowDialogBarrios {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text('Barrios', style: TextStyle(fontSize: 20)),
-              TextButton(
-                onPressed: () async {},
-                child: const Text(
-                  'Ayuda',
-                  style: TextStyle(fontSize: 20.0),
-                ),
-                style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all(Colors.blue)),
-              )
-            ],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(35.0),
           ),
+          title: const Text('Barrios', style: TextStyle(fontSize: 20)),
           content: SizedBox(
             width: size.width * 0.8,
             height: size.height * 0.35,
