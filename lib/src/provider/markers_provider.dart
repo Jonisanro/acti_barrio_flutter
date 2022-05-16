@@ -22,7 +22,6 @@ class MarkersProviders extends ChangeNotifier {
     notifyListeners();
   }
 
-  //*Controllador del GoogleMaps
   CustomInfoWindowController _customInfoWindowController =
       CustomInfoWindowController();
 

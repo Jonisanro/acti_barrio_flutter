@@ -1,19 +1,15 @@
 import 'dart:ui';
-
 import 'package:acti_barrio_flutter/models/markers_response.dart';
-
 import 'package:acti_barrio_flutter/src/provider/markers_provider.dart';
 import 'package:acti_barrio_flutter/src/widgets/custom_navigator.dart';
 import 'package:acti_barrio_flutter/src/widgets/show_dialog_barrios.dart';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-
 import 'package:provider/provider.dart';
-
 import '../provider/barrios_info.dart';
 
 class GoogleMapsPage extends StatefulWidget {
@@ -26,22 +22,11 @@ class GoogleMapsPage extends StatefulWidget {
 class _GoogleMapsPageState extends State<GoogleMapsPage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   LatLng centerCordenadas = const LatLng(-38.952040, -68.059179);
-  bool permissionEnabled = false;
-
+  dynamic ispermissionEnabled = false;
+  bool isGpsEnabled = false;
+  LocationPermission? permission;
   List<Marker> markersList = [];
   late MarkerP tappedMarker;
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    _determinePermissionPosition();
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +35,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
       key: _key,
       child: Scaffold(
         drawer: _drawer(),
-        body: FutureBuilder<Position>(
+        body: FutureBuilder(
           future: _determinePermissionPosition(),
           builder: ((context, snapshot) {
             //TODO Revisar que este habilitado el gps , que  los permisos hayan sido consedidos
@@ -87,33 +72,26 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                             elevation: 10.0,
                             backgroundColor: Colors.white,
                             onPressed: () async => {
-                              if (permissionEnabled)
-                                {
-                                  await barriosInfo.setPosition(
-                                    context,
-                                    CameraPosition(
-                                      bearing: 0,
-                                      tilt: 0,
-                                      target: centerCordenadas,
-                                      zoom: 16.0,
-                                    ),
-                                  )
-                                }
-                              else
-                                {
-                                  await _determinePermissionPosition()
-                                      .then((value) => {
-                                            barriosInfo.setPosition(
-                                              context,
-                                              CameraPosition(
-                                                bearing: 0,
-                                                tilt: 0,
-                                                target: centerCordenadas,
-                                                zoom: 16.0,
-                                              ),
-                                            )
-                                          })
-                                }
+                              await _determinePermissionPosition()
+                                  .then((value) async => {
+                                        isGpsEnabled = await Geolocator
+                                            .isLocationServiceEnabled(),
+                                        ispermissionEnabled =
+                                            await Geolocator.checkPermission(),
+                                        if (isGpsEnabled &&
+                                            ispermissionEnabled ==
+                                                LocationPermission.whileInUse)
+                                          await barriosInfo.setPosition(
+                                            context,
+                                            CameraPosition(
+                                              bearing: 0,
+                                              tilt: 0,
+                                              target: centerCordenadas,
+                                              zoom: 16.0,
+                                            ),
+                                          ),
+                                        setState(() {}),
+                                      })
                             },
                             child: const Icon(
                               Icons.my_location,
@@ -129,6 +107,13 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                   padding: const EdgeInsets.only(top: 8.0),
                   child: Container(
                     decoration: const BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          offset: Offset(0.0, 1.0), //(x,y)
+                          blurRadius: 6.0,
+                        ),
+                      ],
                       borderRadius: BorderRadius.only(
                         bottomRight: Radius.circular(10),
                         topRight: Radius.circular(10),
@@ -200,24 +185,28 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
     );
   }
 
-  Future<Position> _determinePermissionPosition() async {
+  Future _determinePermissionPosition() async {
     final markersProviders =
         Provider.of<MarkersProviders>(context, listen: false);
     bool serviceEnabled = false;
-    LocationPermission permission;
 
-    // Test if location services are enabled.
+    await markersProviders.getMarkers();
+
+    //*Revisa si Gps esta habilitado
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
-      return Future.error('Location services are disabled.');
-    }
 
+    if (!serviceEnabled) {
+      //*Si esta deshabilitado, pregunta si desea habilitarlo
+      await _enabledGpsDialog();
+      return false;
+    }
+    //*Chequea si los permisos estan concedidos
     permission = await Geolocator.checkPermission();
+    //*Si no estan concedidos los pide
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
+
+      //*Si no se conceden los permisos no sigue
       if (permission == LocationPermission.denied) {
         // Permissions are denied, next time you could try
         // requesting permissions again (this is also where
@@ -225,24 +214,79 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
         // returned true. According to Android guidelines
         // your App should show an explanatory UI now.
 
-        return Future.error('Permission denied.');
+        return false;
       }
     }
-
+    //*Si se deniegan los permisos para siempre
     if (permission == LocationPermission.deniedForever) {
+      await _enabledPermissionDialog();
       // Permissions are denied forever, handle appropriately.
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
+
+      return false;
     }
 
-    // When we reach here, permissions are granted and we can
-    // continue accessing the position of the device.
+    //*Si se conceden los permisos sigue
 
     Geolocator.getCurrentPosition().then((value) => {
           centerCordenadas = LatLng(value.latitude, value.longitude),
         });
-    await markersProviders.getMarkers();
+
     return Geolocator.getCurrentPosition();
+  }
+
+  Future<dynamic> _enabledGpsDialog() {
+    return showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(35.0),
+            ),
+            title:
+                const Text('GPS desactivado', style: TextStyle(fontSize: 20)),
+            content: const Text(
+                'Para poder usar la aplicación necesitas activar el GPS'),
+            actions: [
+              CupertinoDialogAction(
+                child: const Text('Abrir Configuracion'),
+                onPressed: () async {
+                  await Geolocator.openLocationSettings();
+                  Future.delayed(const Duration(seconds: 1), () {
+                    Navigator.of(context).pop();
+                  });
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  Future<dynamic> _enabledPermissionDialog() {
+    return showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(35.0),
+            ),
+            title: const Text('Permisos Desactivados',
+                style: TextStyle(fontSize: 20)),
+            content: const Text(
+                'Para poder usar la aplicación necesitas activar los permisos'),
+            actions: [
+              CupertinoDialogAction(
+                child: const Text('Abrir Configuracion'),
+                onPressed: () async {
+                  Geolocator.openAppSettings();
+
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
   }
 
   Widget _drawer() {
