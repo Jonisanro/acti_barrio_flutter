@@ -11,13 +11,13 @@ class CustomBottonBar extends StatefulWidget {
 
 class _CustomBottonBarState extends State<CustomBottonBar> {
   Map tempButtons = {
-    'images/actibarrio_deporte.png': 'Deporte',
-    'images/actibarrio_arte.png': 'Arte',
-    'images/actibarrio_cursos.png': 'Cursos',
-    'images/actibarrio_sociales.png': 'Sociales',
-    'images/actibarrio_otros.png': 'Otros',
-    'images/actibarrio_bici.png': 'Bici',
-    'images/actibarrio_mercado.png': 'Mercado',
+    'images/actibarrio_deporte.png': 'deporte',
+    'images/actibarrio_arte.png': 'arte',
+    'images/actibarrio_cursos.png': 'cursos',
+    'images/actibarrio_sociales.png': 'sociales',
+    'images/actibarrio_otros.png': 'otros',
+    'images/actibarrio_bici.png': 'bici',
+    'images/actibarrio_mercado.png': 'mercado',
   };
 
   @override
@@ -41,7 +41,7 @@ class _CustomBottonBarState extends State<CustomBottonBar> {
         activeBackgroundColor: Colors.grey[800],
         child: const Center(
           child: Image(
-            image: AssetImage('images/filtros.png'),
+            image: AssetImage('images/filtro.png'),
           ),
         ),
         children: tempButtons.keys.map((e) {

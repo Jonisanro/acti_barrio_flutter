@@ -16,7 +16,7 @@ Future<BitmapDescriptor> getAssetImageMarker(String image) async {
 Future<Uint8List?> getBytesFromAsset(String path) async {
   ByteData data = await rootBundle.load(path);
   ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
-      targetWidth: 100);
+      targetWidth: 125);
   ui.FrameInfo fi = await codec.getNextFrame();
   return (await fi.image.toByteData(format: ui.ImageByteFormat.png))
       ?.buffer
