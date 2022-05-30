@@ -1,4 +1,8 @@
-import 'package:acti_barrio_flutter/models/markers_response.dart';
+import 'dart:async';
+
+import 'package:acti_barrio_flutter/share_preferences/preferences.dart';
+
+import '../models/markers_response.dart';
 import 'package:clippy_flutter/triangle.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/material.dart';
@@ -8,18 +12,53 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../helpers/custom_image_markers.dart';
 
 class MarkersProviders extends ChangeNotifier {
-  late MarkerP tappedMarker;
-  List<MarkerP> markers = [];
+  late Evento tappedMarker;
+  List<Evento> markers = [];
   MarkersProviders() {
     getDisplayMarkers();
   }
-
+//TODO: Mejorar logica de busqueda y armado de markadores
   //*Carga marcadores desde el json/http
   getDisplayMarkers() async {
     String data = await rootBundle.loadString('dataJson/app_ab_ubicacion.json');
     final jsonResult = MarkersResponse.fromJson(data);
     markers = jsonResult.results;
     notifyListeners();
+    return markers;
+  }
+
+  //*Cargar eventos segun tipo
+  Future<List<Evento>> getEventForTypes(String tipo) async {
+    List<Evento> markersListTipo = [];
+    String data = await rootBundle.loadString('dataJson/app_ab_ubicacion.json');
+    final jsonResult = MarkersResponse.fromJson(data);
+    markers = jsonResult.results;
+
+    for (var element in markers) {
+      if (element.tipo == tipo) {
+        markersListTipo.add(element);
+      }
+    }
+
+    notifyListeners();
+    return markersListTipo;
+  }
+
+  //*Cargar eventos favoritos
+  Future<List<Evento>> getEventFavorites() async {
+    final prefs = Preferences();
+    List<Evento> markersListTipo = [];
+    String data = await rootBundle.loadString('dataJson/app_ab_ubicacion.json');
+    final jsonResult = MarkersResponse.fromJson(data);
+    markers = jsonResult.results;
+
+    for (var element in prefs.favorites) {
+      final temp = markers.where((e) => e.id.oid == element).first;
+      markersListTipo.add(temp);
+    }
+
+    notifyListeners();
+    return markersListTipo;
   }
 
   CustomInfoWindowController _customInfoWindowController =
@@ -46,13 +85,13 @@ class MarkersProviders extends ChangeNotifier {
 
   //*Mapa de filtros activos/inactivos
   Map<String, bool> _filtrosEstado = {
-    'Deporte': true,
-    'Arte': true,
-    'Cursos': true,
-    'Sociales': true,
-    'Bici': true,
-    'Mercado': true,
-    'Otros': true,
+    'deporte': true,
+    'arte': true,
+    'cursos': true,
+    'sociales': true,
+    'bici': true,
+    'mercado': true,
+    'otros': true,
   };
 
   Map<String, bool> get filtrosEstado => _filtrosEstado;
@@ -69,38 +108,7 @@ class MarkersProviders extends ChangeNotifier {
     markers.forEach((e) async {
       if (e.tipo == filtro) {
         BitmapDescriptor bitmap =
-            await getAssetImageMarker('images/actibarrio_otros.png');
-
-        switch (e.tipo) {
-          case 'Otros':
-            bitmap = await getAssetImageMarker('images/actibarrio_otros.png');
-            break;
-          case 'Deporte':
-            bitmap = await getAssetImageMarker('images/actibarrio_deporte.png');
-            break;
-          case 'Arte':
-            bitmap = await getAssetImageMarker('images/actibarrio_arte.png');
-
-            break;
-          case 'Sociales':
-            bitmap =
-                await getAssetImageMarker('images/actibarrio_sociales.png');
-
-            break;
-
-          case 'Cursos':
-            bitmap = await getAssetImageMarker('images/actibarrio_cursos.png');
-            break;
-          case 'Bici':
-            bitmap = await getAssetImageMarker('images/actibarrio_bici.png');
-            break;
-
-          case 'Mercado':
-            bitmap = await getAssetImageMarker('images/actibarrio_mercado.png');
-            break;
-          default:
-            await getAssetImageMarker('images/actibarrio_otros.png');
-        }
+            await getAssetImageMarker('images/actibarrio_$filtro.png');
 
         final markerId = MarkerId(e.id.oid.toString());
         Marker tempMarker = Marker(
@@ -121,9 +129,7 @@ class MarkersProviders extends ChangeNotifier {
       }
       notifyListeners();
     });
-    Future.delayed(const Duration(milliseconds: 500), () {}).then((_) {
-      notifyListeners();
-    });
+    Future.delayed(const Duration(milliseconds: 500), () {}).then((_) {});
   }
   //*Eliminacion de marcadores por filtro
 
@@ -138,39 +144,9 @@ class MarkersProviders extends ChangeNotifier {
 
   //*Carga de Marcadores
   getMarkers() async {
-    BitmapDescriptor bitmap =
-        await getAssetImageMarker('images/actibarrio_otros.png');
-
     for (var e in markers) {
-      switch (e.tipo) {
-        case 'Otros':
-          bitmap = await getAssetImageMarker('images/actibarrio_otros.png');
-          break;
-        case 'Deporte':
-          bitmap = await getAssetImageMarker('images/actibarrio_deporte.png');
-          break;
-        case 'Arte':
-          bitmap = await getAssetImageMarker('images/actibarrio_arte.png');
-
-          break;
-        case 'Sociales':
-          bitmap = await getAssetImageMarker('images/actibarrio_sociales.png');
-
-          break;
-
-        case 'Cursos':
-          bitmap = await getAssetImageMarker('images/actibarrio_cursos.png');
-          break;
-
-        case 'Bici':
-          bitmap = await getAssetImageMarker('images/actibarrio_bici.png');
-          break;
-
-        case 'Mercado':
-          bitmap = await getAssetImageMarker('images/actibarrio_mercado.png');
-          break;
-        default:
-      }
+      BitmapDescriptor bitmap =
+          await getAssetImageMarker('images/actibarrio_${e.tipo}.png');
 
       final markerId = MarkerId(e.id.oid.toString());
       Marker tempMarker = Marker(
@@ -196,7 +172,7 @@ class MarkersProviders extends ChangeNotifier {
   //*Toma de datos de marcador seleccionado
   void _onMarkerTapped(
     MarkerId markerId,
-    List<MarkerP> markers,
+    List<Evento> markers,
   ) {
     tappedMarker = markers
         .firstWhere((marker) => marker.id.oid.toString() == markerId.value);
@@ -211,16 +187,17 @@ class _CustomInfoWindow extends StatelessWidget {
     required this.e,
   }) : super(key: key);
 
-  final MarkerP tappedMarker;
-  final MarkerP e;
+  final Evento tappedMarker;
+  final Evento e;
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Container(
-          width: double.infinity,
+          width: MediaQuery.of(context).size.width * 0.5,
           decoration: BoxDecoration(
             border: Border.all(color: const Color.fromRGBO(22, 117, 232, 1)),
             color: Colors.white,
@@ -231,21 +208,27 @@ class _CustomInfoWindow extends StatelessWidget {
               Navigator.pushNamed(context, '/eventDescriptor',
                   arguments: tappedMarker);
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(e.descripcion,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(22, 117, 232, 1))),
-                const SizedBox(height: 2),
-                Text(e.direccion,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 10, color: Colors.black)),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 2.5, horizontal: 5),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(e.descripcion,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          overflow: TextOverflow.ellipsis,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 65, 125, 135))),
+                  const SizedBox(height: 1),
+                  Text(e.direccion,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style:
+                          const TextStyle(fontSize: 10, color: Colors.black)),
+                ],
+              ),
             ),
           ),
         ),
@@ -254,9 +237,9 @@ class _CustomInfoWindow extends StatelessWidget {
           child: Triangle.isosceles(
             edge: Edge.BOTTOM,
             child: Container(
-              color: Colors.blue,
+              color: const Color.fromRGBO(81, 167, 177, 1),
               width: 20.0,
-              height: 10.0,
+              height: 15.0,
             ),
           ),
         )

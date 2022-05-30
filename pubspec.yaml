@@ -32,6 +32,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
+  animate_do: ^2.1.0
   cupertino_icons: ^1.0.2
   provider: ^6.0.2
   animated_splash_screen: ^1.2.0
@@ -42,8 +43,12 @@ dependencies:
   clippy_flutter: ^2.0.0-nullsafety.1
   line_awesome_flutter: ^2.0.0
   flutter_speed_dial: ^6.0.0
-  permission_handler: ^9.2.0
-  flutter_bloc: ^8.0.1
+  shared_preferences: ^2.0.15
+  android_intent_plus: ^3.1.1
+  url_launcher: ^6.1.2
+  flutter_share: ^2.0.0
+  flutter_email_sender: ^5.1.0
+  flutter_phone_direct_caller: ^2.1.1
 
 dev_dependencies:
   flutter_test:
