@@ -41,7 +41,7 @@ class _CustomBottonBarState extends State<CustomBottonBar> {
         activeBackgroundColor: Colors.grey[800],
         child: const Center(
           child: Image(
-            image: AssetImage('images/filtros.png'),
+            image: AssetImage('images/filtro.png'),
           ),
         ),
         children: tempButtons.keys.map((e) {

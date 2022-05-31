@@ -1,16 +1,17 @@
 import 'dart:ui';
-import 'package:acti_barrio_flutter/models/markers_response.dart';
+
+import '../helpers/global_functions.dart';
+import '../models/markers_response.dart';
 import 'package:acti_barrio_flutter/src/provider/markers_provider.dart';
 import 'package:acti_barrio_flutter/src/widgets/custom_navigator.dart';
 import 'package:acti_barrio_flutter/src/widgets/show_dialog_barrios.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import '../provider/barrios_info.dart';
+import '../provider/mapbox_info.dart';
 
 class GoogleMapsPage extends StatefulWidget {
   const GoogleMapsPage({Key? key}) : super(key: key);
@@ -21,13 +22,13 @@ class GoogleMapsPage extends StatefulWidget {
 
 class _GoogleMapsPageState extends State<GoogleMapsPage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
-  LatLng centerCordenadas = const LatLng(-38.952040, -68.059179);
+  late LatLng centerCordenadasDefault = const LatLng(-38.951930, -68.059242);
   dynamic ispermissionEnabled = false;
   bool isGpsEnabled = false;
   LocationPermission? permission;
   List<Marker> markersList = [];
-  late MarkerP tappedMarker;
-
+  late Evento tappedMarker;
+  final markers = MarkersProviders();
   @override
   void initState() {
     final markersProviders =
@@ -39,7 +40,6 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final barriosInfo = Provider.of<BarriosInfo>(context, listen: false);
     final markersProviders =
         Provider.of<MarkersProviders>(context, listen: false);
     return SafeArea(
@@ -49,7 +49,6 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
         body: StreamBuilder(
           stream: markersProviders.markersStream,
           builder: ((context, snapshot) {
-            //TODO Revisar que este habilitado el gps , que  los permisos hayan sido consedidos
             if (snapshot.hasData) {
               return Stack(children: [
                 _mapView(context),
@@ -82,27 +81,14 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                           child: FloatingActionButton(
                             elevation: 10.0,
                             backgroundColor: Colors.white,
-                            onPressed: () async => {
-                              await _determinePermissionPosition()
-                                  .then((value) async => {
-                                        isGpsEnabled = await Geolocator
-                                            .isLocationServiceEnabled(),
-                                        ispermissionEnabled =
-                                            await Geolocator.checkPermission(),
-                                        if (isGpsEnabled &&
-                                            ispermissionEnabled ==
-                                                LocationPermission.whileInUse)
-                                          await barriosInfo.setPosition(
-                                            context,
-                                            CameraPosition(
-                                              bearing: 0,
-                                              tilt: 0,
-                                              target: centerCordenadas,
-                                              zoom: 16.0,
-                                            ),
-                                          ),
-                                        setState(() {}),
-                                      })
+                            onPressed: () async {
+                              determinePermissionPosition(context)
+                                  .then((value) => {
+                                        if (value == true)
+                                          {
+                                            getCurrentLocation(context),
+                                          }
+                                      });
                             },
                             child: const Icon(
                               Icons.my_location,
@@ -121,7 +107,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                       boxShadow: [
                         BoxShadow(
                           color: Colors.grey,
-                          offset: Offset(0.0, 1.0), //(x,y)
+                          offset: Offset(0.0, 1.0),
                           blurRadius: 6.0,
                         ),
                       ],
@@ -146,7 +132,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
               ]);
             } else {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: Image(image: AssetImage('images/map_loading.gif')),
               );
             }
           }),
@@ -165,6 +151,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
     return Stack(
       children: [
         GoogleMap(
+            mapToolbarEnabled: false,
             onTap: (position) {
               markersProvider.customInfoWindowController.hideInfoWindow!();
             },
@@ -182,8 +169,8 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
             myLocationButtonEnabled: false,
             compassEnabled: false,
             initialCameraPosition: CameraPosition(
-              target: centerCordenadas,
-              zoom: 16.0,
+              target: centerCordenadasDefault,
+              zoom: 14.0,
             ),
             markers: markers.toSet()),
         CustomInfoWindow(
@@ -204,7 +191,16 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
 
     if (!serviceEnabled) {
       //*Si esta deshabilitado, pregunta si desea habilitarlo
-      await _enabledGpsDialog();
+      await enabledGpsDialog(context).then((_) async => {
+            serviceEnabled = await Geolocator.isLocationServiceEnabled(),
+            if (serviceEnabled)
+              {
+                await Geolocator.getCurrentPosition().then((value) => {
+                      centerCordenadasDefault =
+                          LatLng(value.latitude, value.longitude),
+                    })
+              }
+          });
       return false;
     }
     //*Chequea si los permisos estan concedidos
@@ -226,7 +222,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
     }
     //*Si se deniegan los permisos para siempre
     if (permission == LocationPermission.deniedForever) {
-      await _enabledPermissionDialog();
+      await enabledPermissionDialog(context);
       // Permissions are denied forever, handle appropriately.
 
       return false;
@@ -234,66 +230,11 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
 
     //*Si se conceden los permisos sigue
 
-    Geolocator.getCurrentPosition().then((value) => {
-          centerCordenadas = LatLng(value.latitude, value.longitude),
+    await Geolocator.getCurrentPosition().then((value) => {
+          centerCordenadasDefault = LatLng(value.latitude, value.longitude),
         });
 
-    return Geolocator.getCurrentPosition();
-  }
-
-  Future<dynamic> _enabledGpsDialog() {
-    return showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(35.0),
-            ),
-            title:
-                const Text('GPS desactivado', style: TextStyle(fontSize: 20)),
-            content: const Text(
-                'Para poder usar la aplicación necesitas activar el GPS'),
-            actions: [
-              CupertinoDialogAction(
-                child: const Text('Abrir Configuracion'),
-                onPressed: () async {
-                  await Geolocator.openLocationSettings();
-                  Future.delayed(const Duration(seconds: 1), () {
-                    Navigator.of(context).pop();
-                  });
-                },
-              ),
-            ],
-          );
-        });
-  }
-
-  Future<dynamic> _enabledPermissionDialog() {
-    return showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(35.0),
-            ),
-            title: const Text('Permisos Desactivados',
-                style: TextStyle(fontSize: 20)),
-            content: const Text(
-                'Para poder usar la aplicación necesitas activar los permisos'),
-            actions: [
-              CupertinoDialogAction(
-                child: const Text('Abrir Configuracion'),
-                onPressed: () async {
-                  Geolocator.openAppSettings();
-
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        });
+    return true;
   }
 
   Widget _drawer() {
@@ -308,9 +249,9 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
         ),
         child: ClipRRect(
           borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(35), bottomRight: Radius.circular(35)),
+              topRight: Radius.circular(20), bottomRight: Radius.circular(20)),
           child: Drawer(
-            child: ListView(
+            child: Stack(
               children: [
                 Column(
                   children: [
@@ -324,15 +265,30 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                     const SizedBox(
                       height: 10.0,
                     ),
-                    const Text('ActiBarrio', style: TextStyle(fontSize: 20.0)),
-                    const Text(
-                        'Deserunt ipsum Lorem elit Lorem incididunt eu. Velit aliqua velit laboris proident. Eiusmod adipisicing ex exercitation fugiat quis labore enim incididunt aute commodo. Do magna irure tempor cupidatat commodo labore. Deserunt laborum ex ut ullamco eiusmod ad cillum irure. Velit laborum Lorem irure cupidatat.',
-                        style: TextStyle(),
-                        textAlign: TextAlign.center),
+                    const Padding(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+                      child: Text(
+                          'Do magna irure tempor cupidatat commodo labore. Deserunt laborum ex ut ullamco eiusmod ad cillum irure. Velit laborum Lorem irure cupidatat.',
+                          style: TextStyle(height: 1.35, fontSize: 15.0),
+                          textAlign: TextAlign.left),
+                    ),
                     const SizedBox(
-                      height: 30.0,
+                      height: 20.0,
                     ),
                     ListTile(
+                      minLeadingWidth: 25.0,
+                      onTap: () => Navigator.pushNamed(context, '/favorite'),
+                      leading: Icon(
+                        LineAwesomeIcons.heart,
+                        color: Colors.grey[600],
+                      ),
+                      title: const Text(
+                        "Favoritos",
+                      ),
+                    ),
+                    ListTile(
+                      minLeadingWidth: 25.0,
                       leading: Icon(
                         LineAwesomeIcons.question_circle,
                         color: Colors.grey[600],
@@ -341,10 +297,11 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                         "Guia de uso",
                       ),
                       onTap: () {
-                        /* Navigator.pushReplacementNamed(context, '/home'); */
+                        Navigator.pushReplacementNamed(context, '/home');
                       },
                     ),
                     ListTile(
+                      minLeadingWidth: 25.0,
                       leading: Icon(
                         LineAwesomeIcons.share,
                         color: Colors.grey[600],
@@ -352,9 +309,12 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                       title: const Text(
                         "Comparte Aplicacion",
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        //TODO: Ver si va quedar el compartir app
+                      },
                     ),
                     ListTile(
+                      minLeadingWidth: 25.0,
                       onTap: () {},
                       leading: Icon(
                         LineAwesomeIcons.comment,
@@ -365,25 +325,28 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                       ),
                     ),
                     ListTile(
-                      leading: Icon(
-                        LineAwesomeIcons.info,
-                        color: Colors.grey[600],
-                      ),
-                      title: const Text(
-                        "Acerca Nuestro",
-                      ),
-                      onTap: () {},
-                    ),
+                        minLeadingWidth: 25.0,
+                        leading: Icon(
+                          LineAwesomeIcons.info,
+                          color: Colors.grey[600],
+                        ),
+                        title: const Text(
+                          "Acerca Nuestro",
+                        ),
+                        onTap: () => Navigator.pushNamed(context, '/acercaDe')),
                     const SizedBox(
                       height: 20.0,
                     ),
                   ],
                 ),
-                const Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Text(
-                      'Version : 1.0.0',
-                    ))
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 5.0, right: 15.0),
+                  child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: Text(
+                        'Version : 1.0.0',
+                      )),
+                )
               ],
             ),
           ),
