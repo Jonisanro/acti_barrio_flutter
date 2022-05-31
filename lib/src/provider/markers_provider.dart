@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:acti_barrio_flutter/models/markers_response.dart';
 import 'package:clippy_flutter/triangle.dart';
 import 'package:custom_info_window/custom_info_window.dart';
@@ -13,6 +14,12 @@ class MarkersProviders extends ChangeNotifier {
   MarkersProviders() {
     getDisplayMarkers();
   }
+
+  final StreamController<Map<String, Marker>> _markersStreamController =
+      StreamController.broadcast();
+
+  Stream<Map<String, Marker>> get markersStream =>
+      _markersStreamController.stream;
 
   //*Carga marcadores desde el json/http
   getDisplayMarkers() async {
@@ -46,13 +53,13 @@ class MarkersProviders extends ChangeNotifier {
 
   //*Mapa de filtros activos/inactivos
   Map<String, bool> _filtrosEstado = {
-    'Deporte': true,
-    'Arte': true,
-    'Cursos': true,
-    'Sociales': true,
-    'Bici': true,
-    'Mercado': true,
-    'Otros': true,
+    'deporte': true,
+    'arte': true,
+    'cursos': true,
+    'sociales': true,
+    'bici': true,
+    'mercado': true,
+    'otros': true,
   };
 
   Map<String, bool> get filtrosEstado => _filtrosEstado;
@@ -66,41 +73,10 @@ class MarkersProviders extends ChangeNotifier {
   //*Agregado de marcadores por filtro
 
   addMarkers(String filtro) async {
-    markers.forEach((e) async {
+    for (var e in markers) {
       if (e.tipo == filtro) {
         BitmapDescriptor bitmap =
-            await getAssetImageMarker('images/actibarrio_otros.png');
-
-        switch (e.tipo) {
-          case 'Otros':
-            bitmap = await getAssetImageMarker('images/actibarrio_otros.png');
-            break;
-          case 'Deporte':
-            bitmap = await getAssetImageMarker('images/actibarrio_deporte.png');
-            break;
-          case 'Arte':
-            bitmap = await getAssetImageMarker('images/actibarrio_arte.png');
-
-            break;
-          case 'Sociales':
-            bitmap =
-                await getAssetImageMarker('images/actibarrio_sociales.png');
-
-            break;
-
-          case 'Cursos':
-            bitmap = await getAssetImageMarker('images/actibarrio_cursos.png');
-            break;
-          case 'Bici':
-            bitmap = await getAssetImageMarker('images/actibarrio_bici.png');
-            break;
-
-          case 'Mercado':
-            bitmap = await getAssetImageMarker('images/actibarrio_mercado.png');
-            break;
-          default:
-            await getAssetImageMarker('images/actibarrio_otros.png');
-        }
+            await getAssetImageMarker('images/actibarrio_$filtro.png');
 
         final markerId = MarkerId(e.id.oid.toString());
         Marker tempMarker = Marker(
@@ -119,21 +95,17 @@ class MarkersProviders extends ChangeNotifier {
           (e.id.oid + e.tipo).toString(): tempMarker,
         });
       }
-      notifyListeners();
-    });
-    Future.delayed(const Duration(milliseconds: 500), () {}).then((_) {
-      notifyListeners();
-    });
+    }
+
+    _markersStreamController.add(markersMap);
   }
   //*Eliminacion de marcadores por filtro
 
   removeMarkers(String filtro) async {
     final tempMarkersMap = markersMap;
     tempMarkersMap.removeWhere((key, value) => key.contains(filtro));
-    markersMap = tempMarkersMap;
-    Future.delayed(const Duration(milliseconds: 500), () {}).then((_) {
-      notifyListeners();
-    });
+
+    _markersStreamController.add(tempMarkersMap);
   }
 
   //*Carga de Marcadores
@@ -142,35 +114,8 @@ class MarkersProviders extends ChangeNotifier {
         await getAssetImageMarker('images/actibarrio_otros.png');
 
     for (var e in markers) {
-      switch (e.tipo) {
-        case 'Otros':
-          bitmap = await getAssetImageMarker('images/actibarrio_otros.png');
-          break;
-        case 'Deporte':
-          bitmap = await getAssetImageMarker('images/actibarrio_deporte.png');
-          break;
-        case 'Arte':
-          bitmap = await getAssetImageMarker('images/actibarrio_arte.png');
-
-          break;
-        case 'Sociales':
-          bitmap = await getAssetImageMarker('images/actibarrio_sociales.png');
-
-          break;
-
-        case 'Cursos':
-          bitmap = await getAssetImageMarker('images/actibarrio_cursos.png');
-          break;
-
-        case 'Bici':
-          bitmap = await getAssetImageMarker('images/actibarrio_bici.png');
-          break;
-
-        case 'Mercado':
-          bitmap = await getAssetImageMarker('images/actibarrio_mercado.png');
-          break;
-        default:
-      }
+      BitmapDescriptor bitmap =
+          await getAssetImageMarker('images/actibarrio_${e.tipo}.png');
 
       final markerId = MarkerId(e.id.oid.toString());
       Marker tempMarker = Marker(
@@ -189,6 +134,8 @@ class MarkersProviders extends ChangeNotifier {
         (e.id.oid + e.tipo).toString(): tempMarker,
       });
     }
+
+    _markersStreamController.add(markersMap);
 
     return markersMap;
   }

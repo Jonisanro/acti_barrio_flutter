@@ -29,14 +29,25 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
   late MarkerP tappedMarker;
 
   @override
+  void initState() {
+    final markersProviders =
+        Provider.of<MarkersProviders>(context, listen: false);
+    markersProviders.getMarkers();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final barriosInfo = Provider.of<BarriosInfo>(context, listen: false);
+    final markersProviders =
+        Provider.of<MarkersProviders>(context, listen: false);
     return SafeArea(
       key: _key,
       child: Scaffold(
         drawer: _drawer(),
-        body: FutureBuilder(
-          future: _determinePermissionPosition(),
+        body: StreamBuilder(
+          stream: markersProviders.markersStream,
           builder: ((context, snapshot) {
             //TODO Revisar que este habilitado el gps , que  los permisos hayan sido consedidos
             if (snapshot.hasData) {
@@ -186,11 +197,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
   }
 
   Future _determinePermissionPosition() async {
-    final markersProviders =
-        Provider.of<MarkersProviders>(context, listen: false);
     bool serviceEnabled = false;
-
-    await markersProviders.getMarkers();
 
     //*Revisa si Gps esta habilitado
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
