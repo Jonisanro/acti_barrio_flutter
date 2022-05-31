@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
-import '../../../share_preferences/preferences.dart';
+import '../../share_preferences/preferences.dart';
 
 class PageView1 extends StatefulWidget {
   final PageController controller;

@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:acti_barrio_flutter/share_preferences/preferences.dart';
-
 import '../models/markers_response.dart';
 import 'package:clippy_flutter/triangle.dart';
 import 'package:custom_info_window/custom_info_window.dart';
@@ -10,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../helpers/custom_image_markers.dart';
+import '../share_preferences/preferences.dart';
 
 class MarkersProviders extends ChangeNotifier {
   late Evento tappedMarker;
@@ -129,7 +128,9 @@ class MarkersProviders extends ChangeNotifier {
       }
       notifyListeners();
     });
-    Future.delayed(const Duration(milliseconds: 500), () {}).then((_) {});
+    Future.delayed(const Duration(milliseconds: 500), () {}).then((_) {
+      notifyListeners();
+    });
   }
   //*Eliminacion de marcadores por filtro
 
