@@ -1,6 +1,7 @@
-import 'package:acti_barrio_flutter/share_preferences/preferences.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+
+import '../../share_preferences/preferences.dart';
 
 class PageView4 extends StatefulWidget {
   const PageView4({

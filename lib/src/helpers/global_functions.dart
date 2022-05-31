@@ -1,10 +1,10 @@
+import 'package:acti_barrio_flutter/src/share_preferences/preferences.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../../share_preferences/preferences.dart';
 import '../provider/mapbox_info.dart';
 import '../provider/markers_provider.dart';
 

@@ -8,7 +8,7 @@
   "longitud": -68.1147,
   "activo": true,
   "telefono": "No especificado",
-  "tipo":"Mercado"
+  "tipo":"mercado"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93be"
@@ -19,7 +19,7 @@
   "longitud": -68.0533,
   "activo": true,
   "telefono": "NULL",
-  "tipo":"Bici"
+  "tipo":"bici"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93bf"
@@ -30,7 +30,7 @@
   "longitud": -68.0635,
   "activo": true,
   "telefono": "NULL",
-  "tipo":"Deporte"
+  "tipo":"deporte"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93c0"
@@ -41,7 +41,7 @@
   "longitud": -68.0591,
   "activo": true,
   "telefono": "NULL",
-  "tipo":"Mercado"
+  "tipo":"mercado"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93c1"
@@ -52,7 +52,7 @@
   "longitud": -68.0588,
   "activo": true,
   "telefono": "299 5848844",
-  "tipo":"Deporte"
+  "tipo":"deporte"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93c2"
@@ -63,7 +63,7 @@
   "longitud": -68.0541,
   "activo": true,
   "telefono": "No corresponde",
-  "tipo":"Deporte"
+  "tipo":"deporte"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93c3"
@@ -74,7 +74,7 @@
   "longitud": -68.0482,
   "activo": true,
   "telefono": "No corresponde",
-  "tipo":"Bici"
+  "tipo":"bici"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93c4"
@@ -85,7 +85,7 @@
   "longitud": -68.0539,
   "activo": true,
   "telefono": "No corresponde"
-  ,"tipo":"Cursos"
+  ,"tipo":"cursos"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93c5"
@@ -96,7 +96,7 @@
   "longitud": -68.0682,
   "activo": true,
   "telefono": "0299 442-7401"
-  ,"tipo":"Mercado"
+  ,"tipo":"mercado"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93c6"
@@ -107,7 +107,7 @@
   "longitud": -68.0545,
   "activo": true,
   "telefono": "299-4498060"
-  ,"tipo":"Cursos"
+  ,"tipo":"sociales"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93c7"
@@ -117,7 +117,7 @@
   "latitud": -38.9437,
   "longitud": -68.1258,
   "activo": true,
-  "tipo":"Bici"
+  "tipo":"bici"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93c8"
@@ -127,7 +127,7 @@
   "latitud": -38.9422,
   "longitud": -68.1311,
   "activo": true,
-  "tipo":"Arte"
+  "tipo":"arte"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93c9"
@@ -138,7 +138,7 @@
   "longitud": -68.0398,
   "activo": true,
   "telefono": "299-5046509"
-  ,"tipo":"Otros"
+  ,"tipo":"sociales"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93ca"
@@ -148,7 +148,7 @@
   "latitud": -38.9719,
   "longitud": -68.0261,
   "activo": true
-  ,"tipo":"Mercado"
+  ,"tipo":"mercado"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93cb"
@@ -159,7 +159,7 @@
   "longitud": -68.0333,
   "activo": true,
   "telefono": "299-4402375"
-  ,"tipo":"Bici"
+  ,"tipo":"bici"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93cc"
@@ -170,7 +170,7 @@
   "longitud": -68.0763,
   "activo": true,
   "telefono": "148"
-  ,"tipo":"Otros"
+  ,"tipo":"sociales"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93cd"
@@ -181,7 +181,7 @@
   "longitud": -68.0522,
   "activo": true,
   "telefono": "4474892"
-  ,"tipo":"Otros"
+  ,"tipo":"otros"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93ce"
@@ -191,7 +191,7 @@
   "latitud": -38.9661,
   "longitud": -68.0385,
   "activo": true
-  ,"tipo":"Otros"
+  ,"tipo":"otros"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93cf"
@@ -201,7 +201,7 @@
   "latitud": -38.9597,
   "longitud": -68.0314,
   "activo": true
-  ,"tipo":"Bici"
+  ,"tipo":"bici"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93d0"
@@ -212,7 +212,7 @@
   "longitud": -68.0327,
   "activo": true,
   "telefono": "0299 440-2375"
-  ,"tipo":"Bici"
+  ,"tipo":"bici"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93d1"
@@ -222,7 +222,7 @@
   "latitud": -38.9515,
   "longitud": -68.051,
   "activo": true
-  ,"tipo":"Bici"
+  ,"tipo":"bici"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93d2"
@@ -232,7 +232,7 @@
   "latitud": -38.9472,
   "longitud": -68.0338,
   "activo": true
-  ,"tipo":"Otros"
+  ,"tipo":"otros"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93d3"
@@ -242,7 +242,7 @@
   "latitud": -38.9478,
   "longitud": -68.0319,
   "activo": true
-  ,"tipo":"Otros"
+  ,"tipo":"otros"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93d4"
@@ -252,7 +252,7 @@
   "latitud": -38.9472,
   "longitud": -68.0338,
   "activo": true
-  ,"tipo":"Otros"},{
+  ,"tipo":"otros"},{
   "_id": {
     "$oid": "62697f9d3bb568661cff93d5"
   },
@@ -262,7 +262,7 @@
   "longitud": -68.1469,
   "activo": true,
   "telefono": "299-4494778"
-  ,"tipo":"Otros"
+  ,"tipo":"otros"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93d6"
@@ -273,7 +273,7 @@
   "longitud": -68.1317,
   "activo": true,
   "telefono": "299-4450508"
-  ,"tipo":"Arte"
+  ,"tipo":"arte"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93d7"
@@ -283,7 +283,7 @@
   "latitud": -38.9276,
   "longitud": -68.1302,
   "activo": true
-  ,"tipo":"Mercado"
+  ,"tipo":"mercado"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93d8"
@@ -293,7 +293,7 @@
   "latitud": -38.9277,
   "longitud": -68.1285,
   "activo": true
-  ,"tipo":"Deporte"
+  ,"tipo":"deporte"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93d9"
@@ -303,7 +303,7 @@
   "latitud": -38.9517,
   "longitud": -68.0592,
   "activo": true
-  ,"tipo":"Bici"
+  ,"tipo":"bici"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93da"
@@ -313,7 +313,7 @@
   "latitud": -38.9323,
   "longitud": -68.1282,
   "activo": true
-  ,"tipo":"Otros"
+  ,"tipo":"otros"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93db"
@@ -323,7 +323,7 @@
   "latitud": -38.9296,
   "longitud": -68.1304,
   "activo": true
-  ,"tipo":"Mercado"
+  ,"tipo":"mercado"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93dc"
@@ -333,7 +333,7 @@
   "latitud": -38.9348,
   "longitud": -68.1139,
   "activo": true
-  ,"tipo":"Cursos"
+  ,"tipo":"cursos"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93dd"
@@ -343,7 +343,7 @@
   "latitud": -38.9307,
   "longitud": -68.1284,
   "activo": true
-  ,"tipo":"Cursos"
+  ,"tipo":"cursos"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93de"
@@ -353,7 +353,7 @@
   "latitud": -38.9323,
   "longitud": -68.1239,
   "activo": true
-  ,"tipo":"Cursos"
+  ,"tipo":"cursos"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93df"
@@ -364,7 +364,7 @@
   "longitud": -68.1204,
   "activo": true,
   "telefono": "0299 446-5188"
-  ,"tipo":"Cursos"
+  ,"tipo":"cursos"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93e0"
@@ -374,7 +374,7 @@
   "latitud": -38.938,
   "longitud": -68.1047,
   "activo": true
-  ,"tipo":"Cursos"
+  ,"tipo":"cursos"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93e1"
@@ -384,7 +384,7 @@
   "latitud": -38.952,
   "longitud": -68.0501,
   "activo": true,
-  "tipo":"Cursos"
+  "tipo":"cursos"
   
 },{
   "_id": {
@@ -395,7 +395,7 @@
   "latitud": -38.9278,
   "longitud": -68.1166,
   "activo": true,
-  "tipo":"Mercado"
+  "tipo":"mercado"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93e3"
@@ -405,7 +405,7 @@
   "latitud": -38.9461,
   "longitud": -68.0574,
   "activo": true
-  ,"tipo":"Arte"
+  ,"tipo":"arte"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93e4"
@@ -415,5 +415,5 @@
   "latitud": -38.9313,
   "longitud": -68.1186,
   "activo": true
-  ,"tipo":"Arte"
+  ,"tipo":"arte"
 }]}

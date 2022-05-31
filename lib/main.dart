@@ -1,4 +1,3 @@
-import 'package:acti_barrio_flutter/share_preferences/preferences.dart';
 import 'package:acti_barrio_flutter/src/pages/acerca_nuestro_page.dart';
 
 import 'package:acti_barrio_flutter/src/pages/event_descriptor_page.dart';
@@ -9,6 +8,7 @@ import 'package:acti_barrio_flutter/src/pages/splash_screen_page.dart';
 
 import 'package:acti_barrio_flutter/src/provider/mapbox_info.dart';
 import 'package:acti_barrio_flutter/src/provider/markers_provider.dart';
+import 'package:acti_barrio_flutter/src/share_preferences/preferences.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

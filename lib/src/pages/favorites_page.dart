@@ -44,16 +44,12 @@ class _ListEventsState extends State<ListEvents> {
   List<bool> animationOn = [];
   @override
   Widget build(BuildContext context) {
-    int i = 0;
+    bool disable = true;
     final size = MediaQuery.of(context).size;
     final markers = Provider.of<MarkersProviders>(context);
     return FutureBuilder<List<Evento>>(
         future: markers.getEventFavorites(),
         builder: (context, snapshot) {
-          if (snapshot.data != null && i == 0) {
-            animationOn = List.generate(snapshot.data!.length, (index) => true);
-            i++;
-          }
           if (snapshot.hasData) {
             final List<Evento> listEvents = snapshot.data!;
 
@@ -80,30 +76,17 @@ class _ListEventsState extends State<ListEvents> {
                                 width: size.width * 0.8,
                                 child: Text(listEvents[index].descripcion)),
                             subtitle: Text(listEvents[index].direccion),
-                            trailing: ZoomOut(
-                              animate: animationOn[index] ? false : true,
-                              child: IconButton(
-                                onPressed: () {
-                                  animationOn.removeAt(index);
-                                  setState(() {});
-                                  //TODO: VER SI SE PUEDE TERMINAR
-
-                                  Future.delayed(
-                                      const Duration(milliseconds: 500), () {
-                                    setState(() {
-                                      setFavorite(
-                                          context,
-                                          listEvents[index].id.oid,
-                                          !animationOn[index]);
-                                      animationOn.removeAt(index);
-                                    });
-                                  });
-                                },
-                                icon: const Icon(
-                                  Icons.favorite,
-                                  size: 30.0,
-                                  color: Colors.red,
-                                ),
+                            trailing: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  setFavorite(context, listEvents[index].id.oid,
+                                      !disable);
+                                });
+                              },
+                              icon: const Icon(
+                                Icons.favorite,
+                                size: 30.0,
+                                color: Colors.red,
                               ),
                             ),
                             onTap: () async {

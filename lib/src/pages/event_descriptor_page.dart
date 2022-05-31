@@ -1,4 +1,3 @@
-import 'package:acti_barrio_flutter/share_preferences/preferences.dart';
 import 'package:acti_barrio_flutter/src/pages/page_eventos_tipo_page.dart';
 
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../helpers/global_functions.dart';
 import '../models/markers_response.dart';
 import '../provider/mapbox_info.dart';
+import '../share_preferences/preferences.dart';
 
 class EventDescriptor extends StatelessWidget {
   const EventDescriptor({Key? key})
