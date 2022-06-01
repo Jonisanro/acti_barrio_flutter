@@ -1,9 +1,8 @@
-import 'package:acti_barrio_flutter/src/pages/page_eventos_tipo_page.dart';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../helpers/global_functions.dart';
 import '../models/markers_response.dart';
@@ -74,6 +73,7 @@ class Contenedor extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 20.0),
         child: ListView(
+          padding: const EdgeInsets.only(top: 20.0),
           children: [
             _Titulo(mark: mark),
             _Tags(mark: mark),
@@ -110,25 +110,26 @@ class _Tags extends StatelessWidget {
     return Row(
       children: [
         InkWell(
-          onTap: () => Navigator.push(
+          /* onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => PageEventosTipo(
                   tipo: mark.tipo,
                 ),
-              )),
+              )), */
           child: Container(
             decoration: BoxDecoration(
                 color: const Color.fromRGBO(22, 117, 232, 1),
                 borderRadius: BorderRadius.circular(8)),
             child: Center(
                 child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
               child: Text(
                 mark.tipo,
                 style: const TextStyle(
                     color: Color.fromARGB(255, 216, 214, 214),
-                    fontSize: 12,
+                    fontSize: 14.0,
                     fontWeight: FontWeight.bold),
               ),
             )),
@@ -141,11 +142,11 @@ class _Tags extends StatelessWidget {
           decoration: BoxDecoration(
               color: const Color.fromRGBO(22, 117, 232, 1),
               borderRadius: BorderRadius.circular(8)),
-          child: Center(
+          child: const Center(
               child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
             child: InkWell(
-              onTap: () {
+              /* onTap: () {
                 const LatLng barrio = LatLng(-38.947740, -68.032358);
                 barriosInfo.mapboxController.animateCamera(
                   CameraUpdate.newCameraPosition(
@@ -158,13 +159,13 @@ class _Tags extends StatelessWidget {
                   ),
                 );
                 Navigator.pop(context);
-              },
+              }, */
               //TODO:Seleccionar barrio del markador
-              child: const Text(
+              child: Text(
                 'Naciones Unidas',
                 style: TextStyle(
                     color: Color.fromARGB(255, 216, 214, 214),
-                    fontSize: 12,
+                    fontSize: 14.0,
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -188,6 +189,8 @@ class Background extends StatelessWidget {
     return SizedBox(
       height: size.height * 0.35,
       child: Image(
+        color: Colors.black.withOpacity(0.12),
+        colorBlendMode: BlendMode.darken,
         image: AssetImage('images/portada_${mark.tipo}.png'),
         fit: BoxFit.cover,
       ),
@@ -214,11 +217,13 @@ class _TituloState extends State<_Titulo> {
     bool disable = prefs.existId(widget.mark.id.oid);
     final size = MediaQuery.of(context).size;
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         //*Titulo
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
               width: size.width * 0.75,
@@ -244,9 +249,7 @@ class _TituloState extends State<_Titulo> {
             )
           ],
         ),
-        const SizedBox(
-          height: 5.0,
-        ),
+
         const Padding(
           padding: EdgeInsets.only(bottom: 8.0),
           child: Text(
@@ -409,19 +412,15 @@ class _FechaHoraContacto extends StatelessWidget {
                 width: 60.0,
               ),
               IconButton(
-                //TODO: Agregar funcionalidad de llamar al referente
+                //TODO: Armar funcionabilidad para envio de email
                 onPressed: () async {
-                  final Email email = Email(
-                    body: 'Email body',
-                    subject: 'Email subject',
-                    recipients: ['example@example.com'],
-                    cc: ['cc@example.com'],
-                    bcc: ['bcc@example.com'],
-                    attachmentPaths: ['/path/to/attachment.zip'],
-                    isHTML: false,
-                  );
-
-                  await FlutterEmailSender.send(email);
+                  final Uri _emailLaunchUri = Uri(
+                      scheme: 'mailto',
+                      path: 'smith@example.com',
+                      queryParameters: {
+                        'subject': 'Example Subject & Symbols are allowed!'
+                      });
+                  launchUrl(_emailLaunchUri);
                 },
                 icon: const Icon(
                   Icons.email,
@@ -430,7 +429,13 @@ class _FechaHoraContacto extends StatelessWidget {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  final Uri _phoneLaunchUri = Uri(
+                    scheme: 'tel',
+                    path: '+5411341234567',
+                  );
+                  launchUrl(_phoneLaunchUri);
+                },
                 icon: const Icon(
                   Icons.phone,
                   size: 30.0,

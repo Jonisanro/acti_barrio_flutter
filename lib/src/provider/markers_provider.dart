@@ -56,10 +56,11 @@ class MarkersProviders extends ChangeNotifier {
     String data = await rootBundle.loadString('dataJson/app_ab_ubicacion.json');
     final jsonResult = MarkersResponse.fromJson(data);
     markers = jsonResult.results;
-
-    for (var element in prefs.favorites) {
-      final temp = markers.where((e) => e.id.oid == element).first;
-      markersListTipo.add(temp);
+    if (prefs.favorites != null) {
+      for (var element in prefs.favorites) {
+        final temp = markers.where((e) => e.id.oid == element).first;
+        markersListTipo.add(temp);
+      }
     }
 
     notifyListeners();
@@ -169,7 +170,9 @@ class MarkersProviders extends ChangeNotifier {
       });
     }
 
-    _markersStreamController.add(markersMap);
+    Future.delayed(const Duration(milliseconds: 500), () {
+      _markersStreamController.add(markersMap);
+    });
 
     return markersMap;
   }

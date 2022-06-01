@@ -6,7 +6,6 @@ import 'package:acti_barrio_flutter/src/provider/markers_provider.dart';
 import 'package:acti_barrio_flutter/src/widgets/custom_navigator.dart';
 import 'package:acti_barrio_flutter/src/widgets/show_dialog_barrios.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -23,17 +22,16 @@ class GoogleMapsPage extends StatefulWidget {
 class _GoogleMapsPageState extends State<GoogleMapsPage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   late LatLng centerCordenadasDefault = const LatLng(-38.951930, -68.059242);
-  dynamic ispermissionEnabled = false;
-  bool isGpsEnabled = false;
-  LocationPermission? permission;
-  List<Marker> markersList = [];
+
   late Evento tappedMarker;
   final markers = MarkersProviders();
   @override
   void initState() {
     final markersProviders =
         Provider.of<MarkersProviders>(context, listen: false);
-    markersProviders.getMarkers();
+    determinePermissionPosition(context).then((value) => {
+          markersProviders.getMarkers(),
+        });
 
     super.initState();
   }
@@ -52,56 +50,75 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
             if (snapshot.hasData) {
               return Stack(children: [
                 _mapView(context),
-                const Align(
+                Align(
                     alignment: Alignment.bottomRight,
                     child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: CustomBottonBar(),
+                      padding: const EdgeInsets.only(bottom: 12.0, right: 8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          const CustomBottonBar(),
+                          InkWell(
+                            onTap: () {
+                              ShowDialogBarrios().alerta(context);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30.0),
+                                color: Colors.grey[200],
+                                backgroundBlendMode: BlendMode.saturation,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    offset: Offset(0.0, 0.3), //(x,y)
+                                    blurRadius: 1.0,
+                                  ),
+                                ],
+                              ),
+                              child: const Image(
+                                image:
+                                    AssetImage('images/actibarrio_barrios.png'),
+                                height: 65,
+                                width: 65,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     )),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Align(
                     alignment: Alignment.topRight,
-                    child: Column(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            ShowDialogBarrios().alerta(context);
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: SizedBox(
+                        height: 60.0,
+                        width: 60.0,
+                        child: FloatingActionButton(
+                          elevation: 10.0,
+                          backgroundColor: Colors.white,
+                          onPressed: () async {
+                            determinePermissionPosition(context)
+                                .then((value) => {
+                                      if (value == true)
+                                        {
+                                          getCurrentLocation(context),
+                                        }
+                                    });
                           },
-                          child: const Image(
-                            image: AssetImage('images/actibarrio_barrios.png'),
-                            height: 55.0,
-                            width: 55.0,
+                          child: const Icon(
+                            Icons.my_location,
+                            color: Colors.black54,
+                            size: 25.0,
                           ),
                         ),
-                        const SizedBox(height: 10.0),
-                        SizedBox(
-                          height: 50.0,
-                          width: 50.0,
-                          child: FloatingActionButton(
-                            elevation: 10.0,
-                            backgroundColor: Colors.white,
-                            onPressed: () async {
-                              determinePermissionPosition(context)
-                                  .then((value) => {
-                                        if (value == true)
-                                          {
-                                            getCurrentLocation(context),
-                                          }
-                                      });
-                            },
-                            child: const Icon(
-                              Icons.my_location,
-                              color: Colors.black54,
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
+                  padding: const EdgeInsets.only(top: 20.0),
                   child: Container(
                     decoration: const BoxDecoration(
                       boxShadow: [
@@ -118,11 +135,11 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                       color: Colors.white,
                     ),
                     width: 50.0,
-                    height: 45.0,
+                    height: 55.0,
                     child: IconButton(
                       icon: Icon(
                         Icons.menu,
-                        size: 30.0,
+                        size: 35.0,
                         color: Colors.grey[600],
                       ),
                       onPressed: () => Scaffold.of(context).openDrawer(),
@@ -183,60 +200,6 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
     );
   }
 
-  Future _determinePermissionPosition() async {
-    bool serviceEnabled = false;
-
-    //*Revisa si Gps esta habilitado
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-
-    if (!serviceEnabled) {
-      //*Si esta deshabilitado, pregunta si desea habilitarlo
-      await enabledGpsDialog(context).then((_) async => {
-            serviceEnabled = await Geolocator.isLocationServiceEnabled(),
-            if (serviceEnabled)
-              {
-                await Geolocator.getCurrentPosition().then((value) => {
-                      centerCordenadasDefault =
-                          LatLng(value.latitude, value.longitude),
-                    })
-              }
-          });
-      return false;
-    }
-    //*Chequea si los permisos estan concedidos
-    permission = await Geolocator.checkPermission();
-    //*Si no estan concedidos los pide
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-
-      //*Si no se conceden los permisos no sigue
-      if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
-
-        return false;
-      }
-    }
-    //*Si se deniegan los permisos para siempre
-    if (permission == LocationPermission.deniedForever) {
-      await enabledPermissionDialog(context);
-      // Permissions are denied forever, handle appropriately.
-
-      return false;
-    }
-
-    //*Si se conceden los permisos sigue
-
-    await Geolocator.getCurrentPosition().then((value) => {
-          centerCordenadasDefault = LatLng(value.latitude, value.longitude),
-        });
-
-    return true;
-  }
-
   Widget _drawer() {
     final _screenSize = MediaQuery.of(context).size;
     return SizedBox(
@@ -265,36 +228,35 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                     const SizedBox(
                       height: 10.0,
                     ),
-                    const Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5.0, horizontal: 15.0),
                       child: Text(
-                          'Do magna irure tempor cupidatat commodo labore. Deserunt laborum ex ut ullamco eiusmod ad cillum irure. Velit laborum Lorem irure cupidatat.',
-                          style: TextStyle(height: 1.35, fontSize: 15.0),
-                          textAlign: TextAlign.left),
+                        'Do magna irure tempor cupidatat commodo labore. Deserunt laborum ex ut ullamco eiusmod ad cillum irure. Velit laborum Lorem irure cupidatat.',
+                        style: TextStyle(
+                            color: Colors.grey[800],
+                            height: 1.35,
+                            fontSize: 15.0),
+                        textAlign: TextAlign.left,
+                      ),
                     ),
                     const SizedBox(
                       height: 20.0,
                     ),
                     ListTile(
                       minLeadingWidth: 25.0,
-                      onTap: () => Navigator.pushNamed(context, '/favorite'),
-                      leading: Icon(
-                        LineAwesomeIcons.heart,
-                        color: Colors.grey[600],
-                      ),
-                      title: const Text(
-                        "Favoritos",
-                      ),
-                    ),
-                    ListTile(
-                      minLeadingWidth: 25.0,
                       leading: Icon(
                         LineAwesomeIcons.question_circle,
                         color: Colors.grey[600],
+                        size: 30.0,
                       ),
-                      title: const Text(
+                      title: Text(
                         "Guia de uso",
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          height: 1.35,
+                          color: Colors.grey[800],
+                        ),
                       ),
                       onTap: () {
                         Navigator.pushReplacementNamed(context, '/home');
@@ -302,12 +264,58 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                     ),
                     ListTile(
                       minLeadingWidth: 25.0,
+                      onTap: () => Navigator.pushNamed(context, '/favorite'),
+                      leading: Icon(
+                        LineAwesomeIcons.heart,
+                        color: Colors.grey[600],
+                        size: 30.0,
+                      ),
+                      title: Text(
+                        "Favoritos",
+                        style: TextStyle(
+                          color: Colors.grey[800],
+                          fontSize: 15.0,
+                          height: 1.35,
+                        ),
+                      ),
+                    ),
+                    /* ListTile(
+                      minLeadingWidth: 25.0,
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PageEventosTipo(
+                              tipo: mark.tipo,
+                            ),
+                          )),
+                      leading: Icon(
+                        LineAwesomeIcons.shoe_prints,
+                        color: Colors.grey[600],
+                        size: 30.0,
+                      ),
+                      title: Text(
+                        "Eventos",
+                        style: TextStyle(
+                          color: Colors.grey[800],
+                          fontSize: 15.0,
+                          height: 1.35,
+                        ),
+                      ),
+                    ), */
+                    ListTile(
+                      minLeadingWidth: 25.0,
                       leading: Icon(
                         LineAwesomeIcons.share,
                         color: Colors.grey[600],
+                        size: 30.0,
                       ),
-                      title: const Text(
+                      title: Text(
                         "Comparte Aplicacion",
+                        style: TextStyle(
+                          color: Colors.grey[800],
+                          fontSize: 15.0,
+                          height: 1.35,
+                        ),
                       ),
                       onTap: () {
                         //TODO: Ver si va quedar el compartir app
@@ -315,13 +323,21 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                     ),
                     ListTile(
                       minLeadingWidth: 25.0,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, '/sugerencia');
+                      },
                       leading: Icon(
                         LineAwesomeIcons.comment,
                         color: Colors.grey[600],
+                        size: 30.0,
                       ),
-                      title: const Text(
+                      title: Text(
                         "Dejá tu sugerencia",
+                        style: TextStyle(
+                          color: Colors.grey[800],
+                          fontSize: 15.0,
+                          height: 1.35,
+                        ),
                       ),
                     ),
                     ListTile(
@@ -329,9 +345,15 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                         leading: Icon(
                           LineAwesomeIcons.info,
                           color: Colors.grey[600],
+                          size: 30.0,
                         ),
-                        title: const Text(
+                        title: Text(
                           "Acerca Nuestro",
+                          style: TextStyle(
+                            color: Colors.grey[800],
+                            fontSize: 15.0,
+                            height: 1.35,
+                          ),
                         ),
                         onTap: () => Navigator.pushNamed(context, '/acercaDe')),
                     const SizedBox(
@@ -339,12 +361,17 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                     ),
                   ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 5.0, right: 15.0),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5.0, right: 15.0),
                   child: Align(
                       alignment: Alignment.bottomRight,
                       child: Text(
                         'Version : 1.0.0',
+                        style: TextStyle(
+                            color: Colors.grey[800],
+                            fontSize: 15.0,
+                            height: 1.35,
+                            fontWeight: FontWeight.bold),
                       )),
                 )
               ],

@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
       duration: 2000,
       centered: true,
       splashIconSize: double.infinity,
-      animationDuration: const Duration(milliseconds: 300),
+      animationDuration: const Duration(milliseconds: 600),
       splashTransition: SplashTransition.slideTransition,
       pageTransitionType: PageTransitionType.rightToLeft,
       curve: Curves.decelerate,

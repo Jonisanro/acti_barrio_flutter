@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:provider/provider.dart';
 
+import '../helpers/global_functions.dart';
 import '../provider/mapbox_info.dart';
 
 class ShowDialogBarrios {
@@ -96,19 +97,13 @@ class ShowDialogBarrios {
                           height: 1.3),
                     ),
                     onPressed: () async {
-                      final position = await GeolocatorPlatform.instance
-                          .getCurrentPosition();
-
-                      barriosInfo.mapboxController.animateCamera(
-                        CameraUpdate.newCameraPosition(
-                          CameraPosition(
-                            target:
-                                LatLng(position.latitude, position.longitude),
-                            zoom: 16.0,
-                          ),
-                        ),
-                      );
-                      Navigator.of(context).pop();
+                      determinePermissionPosition(context).then((value) => {
+                            if (value == true)
+                              {
+                                getCurrentLocation(context),
+                              }
+                          });
+                      Navigator.pop(context);
                     },
                   ),
                   const Divider(

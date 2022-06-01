@@ -52,7 +52,7 @@
   "longitud": -68.0588,
   "activo": true,
   "telefono": "299 5848844",
-  "tipo":"deporte"
+  "tipo":"sociales"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93c2"
@@ -74,7 +74,7 @@
   "longitud": -68.0482,
   "activo": true,
   "telefono": "No corresponde",
-  "tipo":"bici"
+  "tipo":"sociales"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93c4"
@@ -138,7 +138,7 @@
   "longitud": -68.0398,
   "activo": true,
   "telefono": "299-5046509"
-  ,"tipo":"sociales"
+  ,"tipo":"otros"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93ca"
@@ -170,7 +170,7 @@
   "longitud": -68.0763,
   "activo": true,
   "telefono": "148"
-  ,"tipo":"sociales"
+  ,"tipo":"otros"
 },{
   "_id": {
     "$oid": "62697f9d3bb568661cff93cd"

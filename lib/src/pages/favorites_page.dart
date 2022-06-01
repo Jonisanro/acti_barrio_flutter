@@ -1,6 +1,5 @@
 import 'package:acti_barrio_flutter/src/models/markers_response.dart';
 import 'package:acti_barrio_flutter/src/provider/markers_provider.dart';
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,7 +20,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Eventos'),
+        title: const Text('Favoritos'),
       ),
       body: const ListEvents(),
     );
@@ -53,56 +52,69 @@ class _ListEventsState extends State<ListEvents> {
           if (snapshot.hasData) {
             final List<Evento> listEvents = snapshot.data!;
 
-            return ListView.builder(
-              itemCount: listEvents.length,
-              itemBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  child: Card(
-                    elevation: 10.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ListTile(
-                            leading: Image(
-                                width: 50.0,
-                                height: 50.0,
-                                image:
-                                    Image.asset('images/actibarrio_deporte.png')
-                                        .image),
-                            title: SizedBox(
-                                width: size.width * 0.8,
-                                child: Text(listEvents[index].descripcion)),
-                            subtitle: Text(listEvents[index].direccion),
-                            trailing: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  setFavorite(context, listEvents[index].id.oid,
-                                      !disable);
-                                });
-                              },
-                              icon: const Icon(
-                                Icons.favorite,
-                                size: 30.0,
-                                color: Colors.red,
-                              ),
-                            ),
-                            onTap: () async {
-                              Navigator.pushNamed(context, '/eventDescriptor',
-                                  arguments: listEvents[index]);
-                            },
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: size.width * 0.95,
+                  child: ListView.builder(
+                    itemCount: listEvents.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Card(
+                          elevation: 5.0,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ListTile(
+                                  leading: Image(
+                                      width: 45.0,
+                                      height: 45.0,
+                                      image: Image.asset(
+                                              'images/actibarrio_deporte.png')
+                                          .image),
+                                  title: SizedBox(
+                                      width: size.width * 0.8,
+                                      child:
+                                          Text(listEvents[index].descripcion)),
+                                  subtitle: Text(listEvents[index].direccion),
+                                  trailing: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        setFavorite(context,
+                                            listEvents[index].id.oid, !disable);
+                                      });
+                                    },
+                                    icon: const Icon(
+                                      Icons.favorite,
+                                      size: 30.0,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  onTap: () async {
+                                    Navigator.pushNamed(
+                                        context, '/eventDescriptor',
+                                        arguments: listEvents[index]);
+                                  },
+                                ),
+                              )
+                            ],
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
+                ),
+              ),
             );
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: Text('No hay eventos'));
           }
         });
   }

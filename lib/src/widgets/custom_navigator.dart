@@ -34,7 +34,7 @@ class _CustomBottonBarState extends State<CustomBottonBar> {
         overlayOpacity: 0.5,
         overlayColor: Colors.grey,
         direction: SpeedDialDirection.up,
-        buttonSize: const Size(60, 60),
+        buttonSize: const Size(65, 65),
         curve: Curves.elasticIn,
         backgroundColor: Colors.transparent,
         animationDuration: const Duration(milliseconds: 100),

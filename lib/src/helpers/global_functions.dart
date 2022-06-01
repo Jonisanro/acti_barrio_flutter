@@ -6,7 +6,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/mapbox_info.dart';
-import '../provider/markers_provider.dart';
 
 void getCurrentLocation(BuildContext context) async {
   final barriosInfo = Provider.of<BarriosInfo>(context, listen: false);
@@ -25,11 +24,8 @@ void getCurrentLocation(BuildContext context) async {
 
 Future determinePermissionPosition(BuildContext context) async {
   LocationPermission? permission;
-  final markersProviders =
-      Provider.of<MarkersProviders>(context, listen: false);
-  bool serviceEnabled = false;
 
-  await markersProviders.getMarkers();
+  bool serviceEnabled = false;
 
   //*Revisa si Gps esta habilitado
   serviceEnabled = await Geolocator.isLocationServiceEnabled();

@@ -180,7 +180,7 @@ class _PageView1State extends State<PageView1> {
                   delay: const Duration(milliseconds: 1500),
                   child: SizedBox(
                     width: size.width * 0.8,
-                    height: size.height * 0.2,
+                    height: size.height * 0.15,
                     child: const Text(
                       'Con los iconos de los distintos tipos de actividades vas a poder filtrarlas',
                       overflow: TextOverflow.clip,
@@ -193,37 +193,38 @@ class _PageView1State extends State<PageView1> {
                   ),
                 ),
                 const SizedBox(
-                  height: 20.0,
+                  height: 15.0,
                 ),
                 Align(
                   alignment: Alignment.bottomLeft,
-                  child: MaterialButton(
-                    /* color: Colors.grey[300], */
-                    onPressed: () {
-                      Preferences.isTutorialActived = true;
-                      Navigator.pushReplacementNamed(context, '/google_maps');
-                    },
-                    child: SizedBox(
-                      width: 70.0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: const [
-                          Text(
-                            'Omitir',
-                            style: TextStyle(
-                                color: Colors.black45,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            width: 10.0,
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios_outlined,
-                            size: 15.0,
-                            color: Colors.black45,
-                          ),
-                        ],
+                  child: SizedBox(
+                    width: size.width * 0.3,
+                    child: MaterialButton(
+                      onPressed: () {
+                        Preferences.isTutorialActived = true;
+                        Navigator.pushReplacementNamed(context, '/google_maps');
+                      },
+                      child: SizedBox(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: const [
+                            Text(
+                              'Omitir',
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: 20.0,
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios_outlined,
+                              size: 15.0,
+                              color: Colors.black54,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
