@@ -162,6 +162,42 @@ class _Tags extends StatelessWidget {
               }, */
               //TODO:Seleccionar barrio del markador
               child: Text(
+                'Neuquen',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 216, 214, 214),
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          )),
+        ),
+        const SizedBox(
+          width: 10.0,
+        ),
+        Container(
+          decoration: BoxDecoration(
+              color: const Color.fromRGBO(22, 117, 232, 1),
+              borderRadius: BorderRadius.circular(8)),
+          child: const Center(
+              child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+            child: InkWell(
+              /* onTap: () {
+                const LatLng barrio = LatLng(-38.947740, -68.032358);
+                barriosInfo.mapboxController.animateCamera(
+                  CameraUpdate.newCameraPosition(
+                    const CameraPosition(
+                      bearing: 0,
+                      tilt: 0,
+                      target: barrio,
+                      zoom: 16.0,
+                    ),
+                  ),
+                );
+                Navigator.pop(context);
+              }, */
+              //TODO:Seleccionar barrio del markador
+              child: Text(
                 'Naciones Unidas',
                 style: TextStyle(
                     color: Color.fromARGB(255, 216, 214, 214),
