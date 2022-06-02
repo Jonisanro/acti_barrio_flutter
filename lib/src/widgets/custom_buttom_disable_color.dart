@@ -50,8 +50,8 @@ class _CustomButtonColorState extends State<CustomButtonColor> {
               ),
         child: Image(
           image: AssetImage(widget.assetImage),
-          height: 80,
-          width: 80,
+          height: 100,
+          width: 100,
         ),
       ),
     );
