@@ -106,7 +106,6 @@ class _Tags extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final barriosInfo = Provider.of<BarriosInfo>(context, listen: false);
     return Row(
       children: [
         InkWell(

@@ -13,6 +13,7 @@ class BarriosInfo with ChangeNotifier {
     notifyListeners();
   }
 
+//*MapController iniciacion de mapa
   void onInitMap(GoogleMapController controller) {
     _mapController = controller;
   }

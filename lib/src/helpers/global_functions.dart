@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../provider/mapbox_info.dart';
 
+//*Obtiene la ubicación actual
 void getCurrentLocation(BuildContext context) async {
   final barriosInfo = Provider.of<BarriosInfo>(context, listen: false);
 
@@ -22,6 +23,7 @@ void getCurrentLocation(BuildContext context) async {
   );
 }
 
+//*Consulta si esta activado el gps y permisos
 Future determinePermissionPosition(BuildContext context) async {
   LocationPermission? permission;
 
@@ -67,6 +69,7 @@ Future determinePermissionPosition(BuildContext context) async {
   return true;
 }
 
+//*Muestra un dialogo para habilitar el gps
 Future<dynamic> enabledGpsDialog(BuildContext context) {
   return showDialog(
       barrierDismissible: false,
@@ -104,6 +107,7 @@ Future<dynamic> enabledGpsDialog(BuildContext context) {
       });
 }
 
+//*Muestra un dialogo para habilitar los permisos
 Future<dynamic> enabledPermissionDialog(BuildContext context) {
   return showDialog(
       barrierDismissible: false,
@@ -140,6 +144,7 @@ Future<dynamic> enabledPermissionDialog(BuildContext context) {
       });
 }
 
+//*Setea o elimina eventos favoritos
 Future<bool> setFavorite(BuildContext context, String id, bool disable) async {
   final prefs = Preferences();
   if (disable) {

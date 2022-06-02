@@ -10,6 +10,7 @@ class CustomBottonBar extends StatefulWidget {
 }
 
 class _CustomBottonBarState extends State<CustomBottonBar> {
+  //TODO:Cargar filtros de base de datos
   Map tempButtons = {
     'images/actibarrio_deporte.png': 'deporte',
     'images/actibarrio_arte.png': 'arte',

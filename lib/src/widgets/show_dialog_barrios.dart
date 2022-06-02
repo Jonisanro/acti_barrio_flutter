@@ -10,13 +10,13 @@ import '../provider/mapbox_info.dart';
 
 class ShowDialogBarrios {
   final Map tempListBarrios = {
-    'Valentina Norte': {'lat': -38.928105, 'long': -68.167479},
-    'Naciones Unidas': {'lat': -38.947740, 'long': -68.032358},
-    'Naciones Unidas2': {'lat': -38.947740, 'long': -68.032358},
-    'Naciones Unidas3': {'lat': -38.947740, 'long': -68.032358},
-    'Naciones Unidas4': {'lat': -38.947740, 'long': -68.032358},
-    'Naciones Unidas5': {'lat': -38.947740, 'long': -68.032358},
-    'Naciones Unidas6': {'lat': -38.947740, 'long': -68.032358},
+    'Valentina Norte,Neuquen': {'lat': -38.928105, 'long': -68.167479},
+    'Naciones Unidas,Neuquen': {'lat': -38.947740, 'long': -68.032358},
+    'Naciones Unidas2,Neuquen': {'lat': -38.947740, 'long': -68.032358},
+    'Naciones Unidas3,Neuquen': {'lat': -38.947740, 'long': -68.032358},
+    'Naciones Unidas4,Neuquen': {'lat': -38.947740, 'long': -68.032358},
+    'Naciones Unidas5,Neuquen': {'lat': -38.947740, 'long': -68.032358},
+    'Naciones Unidas6,Neuquen': {'lat': -38.947740, 'long': -68.032358},
   };
 
   alerta(BuildContext context) {

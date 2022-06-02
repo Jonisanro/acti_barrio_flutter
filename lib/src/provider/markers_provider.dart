@@ -16,7 +16,7 @@ class MarkersProviders extends ChangeNotifier {
   MarkersProviders() {
     getDisplayMarkers();
   }
-
+//*Stream para escuchar cambios en el mapa de marcadores
   final StreamController<Map<String, Marker>> _markersStreamController =
       StreamController.broadcast();
 
@@ -67,6 +67,7 @@ class MarkersProviders extends ChangeNotifier {
     return markersListTipo;
   }
 
+  //*Ventana de informacion de evento personalizada
   CustomInfoWindowController _customInfoWindowController =
       CustomInfoWindowController();
 
@@ -89,7 +90,7 @@ class MarkersProviders extends ChangeNotifier {
     notifyListeners();
   }
 
-  //*Mapa de filtros activos/inactivos
+  //*Mapa de filtros activos/inactivos , cargarlos desde http
   Map<String, bool> _filtrosEstado = {
     'deporte': true,
     'arte': true,
