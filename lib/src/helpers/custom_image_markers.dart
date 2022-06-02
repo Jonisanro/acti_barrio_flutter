@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 import 'package:google_maps_flutter/google_maps_flutter.dart'
     show BitmapDescriptor;
 
+//*Toma una imagen y la convierte en un BitmapDescriptor
 Future<BitmapDescriptor> getAssetImageMarker(String image) async {
   late BitmapDescriptor iconMarker;
   await getBytesFromAsset(image).then((value) => {
@@ -13,6 +14,7 @@ Future<BitmapDescriptor> getAssetImageMarker(String image) async {
   return iconMarker;
 }
 
+//*Transforma una imagen en una lista de bytes
 Future<Uint8List?> getBytesFromAsset(String path) async {
   ByteData data = await rootBundle.load(path);
   ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),

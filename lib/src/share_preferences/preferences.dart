@@ -8,6 +8,7 @@ class Preferences {
   static Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
   }
+  //*Muestra o no el tutorial de la app
 
   static bool get isTutorialActived {
     return _prefs.getBool('isTutorialActived') ?? _isTutorialActived;

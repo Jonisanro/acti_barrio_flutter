@@ -158,6 +158,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
     );
   }
 
+  //*Construccion de la vista del mapa
   Widget _mapView(BuildContext context) {
     final markersProvider =
         Provider.of<MarkersProviders>(context, listen: true);
@@ -200,6 +201,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
     );
   }
 
+  //*Drawer Personalizado
   Widget _drawer() {
     final _screenSize = MediaQuery.of(context).size;
     return SizedBox(
