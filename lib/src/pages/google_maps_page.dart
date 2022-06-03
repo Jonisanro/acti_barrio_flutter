@@ -30,7 +30,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
     final markersProviders =
         Provider.of<MarkersProviders>(context, listen: false);
     determinePermissionPosition(context).then((value) => {
-          markersProviders.getMarkers(),
+          markersProviders.getMarkers(context),
         });
 
     super.initState();

@@ -30,7 +30,7 @@ class _CustomButtonColorState extends State<CustomButtonColor> {
             .update(widget.nombreFiltro, (value) => disable);
 
         if (disable) {
-          await markersProvider.addMarkers(widget.nombreFiltro);
+          await markersProvider.addMarkers(context, widget.nombreFiltro);
 
           setState(() {});
         } else {

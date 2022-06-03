@@ -106,108 +106,214 @@ class _Tags extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        InkWell(
-          /* onTap: () => Navigator.push(
+    if (mark.tipo.length < 6) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+                color: const Color.fromRGBO(22, 117, 232, 1),
+                borderRadius: BorderRadius.circular(8)),
+            child: const Center(
+                child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+              child: InkWell(
+                /* onTap: () {
+                    const LatLng barrio = LatLng(-38.947740, -68.032358);
+                    barriosInfo.mapboxController.animateCamera(
+                      CameraUpdate.newCameraPosition(
+                        const CameraPosition(
+                          bearing: 0,
+                          tilt: 0,
+                          target: barrio,
+                          zoom: 16.0,
+                        ),
+                      ),
+                    );
+                    Navigator.pop(context);
+                  }, */
+                //TODO:Seleccionar barrio del markador
+                child: Text(
+                  'Neuquen',
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 216, 214, 214),
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            )),
+          ),
+          Container(
+            decoration: BoxDecoration(
+                color: const Color.fromRGBO(22, 117, 232, 1),
+                borderRadius: BorderRadius.circular(8)),
+            child: const Center(
+                child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+              child: InkWell(
+                /* onTap: () {
+                    const LatLng barrio = LatLng(-38.947740, -68.032358);
+                    barriosInfo.mapboxController.animateCamera(
+                      CameraUpdate.newCameraPosition(
+                        const CameraPosition(
+                          bearing: 0,
+                          tilt: 0,
+                          target: barrio,
+                          zoom: 16.0,
+                        ),
+                      ),
+                    );
+                    Navigator.pop(context);
+                  }, */
+                //TODO:Seleccionar barrio del markador
+                child: Text(
+                  'Naciones Unidas',
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 216, 214, 214),
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            )),
+          ),
+          InkWell(
+            /* onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => PageEventosTipo(
                   tipo: mark.tipo,
                 ),
               )), */
-          child: Container(
-            decoration: BoxDecoration(
-                color: const Color.fromRGBO(22, 117, 232, 1),
-                borderRadius: BorderRadius.circular(8)),
-            child: Center(
-                child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
-              child: Text(
-                mark.tipo,
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 216, 214, 214),
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold),
-              ),
-            )),
+
+            child: Container(
+              decoration: BoxDecoration(
+                  color: const Color.fromRGBO(22, 117, 232, 1),
+                  borderRadius: BorderRadius.circular(8)),
+              child: Center(
+                  child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+                child: Text(
+                  mark.tipo,
+                  style: const TextStyle(
+                      color: Color.fromARGB(255, 216, 214, 214),
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold),
+                ),
+              )),
+            ),
           ),
-        ),
-        const SizedBox(
-          width: 10.0,
-        ),
-        Container(
-          decoration: BoxDecoration(
-              color: const Color.fromRGBO(22, 117, 232, 1),
-              borderRadius: BorderRadius.circular(8)),
-          child: const Center(
-              child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
-            child: InkWell(
-              /* onTap: () {
-                const LatLng barrio = LatLng(-38.947740, -68.032358);
-                barriosInfo.mapboxController.animateCamera(
-                  CameraUpdate.newCameraPosition(
-                    const CameraPosition(
-                      bearing: 0,
-                      tilt: 0,
-                      target: barrio,
-                      zoom: 16.0,
+        ],
+      );
+    } else {
+      return Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    color: const Color.fromRGBO(22, 117, 232, 1),
+                    borderRadius: BorderRadius.circular(8)),
+                child: const Center(
+                    child: Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+                  child: InkWell(
+                    /* onTap: () {
+                    const LatLng barrio = LatLng(-38.947740, -68.032358);
+                    barriosInfo.mapboxController.animateCamera(
+                      CameraUpdate.newCameraPosition(
+                        const CameraPosition(
+                          bearing: 0,
+                          tilt: 0,
+                          target: barrio,
+                          zoom: 16.0,
+                        ),
+                      ),
+                    );
+                    Navigator.pop(context);
+                  }, */
+                    //TODO:Seleccionar barrio del markador
+                    child: Text(
+                      'Neuquen',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 216, 214, 214),
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
-                );
-                Navigator.pop(context);
-              }, */
-              //TODO:Seleccionar barrio del markador
-              child: Text(
-                'Neuquen',
-                style: TextStyle(
-                    color: Color.fromARGB(255, 216, 214, 214),
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold),
+                )),
               ),
-            ),
-          )),
-        ),
-        const SizedBox(
-          width: 10.0,
-        ),
-        Container(
-          decoration: BoxDecoration(
-              color: const Color.fromRGBO(22, 117, 232, 1),
-              borderRadius: BorderRadius.circular(8)),
-          child: const Center(
-              child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
-            child: InkWell(
-              /* onTap: () {
-                const LatLng barrio = LatLng(-38.947740, -68.032358);
-                barriosInfo.mapboxController.animateCamera(
-                  CameraUpdate.newCameraPosition(
-                    const CameraPosition(
-                      bearing: 0,
-                      tilt: 0,
-                      target: barrio,
-                      zoom: 16.0,
+              Container(
+                decoration: BoxDecoration(
+                    color: const Color.fromRGBO(22, 117, 232, 1),
+                    borderRadius: BorderRadius.circular(8)),
+                child: const Center(
+                    child: Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+                  child: InkWell(
+                    /* onTap: () {
+                    const LatLng barrio = LatLng(-38.947740, -68.032358);
+                    barriosInfo.mapboxController.animateCamera(
+                      CameraUpdate.newCameraPosition(
+                        const CameraPosition(
+                          bearing: 0,
+                          tilt: 0,
+                          target: barrio,
+                          zoom: 16.0,
+                        ),
+                      ),
+                    );
+                    Navigator.pop(context);
+                  }, */
+                    //TODO:Seleccionar barrio del markador
+                    child: Text(
+                      'Naciones Unidas',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 216, 214, 214),
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
-                );
-                Navigator.pop(context);
-              }, */
-              //TODO:Seleccionar barrio del markador
-              child: Text(
-                'Naciones Unidas',
-                style: TextStyle(
-                    color: Color.fromARGB(255, 216, 214, 214),
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold),
+                )),
               ),
+            ],
+          ),
+          const SizedBox(
+            height: 10.0,
+          ),
+          InkWell(
+            /* onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PageEventosTipo(
+                  tipo: mark.tipo,
+                ),
+              )), */
+
+            child: Container(
+              decoration: BoxDecoration(
+                  color: const Color.fromRGBO(22, 117, 232, 1),
+                  borderRadius: BorderRadius.circular(8)),
+              child: Center(
+                  child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+                child: Text(
+                  mark.tipo,
+                  style: const TextStyle(
+                      color: Color.fromARGB(255, 216, 214, 214),
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.bold),
+                ),
+              )),
             ),
-          )),
-        ),
-      ],
-    );
+          ),
+        ],
+      );
+    }
   }
 }
 

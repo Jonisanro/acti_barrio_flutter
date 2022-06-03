@@ -111,11 +111,11 @@ class MarkersProviders extends ChangeNotifier {
 
   //*Agregado de marcadores por filtro
 
-  addMarkers(String filtro) async {
+  addMarkers(BuildContext context, String filtro) async {
     for (var e in markers) {
       if (e.tipo == filtro) {
         BitmapDescriptor bitmap =
-            await getAssetImageMarker('images/actibarrio_$filtro.png');
+            await getAssetImageMarker('images/actibarrio_$filtro.png', context);
 
         final markerId = MarkerId(e.id.oid.toString());
         Marker tempMarker = Marker(
@@ -148,10 +148,10 @@ class MarkersProviders extends ChangeNotifier {
   }
 
   //*Carga de Marcadores
-  getMarkers() async {
+  getMarkers(BuildContext context) async {
     for (var e in markers) {
       BitmapDescriptor bitmap =
-          await getAssetImageMarker('images/actibarrio_${e.tipo}.png');
+          await getAssetImageMarker('images/actibarrio_${e.tipo}.png', context);
 
       final markerId = MarkerId(e.id.oid.toString());
       Marker tempMarker = Marker(
