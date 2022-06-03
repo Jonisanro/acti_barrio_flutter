@@ -216,7 +216,7 @@ class _PageView1State extends State<PageView1> {
                                   fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
-                              width: 20.0,
+                              width: 10.0,
                             ),
                             Icon(
                               Icons.arrow_forward_ios_outlined,

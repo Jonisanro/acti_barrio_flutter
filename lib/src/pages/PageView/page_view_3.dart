@@ -116,7 +116,7 @@ class _PageView3State extends State<PageView3> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 20),
                 FadeInRight(
                   delay: const Duration(milliseconds: 1500),
                   child: SizedBox(

@@ -48,7 +48,7 @@ class _PageView4State extends State<PageView4> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 30),
                 FadeInRight(
                   delay: const Duration(milliseconds: 500),
                   child: SizedBox(
@@ -58,19 +58,18 @@ class _PageView4State extends State<PageView4> {
                       overflow: TextOverflow.clip,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 19.0,
+                        fontSize: 18.0,
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(),
                 FadeInRight(
                   delay: const Duration(milliseconds: 1000),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(
-                        height: 10.0,
+                        height: 15.0,
                       ),
                       ElevatedButton(
                           onPressed: () async => Navigator.popAndPushNamed(
@@ -79,7 +78,7 @@ class _PageView4State extends State<PageView4> {
                             padding: EdgeInsets.all(15.0),
                             child: Text('Ir al mapa'),
                           )),
-                      const SizedBox(height: 10.0),
+                      const SizedBox(height: 15.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
