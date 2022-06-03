@@ -26,7 +26,7 @@ class _CustomBottonBarState extends State<CustomBottonBar> {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: SpeedDial(
-        spacing: 20.0,
+        spacing: 10.0,
         useRotationAnimation: false,
         activeChild: const Icon(
           Icons.close,

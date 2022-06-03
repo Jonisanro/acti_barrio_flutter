@@ -22,7 +22,7 @@ class _PageView3State extends State<PageView3> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 FadeInRight(
@@ -45,7 +45,6 @@ class _PageView3State extends State<PageView3> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 30),
                 FadeInRight(
                   delay: const Duration(milliseconds: 500),
                   child: SizedBox(
@@ -92,9 +91,6 @@ class _PageView3State extends State<PageView3> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 40.0,
-                ),
                 FadeInRight(
                   delay: const Duration(milliseconds: 1000),
                   child: Container(
@@ -116,7 +112,6 @@ class _PageView3State extends State<PageView3> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 20),
                 FadeInRight(
                   delay: const Duration(milliseconds: 1500),
                   child: SizedBox(

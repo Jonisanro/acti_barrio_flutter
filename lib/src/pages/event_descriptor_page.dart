@@ -309,6 +309,8 @@ class _FechaHoraContacto extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           //*Fecha
           Row(
@@ -411,71 +413,77 @@ class _FechaHoraContacto extends StatelessWidget {
 
           //*Referente
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: 40.0,
-                height: 40.0,
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 224, 235, 240)),
-                child: const Icon(
-                  Icons.person,
-                  size: 30.0,
-                  color: Color.fromRGBO(22, 117, 232, 1),
-                ),
-              ),
-              const SizedBox(
-                width: 10.0,
-              ),
-              Column(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Referente',
-                    style: TextStyle(fontSize: 13.0, color: Colors.black38),
+                children: [
+                  Container(
+                    width: 40.0,
+                    height: 40.0,
+                    decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 224, 235, 240)),
+                    child: const Icon(
+                      Icons.person,
+                      size: 30.0,
+                      color: Color.fromRGBO(22, 117, 232, 1),
+                    ),
                   ),
-                  SizedBox(
-                    height: 3.0,
+                  const SizedBox(
+                    width: 10.0,
                   ),
-                  Text('San Roman Jonathan',
-                      style: TextStyle(
-                          fontSize: 13.0, fontWeight: FontWeight.bold)),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Referente',
+                        style: TextStyle(fontSize: 13.0, color: Colors.black38),
+                      ),
+                      SizedBox(
+                        height: 3.0,
+                      ),
+                      Text('San Roman Jonathan',
+                          style: TextStyle(
+                              fontSize: 13.0, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
                 ],
               ),
-              const SizedBox(
-                width: 60.0,
-              ),
-              IconButton(
-                //TODO: Armar funcionabilidad para envio de email
-                onPressed: () async {
-                  final Uri _emailLaunchUri = Uri(
-                      scheme: 'mailto',
-                      path: 'smith@example.com',
-                      queryParameters: {
-                        'subject': 'Example Subject & Symbols are allowed!'
-                      });
-                  launchUrl(_emailLaunchUri);
-                },
-                icon: const Icon(
-                  Icons.email,
-                  size: 30.0,
-                  color: Color.fromRGBO(22, 117, 232, 1),
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  final Uri _phoneLaunchUri = Uri(
-                    scheme: 'tel',
-                    path: '+5411341234567',
-                  );
-                  launchUrl(_phoneLaunchUri);
-                },
-                icon: const Icon(
-                  Icons.phone,
-                  size: 30.0,
-                  color: Color.fromRGBO(22, 117, 232, 1),
-                ),
+              Row(
+                children: [
+                  IconButton(
+                    //TODO: Armar funcionabilidad para envio de email
+                    onPressed: () async {
+                      final Uri _emailLaunchUri = Uri(
+                          scheme: 'mailto',
+                          path: 'smith@example.com',
+                          queryParameters: {
+                            'subject': 'Example Subject & Symbols are allowed!'
+                          });
+                      launchUrl(_emailLaunchUri);
+                    },
+                    icon: const Icon(
+                      Icons.email,
+                      size: 30.0,
+                      color: Color.fromRGBO(22, 117, 232, 1),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      final Uri _phoneLaunchUri = Uri(
+                        scheme: 'tel',
+                        path: '+5411341234567',
+                      );
+                      launchUrl(_phoneLaunchUri);
+                    },
+                    icon: const Icon(
+                      Icons.phone,
+                      size: 30.0,
+                      color: Color.fromRGBO(22, 117, 232, 1),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -492,60 +500,60 @@ class _FechaHoraContacto extends StatelessWidget {
 
           //*Ubicacion
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: 40.0,
-                height: 40.0,
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 224, 235, 240)),
-                child: const Icon(
-                  Icons.person,
-                  size: 30.0,
-                  color: Color.fromRGBO(22, 117, 232, 1),
-                ),
-              ),
-              const SizedBox(
-                width: 10.0,
-              ),
-              Column(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Ubicación',
-                    style: TextStyle(fontSize: 13.0, color: Colors.black38),
+                children: [
+                  Container(
+                    width: 40.0,
+                    height: 40.0,
+                    decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 224, 235, 240)),
+                    child: const Icon(
+                      Icons.person,
+                      size: 30.0,
+                      color: Color.fromRGBO(22, 117, 232, 1),
+                    ),
                   ),
-                  SizedBox(
-                    height: 3.0,
+                  const SizedBox(
+                    width: 10.0,
                   ),
-                  Text('San Roman Jonathan',
-                      style: TextStyle(
-                          fontSize: 13.0, fontWeight: FontWeight.bold)),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Ubicación',
+                        style: TextStyle(fontSize: 13.0, color: Colors.black38),
+                      ),
+                      SizedBox(
+                        height: 3.0,
+                      ),
+                      Text('San Roman Jonathan',
+                          style: TextStyle(
+                              fontSize: 13.0, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
                 ],
               ),
-              const SizedBox(
-                width: 110.0,
-              ),
-              IconButton(
-                onPressed: () {
-                  LatLng barrio = LatLng(mark.latitud, mark.longitud);
-                  barriosInfo.mapboxController.animateCamera(
-                    CameraUpdate.newCameraPosition(
-                      CameraPosition(
-                        bearing: 0,
-                        tilt: 0,
-                        target: barrio,
-                        zoom: 17.0,
-                      ),
-                    ),
-                  );
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Icons.location_on_rounded,
-                  size: 30.0,
-                  color: Color.fromRGBO(22, 117, 232, 1),
+              Padding(
+                padding: const EdgeInsets.only(right: 50.0),
+                child: IconButton(
+                  //TODO: Armar funcionabilidad para envio de email
+                  onPressed: () async {
+                    determinePermissionPosition(context).then((value) => {
+                          if (value == true)
+                            {
+                              getCurrentLocation(context),
+                            }
+                        });
+                  },
+                  icon: const Icon(
+                    Icons.location_on,
+                    size: 30.0,
+                    color: Color.fromRGBO(22, 117, 232, 1),
+                  ),
                 ),
               ),
             ],
