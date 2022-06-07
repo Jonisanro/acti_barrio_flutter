@@ -9,6 +9,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../helpers/custom_image_markers.dart';
 import '../share_preferences/preferences.dart';
+import 'package:http/http.dart' as http;
 
 class MarkersProviders extends ChangeNotifier {
   late Evento tappedMarker;
@@ -16,6 +17,7 @@ class MarkersProviders extends ChangeNotifier {
   MarkersProviders() {
     getDisplayMarkers();
   }
+
 //*Stream para escuchar cambios en el mapa de marcadores
   final StreamController<Map<String, Marker>> _markersStreamController =
       StreamController.broadcast();
@@ -24,6 +26,19 @@ class MarkersProviders extends ChangeNotifier {
       _markersStreamController.stream;
 
   //*Carga marcadores desde el json/http
+  /* getDisplayMarkers() async {
+    final url = Uri.parse(
+        "http://10.0.2.2:3001/api/modules/actibarrio/traerActividades");
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      String data = response.body;
+      final jsonResult = MarkersResponse.fromJson(data);
+      markers = jsonResult.results;
+      notifyListeners();
+      return markers;
+    }
+  } */
+
   getDisplayMarkers() async {
     String data = await rootBundle.loadString('dataJson/app_ab_ubicacion.json');
     final jsonResult = MarkersResponse.fromJson(data);

@@ -15,11 +15,11 @@ MERGED from [:android_intent_plus] C:\Users\Administrador\Documents\GitHub\ActiB
 MERGED from [androidx.window:window-java:1.0.0-beta04] C:\Users\Administrador\.gradle\caches\transforms-3\9b68b10994c149d62397bd40bcf4f9a5\transformed\jetified-window-java-1.0.0-beta04\AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Administrador\.gradle\caches\transforms-3\d8ea44c439152f030c7fed7c57271ece\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:17:1-33:12
 MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\0b736019bd5f75c27c84fb4f93a640a6\transformed\jetified-play-services-location-17.0.0\AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7a6d762734745cf43f3362dee37aa808\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:17:1-38:12
-MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c5cd346173366ad3bcf23f7605745576\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:17:1-44:12
+MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Administrador\.gradle\caches\transforms-3\45e5f2780786b25bd04fa7d78c288db1\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:16:1-24:12
 MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\a7ca2cc99e77d3b6f8f48eb6ea2de0ed\transformed\jetified-play-services-places-placereport-17.0.0\AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\3fd182a70308010eacefca4b63685156\transformed\jetified-play-services-tasks-17.0.0\AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c95d3f006e54404bda3255fb978f8459\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:17:1-28:12
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Administrador\.gradle\caches\transforms-3\055496d1c9326e5a473a712fb6b03c5d\transformed\jetified-play-services-tasks-18.0.1\AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\9512ed514a0d4a6fd4d878375f0a228c\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:16:1-26:12
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Administrador\.gradle\caches\transforms-3\23cd00767440a03a1d726376c698866a\transformed\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7e1ca886ec1b46931adb525121dfb6f1\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.loader:loader:1.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\1d18db37ce50f960c37e6d40da40f16e\transformed\loader-1.0.0\AndroidManifest.xml:17:1-22:12
@@ -72,6 +72,8 @@ ADDED from C:\Users\Administrador\Documents\GitHub\ActiBarrio\acti_barrio_flutte
 		ADDED from C:\Users\Administrador\Documents\GitHub\ActiBarrio\acti_barrio_flutter\android\app\src\main\AndroidManifest.xml:6:22-82
 queries
 ADDED from C:\Users\Administrador\Documents\GitHub\ActiBarrio\acti_barrio_flutter\android\app\src\main\AndroidManifest.xml:7:5-12:13
+MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:30:5-34:15
+MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:30:5-34:15
 intent#action:name:android.intent.action.SENDTO+data:scheme:mailto
 ADDED from C:\Users\Administrador\Documents\GitHub\ActiBarrio\acti_barrio_flutter\android\app\src\main\AndroidManifest.xml:8:5-11:14
 action#android.intent.action.SENDTO
@@ -92,16 +94,16 @@ MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Administrador\.gradle
 MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Administrador\.gradle\caches\transforms-3\d8ea44c439152f030c7fed7c57271ece\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:24:5-31:19
 MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\0b736019bd5f75c27c84fb4f93a640a6\transformed\jetified-play-services-location-17.0.0\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\0b736019bd5f75c27c84fb4f93a640a6\transformed\jetified-play-services-location-17.0.0\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7a6d762734745cf43f3362dee37aa808\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:30:5-36:19
-MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7a6d762734745cf43f3362dee37aa808\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:30:5-36:19
-MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c5cd346173366ad3bcf23f7605745576\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:22:5-27:19
-MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c5cd346173366ad3bcf23f7605745576\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:36:5-42:19
+MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:36:5-42:19
+MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Administrador\.gradle\caches\transforms-3\45e5f2780786b25bd04fa7d78c288db1\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Administrador\.gradle\caches\transforms-3\45e5f2780786b25bd04fa7d78c288db1\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:19:5-23:19
 MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\a7ca2cc99e77d3b6f8f48eb6ea2de0ed\transformed\jetified-play-services-places-placereport-17.0.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\a7ca2cc99e77d3b6f8f48eb6ea2de0ed\transformed\jetified-play-services-places-placereport-17.0.0\AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\3fd182a70308010eacefca4b63685156\transformed\jetified-play-services-tasks-17.0.0\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\3fd182a70308010eacefca4b63685156\transformed\jetified-play-services-tasks-17.0.0\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c95d3f006e54404bda3255fb978f8459\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:22:5-26:19
-MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c95d3f006e54404bda3255fb978f8459\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Administrador\.gradle\caches\transforms-3\055496d1c9326e5a473a712fb6b03c5d\transformed\jetified-play-services-tasks-18.0.1\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Administrador\.gradle\caches\transforms-3\055496d1c9326e5a473a712fb6b03c5d\transformed\jetified-play-services-tasks-18.0.1\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\9512ed514a0d4a6fd4d878375f0a228c\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\9512ed514a0d4a6fd4d878375f0a228c\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:20:5-24:19
 MERGED from [androidx.core:core:1.6.0] C:\Users\Administrador\.gradle\caches\transforms-3\d06f095ade40eb1f10beeb34fc53e55d\transformed\core-1.6.0\AndroidManifest.xml:24:5-89
 MERGED from [androidx.core:core:1.6.0] C:\Users\Administrador\.gradle\caches\transforms-3\d06f095ade40eb1f10beeb34fc53e55d\transformed\core-1.6.0\AndroidManifest.xml:24:5-89
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Administrador\.gradle\caches\transforms-3\1f04dbcc71964aecead1f0851069d0e0\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
@@ -180,16 +182,16 @@ MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Administrador\.gradle
 MERGED from [androidx.window:window:1.0.0-beta04] C:\Users\Administrador\.gradle\caches\transforms-3\d8ea44c439152f030c7fed7c57271ece\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:20:5-22:41
 MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\0b736019bd5f75c27c84fb4f93a640a6\transformed\jetified-play-services-location-17.0.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\0b736019bd5f75c27c84fb4f93a640a6\transformed\jetified-play-services-location-17.0.0\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7a6d762734745cf43f3362dee37aa808\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7a6d762734745cf43f3362dee37aa808\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c5cd346173366ad3bcf23f7605745576\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c5cd346173366ad3bcf23f7605745576\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Administrador\.gradle\caches\transforms-3\45e5f2780786b25bd04fa7d78c288db1\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Administrador\.gradle\caches\transforms-3\45e5f2780786b25bd04fa7d78c288db1\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:18:5-43
 MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\a7ca2cc99e77d3b6f8f48eb6ea2de0ed\transformed\jetified-play-services-places-placereport-17.0.0\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\a7ca2cc99e77d3b6f8f48eb6ea2de0ed\transformed\jetified-play-services-places-placereport-17.0.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\3fd182a70308010eacefca4b63685156\transformed\jetified-play-services-tasks-17.0.0\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\3fd182a70308010eacefca4b63685156\transformed\jetified-play-services-tasks-17.0.0\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c95d3f006e54404bda3255fb978f8459\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c95d3f006e54404bda3255fb978f8459\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Administrador\.gradle\caches\transforms-3\055496d1c9326e5a473a712fb6b03c5d\transformed\jetified-play-services-tasks-18.0.1\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Administrador\.gradle\caches\transforms-3\055496d1c9326e5a473a712fb6b03c5d\transformed\jetified-play-services-tasks-18.0.1\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\9512ed514a0d4a6fd4d878375f0a228c\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\9512ed514a0d4a6fd4d878375f0a228c\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:18:5-43
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Administrador\.gradle\caches\transforms-3\23cd00767440a03a1d726376c698866a\transformed\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Administrador\.gradle\caches\transforms-3\23cd00767440a03a1d726376c698866a\transformed\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7e1ca886ec1b46931adb525121dfb6f1\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
@@ -230,8 +232,8 @@ INJECTED from C:\Users\Administrador\Documents\GitHub\ActiBarrio\acti_barrio_flu
 		INJECTED from C:\Users\Administrador\Documents\GitHub\ActiBarrio\acti_barrio_flutter\android\app\src\debug\AndroidManifest.xml
 uses-permission#android.permission.INTERNET
 ADDED from C:\Users\Administrador\Documents\GitHub\ActiBarrio\acti_barrio_flutter\android\app\src\debug\AndroidManifest.xml:6:5-66
-MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7a6d762734745cf43f3362dee37aa808\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7a6d762734745cf43f3362dee37aa808\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:24:5-67
 	android:name
 		ADDED from C:\Users\Administrador\Documents\GitHub\ActiBarrio\acti_barrio_flutter\android\app\src\debug\AndroidManifest.xml:6:22-64
 service#com.baseflow.geolocator.GeolocatorLocationService
@@ -265,32 +267,36 @@ ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\Administrador\.gradle\
 	android:name
 		ADDED from [androidx.window:window:1.0.0-beta04] C:\Users\Administrador\.gradle\caches\transforms-3\d8ea44c439152f030c7fed7c57271ece\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7a6d762734745cf43f3362dee37aa808\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:23:5-79
+ADDED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:23:5-79
 	android:name
-		ADDED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7a6d762734745cf43f3362dee37aa808\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:23:22-76
+		ADDED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:23:22-76
 uses-feature#0x00020000
-ADDED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7a6d762734745cf43f3362dee37aa808\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
+ADDED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:26:5-28:35
 	android:glEsVersion
-		ADDED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7a6d762734745cf43f3362dee37aa808\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
+		ADDED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:27:9-41
 	android:required
-		ADDED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7a6d762734745cf43f3362dee37aa808\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
+		ADDED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:28:9-32
+package#com.google.android.apps.maps
+ADDED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:33:9-64
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:33:18-61
 uses-library#org.apache.http.legacy
-ADDED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7a6d762734745cf43f3362dee37aa808\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
+ADDED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:39:9-41:40
 	android:required
-		ADDED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7a6d762734745cf43f3362dee37aa808\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
+		ADDED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:41:13-37
 	android:name
-		ADDED from [com.google.android.gms:play-services-maps:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\7a6d762734745cf43f3362dee37aa808\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
+		ADDED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Administrador\.gradle\caches\transforms-3\a19427bcf499c79500f5d741f3a3e781\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:40:13-50
 activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c5cd346173366ad3bcf23f7605745576\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+ADDED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Administrador\.gradle\caches\transforms-3\45e5f2780786b25bd04fa7d78c288db1\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
 	android:exported
-		ADDED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c5cd346173366ad3bcf23f7605745576\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+		ADDED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Administrador\.gradle\caches\transforms-3\45e5f2780786b25bd04fa7d78c288db1\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
 	android:theme
-		ADDED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c5cd346173366ad3bcf23f7605745576\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+		ADDED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Administrador\.gradle\caches\transforms-3\45e5f2780786b25bd04fa7d78c288db1\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
 	android:name
-		ADDED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c5cd346173366ad3bcf23f7605745576\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+		ADDED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Administrador\.gradle\caches\transforms-3\45e5f2780786b25bd04fa7d78c288db1\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
 meta-data#com.google.android.gms.version
-ADDED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c95d3f006e54404bda3255fb978f8459\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+ADDED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\9512ed514a0d4a6fd4d878375f0a228c\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:21:9-23:69
 	android:value
-		ADDED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c95d3f006e54404bda3255fb978f8459\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+		ADDED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\9512ed514a0d4a6fd4d878375f0a228c\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:23:13-66
 	android:name
-		ADDED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\c95d3f006e54404bda3255fb978f8459\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+		ADDED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\9512ed514a0d4a6fd4d878375f0a228c\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:22:13-58
