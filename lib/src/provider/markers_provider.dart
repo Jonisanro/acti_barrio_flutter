@@ -9,7 +9,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../helpers/custom_image_markers.dart';
 import '../share_preferences/preferences.dart';
-import 'package:http/http.dart' as http;
 
 class MarkersProviders extends ChangeNotifier {
   late Evento tappedMarker;
