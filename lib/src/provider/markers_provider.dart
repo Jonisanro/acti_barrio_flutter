@@ -24,7 +24,7 @@ class MarkersProviders extends ChangeNotifier {
   Stream<Map<String, Marker>> get markersStream =>
       _markersStreamController.stream;
 
-  //*Carga marcadores desde el json/http
+  //*Carga marcadores desde el json/https
   /* getDisplayMarkers() async {
     final url = Uri.parse(
         "http://10.0.2.2:3001/api/modules/actibarrio/traerActividades");
