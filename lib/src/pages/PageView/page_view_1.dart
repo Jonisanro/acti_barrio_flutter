@@ -18,7 +18,7 @@ class _PageView1State extends State<PageView1> {
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(20.0),
         child: SizedBox(
           width: size.width * 0.9,
           child: Padding(
@@ -27,6 +27,44 @@ class _PageView1State extends State<PageView1> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  child: MaterialButton(
+                    onPressed: () {
+                      Preferences.isTutorialActived = true;
+                      Navigator.pushReplacementNamed(context, '/google_maps');
+                    },
+                    child: SizedBox(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(
+                            Icons.arrow_back_ios,
+                            size: 15.0,
+                            color: Colors.black54,
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Text(
+                            'Omitir',
+                            style: TextStyle(
+                                color: Colors.black54,
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_outlined,
+                            size: 15.0,
+                            color: Colors.black54,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
                 FadeInRight(
                   child: Container(
                     decoration: BoxDecoration(
@@ -49,7 +87,7 @@ class _PageView1State extends State<PageView1> {
                 ),
                 const SizedBox(height: 15),
                 FadeInRight(
-                  delay: const Duration(milliseconds: 500),
+                  delay: const Duration(milliseconds: 250),
                   child: SizedBox(
                     width: size.width * 0.8,
                     child: const Text(
@@ -67,7 +105,7 @@ class _PageView1State extends State<PageView1> {
                   height: 30.0,
                 ),
                 FadeInRight(
-                  delay: const Duration(milliseconds: 1000),
+                  delay: const Duration(milliseconds: 500),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -177,7 +215,7 @@ class _PageView1State extends State<PageView1> {
                   height: 15.0,
                 ),
                 FadeInRight(
-                  delay: const Duration(milliseconds: 1500),
+                  delay: const Duration(milliseconds: 750),
                   child: SizedBox(
                     width: size.width * 0.8,
                     height: size.height * 0.15,
@@ -194,40 +232,6 @@ class _PageView1State extends State<PageView1> {
                 ),
                 const SizedBox(
                   height: 15.0,
-                ),
-                Align(
-                  alignment: Alignment.bottomLeft,
-                  child: SizedBox(
-                    width: size.width * 0.3,
-                    child: MaterialButton(
-                      onPressed: () {
-                        Preferences.isTutorialActived = true;
-                        Navigator.pushReplacementNamed(context, '/google_maps');
-                      },
-                      child: SizedBox(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: const [
-                            Text(
-                              'Omitir',
-                              style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_outlined,
-                              size: 15.0,
-                              color: Colors.black54,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
                 ),
               ],
             ),

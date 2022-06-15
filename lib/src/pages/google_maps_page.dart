@@ -10,6 +10,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+
 import '../provider/mapbox_info.dart';
 
 class GoogleMapsPage extends StatefulWidget {
@@ -29,8 +30,11 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
   void initState() {
     final markersProviders =
         Provider.of<MarkersProviders>(context, listen: false);
-    determinePermissionPosition(context).then((value) => {
-          markersProviders.getMarkers(context),
+
+    determinePermissionPosition(context).then((value) async => {
+          await markersProviders.getMarkers(
+            context,
+          ),
         });
 
     super.initState();

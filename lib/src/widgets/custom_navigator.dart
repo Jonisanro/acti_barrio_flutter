@@ -1,6 +1,9 @@
 import 'package:acti_barrio_flutter/src/widgets/custom_buttom_disable_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/filtros_provider.dart';
 
 class CustomBottonBar extends StatefulWidget {
   const CustomBottonBar({Key? key}) : super(key: key);
@@ -10,19 +13,17 @@ class CustomBottonBar extends StatefulWidget {
 }
 
 class _CustomBottonBarState extends State<CustomBottonBar> {
+  @override
+  void initState() {
+    getFiltros();
+    super.initState();
+  }
   //TODO:Cargar filtros de base de datos
-  Map tempButtons = {
-    'images/actibarrio_deporte.png': 'deporte',
-    'images/actibarrio_arte.png': 'arte',
-    'images/actibarrio_cursos.png': 'cursos',
-    'images/actibarrio_sociales.png': 'sociales',
-    'images/actibarrio_otros.png': 'otros',
-    'images/actibarrio_bici.png': 'bici',
-    'images/actibarrio_mercado.png': 'mercado',
-  };
 
   @override
   Widget build(BuildContext context) {
+    final filtrosProviders = Provider.of<FiltrosProviders>(context);
+    final filtros = filtrosProviders.filtros;
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: SpeedDial(
@@ -45,15 +46,22 @@ class _CustomBottonBarState extends State<CustomBottonBar> {
             image: AssetImage('images/filtro.png'),
           ),
         ),
-        children: tempButtons.keys.map((e) {
+        children: filtros.map((e) {
+          print(e.nombre);
           return SpeedDialChild(
               backgroundColor: Colors.transparent,
               child: CustomButtonColor(
-                nombreFiltro: tempButtons[e],
-                assetImage: e,
+                nombreFiltro: e.nombre,
+                assetImage: e.imagen,
               ));
         }).toList(),
       ),
     );
+  }
+
+  void getFiltros() async {
+    final filtrosProviders =
+        Provider.of<FiltrosProviders>(context, listen: false);
+    await filtrosProviders.getFiltros();
   }
 }

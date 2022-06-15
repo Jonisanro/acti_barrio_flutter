@@ -114,32 +114,16 @@ class _Tags extends StatelessWidget {
             decoration: BoxDecoration(
                 color: const Color.fromRGBO(22, 117, 232, 1),
                 borderRadius: BorderRadius.circular(8)),
-            child: const Center(
+            child: Center(
                 child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
-              child: InkWell(
-                /* onTap: () {
-                    const LatLng barrio = LatLng(-38.947740, -68.032358);
-                    barriosInfo.mapboxController.animateCamera(
-                      CameraUpdate.newCameraPosition(
-                        const CameraPosition(
-                          bearing: 0,
-                          tilt: 0,
-                          target: barrio,
-                          zoom: 16.0,
-                        ),
-                      ),
-                    );
-                    Navigator.pop(context);
-                  }, */
-                //TODO:Seleccionar barrio del markador
-                child: Text(
-                  'Neuquen',
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 216, 214, 214),
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.bold),
-                ),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+              child: Text(
+                mark.localidad,
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 216, 214, 214),
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.bold),
               ),
             )),
           ),
@@ -147,9 +131,10 @@ class _Tags extends StatelessWidget {
             decoration: BoxDecoration(
                 color: const Color.fromRGBO(22, 117, 232, 1),
                 borderRadius: BorderRadius.circular(8)),
-            child: const Center(
+            child: Center(
                 child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
               child: InkWell(
                 /* onTap: () {
                     const LatLng barrio = LatLng(-38.947740, -68.032358);
@@ -165,10 +150,10 @@ class _Tags extends StatelessWidget {
                     );
                     Navigator.pop(context);
                   }, */
-                //TODO:Seleccionar barrio del markador
+
                 child: Text(
-                  'Naciones Unidas',
-                  style: TextStyle(
+                  mark.barrio,
+                  style: const TextStyle(
                       color: Color.fromARGB(255, 216, 214, 214),
                       fontSize: 14.0,
                       fontWeight: FontWeight.bold),
@@ -268,7 +253,7 @@ class _Tags extends StatelessWidget {
                     );
                     Navigator.pop(context);
                   }, */
-                    //TODO:Seleccionar barrio del markador
+
                     child: Text(
                       'Naciones Unidas',
                       style: TextStyle(
@@ -355,7 +340,7 @@ class _TituloState extends State<_Titulo> {
   @override
   Widget build(BuildContext context) {
     final prefs = Preferences();
-    bool disable = prefs.existId(widget.mark.id.oid);
+    bool disable = prefs.existId(widget.mark.id);
     final size = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -369,7 +354,7 @@ class _TituloState extends State<_Titulo> {
             SizedBox(
               width: size.width * 0.75,
               child: Text(
-                widget.mark.descripcion,
+                widget.mark.nombre,
                 style: const TextStyle(
                     overflow: TextOverflow.clip,
                     fontSize: 20.0,
@@ -379,7 +364,7 @@ class _TituloState extends State<_Titulo> {
             IconButton(
               onPressed: () {
                 disable = !disable;
-                setFavorite(context, widget.mark.id.oid, disable);
+                setFavorite(context, widget.mark.id, disable);
                 setState(() {});
               },
               icon: Icon(
@@ -436,16 +421,19 @@ class _FechaHoraContacto extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     'Desde / Hasta',
                     style: TextStyle(fontSize: 13.0, color: Colors.black38),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 3.0,
                   ),
-                  Text('Miercoles, 12 Jun - Sabado, 13 Jun',
-                      style: TextStyle(
+                  Text(mark.fechaInicio,
+                      style: const TextStyle(
+                          fontSize: 13.0, fontWeight: FontWeight.bold)),
+                  Text(mark.fechaFin,
+                      style: const TextStyle(
                           fontSize: 13.0, fontWeight: FontWeight.bold))
                 ],
               ),
@@ -536,16 +524,16 @@ class _FechaHoraContacto extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     'Referente',
                     style: TextStyle(fontSize: 13.0, color: Colors.black38),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 3.0,
                   ),
-                  Text('San Roman Jonathan',
-                      style: TextStyle(
+                  Text(mark.contacto.nombreReferente,
+                      style: const TextStyle(
                           fontSize: 13.0, fontWeight: FontWeight.bold)),
                 ],
               ),
@@ -617,16 +605,16 @@ class _FechaHoraContacto extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     'Ubicación',
                     style: TextStyle(fontSize: 13.0, color: Colors.black38),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 3.0,
                   ),
-                  Text('San Roman Jonathan',
-                      style: TextStyle(
+                  Text(mark.direccion,
+                      style: const TextStyle(
                           fontSize: 13.0, fontWeight: FontWeight.bold)),
                 ],
               ),
@@ -679,14 +667,13 @@ class _Descripcion extends StatelessWidget {
         const SizedBox(
           height: 10.0,
         ),
-        Text(mark.descripcion,
+        Text(mark.nombre,
             style:
                 const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
         const SizedBox(
           height: 10.0,
         ),
-        const Text(
-            'Mollit velit sint velit labore voluptate et laboris eu excepteur sit exercitation ad. Ut cillum ea dolore occaecat elit sunt Lorem ut in excepteur. Est aute enim adipisicing duis quis. Laboris tempor fugiat nisi voluptate exercitation. Fugiat sit aliquip officia cillum proident ex. Velit esse cillum esse sunt et minim labore velit dolor ullamco fugiat commodo nulla. Nulla nulla duis et laboris nisi nisi ex do nulla mollit sint cillum amet.'),
+        Text(mark.descripcion),
         const SizedBox(
           height: 10.0,
         ),

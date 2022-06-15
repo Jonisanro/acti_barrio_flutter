@@ -1,11 +1,14 @@
 import 'dart:async';
-
+import 'dart:convert';
+import 'package:acti_barrio_flutter/src/provider/filtros_provider.dart';
+import 'package:http/http.dart' as http;
 import 'package:acti_barrio_flutter/src/models/markers_response.dart';
 import 'package:clippy_flutter/triangle.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../helpers/custom_image_markers.dart';
 import '../share_preferences/preferences.dart';
@@ -24,8 +27,8 @@ class MarkersProviders extends ChangeNotifier {
   Stream<Map<String, Marker>> get markersStream =>
       _markersStreamController.stream;
 
-  //*Carga marcadores desde el json/http
-  /* getDisplayMarkers() async {
+  //*Carga marcadores desde el http
+  getDisplayMarkers() async {
     final url = Uri.parse(
         "http://10.0.2.2:3001/api/modules/actibarrio/traerActividades");
     final response = await http.get(url);
@@ -34,51 +37,47 @@ class MarkersProviders extends ChangeNotifier {
       final jsonResult = MarkersResponse.fromJson(data);
       markers = jsonResult.results;
       notifyListeners();
+      await writeJsonEventsLocal();
       return markers;
     }
-  } */
-
-  getDisplayMarkers() async {
-    String data = await rootBundle.loadString('dataJson/app_ab_ubicacion.json');
-    final jsonResult = MarkersResponse.fromJson(data);
-    markers = jsonResult.results;
-    notifyListeners();
-    return markers;
   }
 
-  //*Cargar eventos segun tipo
-  Future<List<Evento>> getEventForTypes(String tipo) async {
-    List<Evento> markersListTipo = [];
-    String data = await rootBundle.loadString('dataJson/app_ab_ubicacion.json');
-    final jsonResult = MarkersResponse.fromJson(data);
-    markers = jsonResult.results;
+  writeJsonEventsLocal() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('events', jsonEncode(markers));
+  }
 
-    for (var element in markers) {
-      if (element.tipo == tipo) {
-        markersListTipo.add(element);
+  //*Cargar eventos locales
+  Future<List<Evento>> getEventsSharedPreferences() async {
+    List<Evento> events = [];
+    final prefs = await SharedPreferences.getInstance();
+    String? data = prefs.getString('events');
+    if (data != null) {
+      final List listEventos = jsonDecode(data);
+      for (var element in listEventos) {
+        events.add(Evento.fromJson(element));
       }
     }
 
-    notifyListeners();
-    return markersListTipo;
+    return events;
   }
 
   //*Cargar eventos favoritos
   Future<List<Evento>> getEventFavorites() async {
     final prefs = Preferences();
-    List<Evento> markersListTipo = [];
-    String data = await rootBundle.loadString('dataJson/app_ab_ubicacion.json');
-    final jsonResult = MarkersResponse.fromJson(data);
-    markers = jsonResult.results;
-    if (prefs.favorites != null) {
-      for (var element in prefs.favorites) {
-        final temp = markers.where((e) => e.id.oid == element).first;
-        markersListTipo.add(temp);
+    List<Evento> markersListFavorites = [];
+
+    if (prefs.favorites != null && prefs.favorites != []) {
+      for (var element in prefs.favorites!) {
+        for (var evento in markers) {
+          if (evento.id == element) {
+            markersListFavorites.add(evento);
+          }
+        }
       }
     }
 
-    notifyListeners();
-    return markersListTipo;
+    return markersListFavorites;
   }
 
   //*Ventana de informacion de evento personalizada
@@ -115,6 +114,19 @@ class MarkersProviders extends ChangeNotifier {
     'otros': true,
   };
 
+  resetfiltros() {
+    _filtrosEstado = {
+      'deporte': true,
+      'arte': true,
+      'cursos': true,
+      'sociales': true,
+      'bici': true,
+      'mercado': true,
+      'otros': true,
+    };
+    notifyListeners();
+  }
+
   Map<String, bool> get filtrosEstado => _filtrosEstado;
 
   set filtrosEstado(Map<String, bool> value) {
@@ -131,7 +143,7 @@ class MarkersProviders extends ChangeNotifier {
         BitmapDescriptor bitmap =
             await getAssetImageMarker('images/actibarrio_$filtro.png', context);
 
-        final markerId = MarkerId(e.id.oid.toString());
+        final markerId = MarkerId(e.id.toString());
         Marker tempMarker = Marker(
           markerId: markerId,
           onTap: () {
@@ -145,7 +157,7 @@ class MarkersProviders extends ChangeNotifier {
         );
 
         markersMap.addAll({
-          (e.id.oid + e.tipo).toString(): tempMarker,
+          (e.id + e.tipo).toString(): tempMarker,
         });
       }
     }
@@ -163,11 +175,17 @@ class MarkersProviders extends ChangeNotifier {
 
   //*Carga de Marcadores
   getMarkers(BuildContext context) async {
+    final filtrosProviders =
+        Provider.of<FiltrosProviders>(context, listen: false);
+    final filtros = await filtrosProviders.getFiltros();
+    await resetfiltros();
     for (var e in markers) {
-      BitmapDescriptor bitmap =
-          await getAssetImageMarker('images/actibarrio_${e.tipo}.png', context);
+      final urlImage = filtros,
+          filtro =
+              filtros.where((element) => element.nombre == e.tipo).first.imagen;
+      BitmapDescriptor bitmap = await getAssetImageMarker(filtro, context);
 
-      final markerId = MarkerId(e.id.oid.toString());
+      final markerId = MarkerId(e.id.toString());
       Marker tempMarker = Marker(
         markerId: markerId,
         onTap: () {
@@ -181,7 +199,7 @@ class MarkersProviders extends ChangeNotifier {
       );
 
       markersMap.addAll({
-        (e.id.oid + e.tipo).toString(): tempMarker,
+        (e.id + e.tipo).toString(): tempMarker,
       });
     }
 
@@ -197,8 +215,8 @@ class MarkersProviders extends ChangeNotifier {
     MarkerId markerId,
     List<Evento> markers,
   ) {
-    tappedMarker = markers
-        .firstWhere((marker) => marker.id.oid.toString() == markerId.value);
+    tappedMarker =
+        markers.firstWhere((marker) => marker.id.toString() == markerId.value);
   }
 }
 
@@ -237,7 +255,7 @@ class _CustomInfoWindow extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(e.descripcion,
+                  Text(e.nombre,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                           overflow: TextOverflow.ellipsis,

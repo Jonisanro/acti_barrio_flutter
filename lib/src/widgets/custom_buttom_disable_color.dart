@@ -21,6 +21,7 @@ class _CustomButtonColorState extends State<CustomButtonColor> {
   Widget build(BuildContext context) {
     final markersProvider =
         Provider.of<MarkersProviders>(context, listen: false);
+
     dynamic disable = markersProvider.filtrosEstado[widget.nombreFiltro];
 
     return InkWell(
@@ -49,7 +50,7 @@ class _CustomButtonColorState extends State<CustomButtonColor> {
                 backgroundBlendMode: BlendMode.saturation,
               ),
         child: Image(
-          image: AssetImage(widget.assetImage),
+          image: NetworkImage(widget.assetImage),
           height: 100,
           width: 100,
         ),

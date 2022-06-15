@@ -1,4 +1,4 @@
-import 'package:acti_barrio_flutter/src/models/markers_response.dart';
+/* import 'package:acti_barrio_flutter/src/models/markers_response.dart';
 import 'package:acti_barrio_flutter/src/provider/markers_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -104,3 +104,4 @@ class ListEvents extends StatelessWidget {
         });
   }
 }
+ */

@@ -28,68 +28,108 @@ class MarkersResponse {
 
 class Evento {
   Evento({
+    required this.contacto,
     required this.id,
-    required this.descripcion,
+    required this.nombre,
     required this.direccion,
+    required this.descripcion,
     required this.latitud,
     required this.longitud,
     required this.activo,
-    required this.telefono,
     required this.tipo,
+    required this.urlIcono,
+    required this.localidad,
+    required this.barrio,
+    required this.fechaInicio,
+    required this.fechaFin,
+    required this.favorite,
+    required this.v,
   });
 
-  Id id;
-  String descripcion;
+  Contacto contacto;
+  String id;
+  String nombre;
   String direccion;
+  String descripcion;
   double latitud;
   double longitud;
   bool activo;
-  String telefono;
   String tipo;
+  String urlIcono;
+  String localidad;
+  String barrio;
+  String fechaInicio;
+  String fechaFin;
+  bool favorite;
+  int v;
 
   factory Evento.fromJson(String str) => Evento.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
   factory Evento.fromMap(Map<String, dynamic> json) => Evento(
-        id: Id.fromMap(json["_id"]),
-        descripcion: json["descripcion"],
+        contacto: Contacto.fromMap(json["Contacto"]),
+        id: json["_id"],
+        nombre: json["nombre"],
         direccion: json["direccion"],
+        descripcion: json["descripcion"],
         latitud: json["latitud"].toDouble(),
         longitud: json["longitud"].toDouble(),
         activo: json["activo"],
-        telefono: json["telefono"] ?? '',
-        tipo: json["tipo"] ?? '',
+        tipo: json["tipo"],
+        urlIcono: json["urlIcono"],
+        localidad: json["localidad"],
+        barrio: json["barrio"],
+        fechaInicio: json["fecha_inicio"],
+        fechaFin: json["fecha_fin"],
+        favorite: false,
+        v: json["__v"],
       );
 
   Map<String, dynamic> toMap() => {
-        "_id": id.toMap(),
-        "descripcion": descripcion,
+        "Contacto": contacto.toMap(),
+        "_id": id,
+        "nombre": nombre,
         "direccion": direccion,
+        "descripcion": descripcion,
         "latitud": latitud,
         "longitud": longitud,
         "activo": activo,
-        "telefono": telefono,
         "tipo": tipo,
+        "urlIcono": urlIcono,
+        "localidad": localidad,
+        "barrio": barrio,
+        "fecha_inicio": fechaInicio,
+        "fecha_fin": fechaFin,
+        "favorite": false,
+        "__v": v,
       };
 }
 
-class Id {
-  Id({
-    required this.oid,
+class Contacto {
+  Contacto({
+    required this.nombreReferente,
+    required this.telefono,
+    required this.email,
   });
 
-  String oid;
+  String nombreReferente;
+  String telefono;
+  String email;
 
-  factory Id.fromJson(String str) => Id.fromMap(json.decode(str));
+  factory Contacto.fromJson(String str) => Contacto.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory Id.fromMap(Map<String, dynamic> json) => Id(
-        oid: json["\u0024oid"],
+  factory Contacto.fromMap(Map<String, dynamic> json) => Contacto(
+        nombreReferente: json["nombreReferente"],
+        telefono: json["telefono"],
+        email: json["email"],
       );
 
   Map<String, dynamic> toMap() => {
-        "\u0024oid": oid,
+        "nombreReferente": nombreReferente,
+        "telefono": telefono,
+        "email": email,
       };
 }

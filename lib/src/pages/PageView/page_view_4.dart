@@ -50,7 +50,7 @@ class _PageView4State extends State<PageView4> {
                 ),
                 const SizedBox(height: 30),
                 FadeInRight(
-                  delay: const Duration(milliseconds: 500),
+                  delay: const Duration(milliseconds: 250),
                   child: SizedBox(
                     width: size.width * 0.9,
                     child: const Text(
@@ -64,7 +64,7 @@ class _PageView4State extends State<PageView4> {
                   ),
                 ),
                 FadeInRight(
-                  delay: const Duration(milliseconds: 1000),
+                  delay: const Duration(milliseconds: 500),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
