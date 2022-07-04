@@ -106,9 +106,11 @@ class _Tags extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (mark.tipo.length < 6) {
+    if (mark.localidad.nombre.length < 10 &&
+        mark.localidad.barrio!.nombre.length < 10) {
       return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
             decoration: BoxDecoration(
@@ -119,7 +121,7 @@ class _Tags extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
               child: Text(
-                mark.localidad,
+                mark.tipo,
                 style: const TextStyle(
                     color: Color.fromARGB(255, 216, 214, 214),
                     fontSize: 14.0,
@@ -127,83 +129,27 @@ class _Tags extends StatelessWidget {
               ),
             )),
           ),
-          Container(
-            decoration: BoxDecoration(
-                color: const Color.fromRGBO(22, 117, 232, 1),
-                borderRadius: BorderRadius.circular(8)),
-            child: Center(
-                child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
-              child: InkWell(
-                /* onTap: () {
-                    const LatLng barrio = LatLng(-38.947740, -68.032358);
-                    barriosInfo.mapboxController.animateCamera(
-                      CameraUpdate.newCameraPosition(
-                        const CameraPosition(
-                          bearing: 0,
-                          tilt: 0,
-                          target: barrio,
-                          zoom: 16.0,
-                        ),
-                      ),
-                    );
-                    Navigator.pop(context);
-                  }, */
-
-                child: Text(
-                  mark.barrio,
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 216, 214, 214),
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            )),
+          const SizedBox(
+            width: 10.0,
           ),
           InkWell(
-            /* onTap: () => Navigator.push(
+              /* onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => PageEventosTipo(
                   tipo: mark.tipo,
                 ),
               )), */
-
-            child: Container(
-              decoration: BoxDecoration(
-                  color: const Color.fromRGBO(22, 117, 232, 1),
-                  borderRadius: BorderRadius.circular(8)),
-              child: Center(
-                  child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
-                child: Text(
-                  mark.tipo,
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 216, 214, 214),
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.bold),
-                ),
-              )),
-            ),
-          ),
-        ],
-      );
-    } else {
-      return Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
+              child: (() {
+            if (mark.localidad.barrio != null) {
+              return Container(
                 decoration: BoxDecoration(
                     color: const Color.fromRGBO(22, 117, 232, 1),
                     borderRadius: BorderRadius.circular(8)),
-                child: const Center(
+                child: Center(
                     child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 5.0, horizontal: 15.0),
                   child: InkWell(
                     /* onTap: () {
                     const LatLng barrio = LatLng(-38.947740, -68.032358);
@@ -221,23 +167,91 @@ class _Tags extends StatelessWidget {
                   }, */
                     //TODO:Seleccionar barrio del markador
                     child: Text(
-                      'Neuquen',
-                      style: TextStyle(
+                      mark.localidad.nombre,
+                      style: const TextStyle(
                           color: Color.fromARGB(255, 216, 214, 214),
                           fontSize: 14.0,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
                 )),
+              );
+            }
+
+            return Container();
+          })()),
+        ],
+      );
+    } else {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    color: const Color.fromRGBO(22, 117, 232, 1),
+                    borderRadius: BorderRadius.circular(8)),
+                child: Center(
+                    child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 5.0, horizontal: 15.0),
+                  child: InkWell(
+                      /* onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PageEventosTipo(
+                  tipo: mark.tipo,
+                ),
+              )), */
+                      child: (() {
+                    if (mark.localidad.barrio != null) {
+                      return Container(
+                        decoration: BoxDecoration(
+                            color: const Color.fromRGBO(22, 117, 232, 1),
+                            borderRadius: BorderRadius.circular(8)),
+                        child: Center(
+                            child: InkWell(
+                          /* onTap: () {
+                    const LatLng barrio = LatLng(-38.947740, -68.032358);
+                    barriosInfo.mapboxController.animateCamera(
+                      CameraUpdate.newCameraPosition(
+                        const CameraPosition(
+                            bearing: 0,
+                            tilt: 0,
+                            target: barrio,
+                            zoom: 16.0,
+                        ),
+                      ),
+                    );
+                    Navigator.pop(context);
+                  }, */
+                          //TODO:Seleccionar barrio del markador
+                          child: Text(
+                            mark.tipo,
+                            style: const TextStyle(
+                                color: Color.fromARGB(255, 216, 214, 214),
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )),
+                      );
+                    }
+
+                    return Container();
+                  })()),
+                )),
               ),
               Container(
                 decoration: BoxDecoration(
                     color: const Color.fromRGBO(22, 117, 232, 1),
                     borderRadius: BorderRadius.circular(8)),
-                child: const Center(
+                child: Center(
                     child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 5.0, horizontal: 15.0),
                   child: InkWell(
                     /* onTap: () {
                     const LatLng barrio = LatLng(-38.947740, -68.032358);
@@ -255,8 +269,8 @@ class _Tags extends StatelessWidget {
                   }, */
 
                     child: Text(
-                      'Naciones Unidas',
-                      style: TextStyle(
+                      mark.localidad.nombre,
+                      style: const TextStyle(
                           color: Color.fromARGB(255, 216, 214, 214),
                           fontSize: 14.0,
                           fontWeight: FontWeight.bold),
@@ -269,32 +283,44 @@ class _Tags extends StatelessWidget {
           const SizedBox(
             height: 10.0,
           ),
-          InkWell(
-            /* onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PageEventosTipo(
-                  tipo: mark.tipo,
-                ),
-              )), */
-
-            child: Container(
-              decoration: BoxDecoration(
-                  color: const Color.fromRGBO(22, 117, 232, 1),
-                  borderRadius: BorderRadius.circular(8)),
-              child: Center(
-                  child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
-                child: Text(
-                  mark.tipo,
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 216, 214, 214),
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.bold),
-                ),
-              )),
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    color: const Color.fromRGBO(22, 117, 232, 1),
+                    borderRadius: BorderRadius.circular(8)),
+                child: Center(
+                    child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 5.0, horizontal: 15.0),
+                  child: InkWell(
+                    /* onTap: () {
+                      const LatLng barrio = LatLng(-38.947740, -68.032358);
+                      barriosInfo.mapboxController.animateCamera(
+                        CameraUpdate.newCameraPosition(
+                          const CameraPosition(
+                              bearing: 0,
+                              tilt: 0,
+                              target: barrio,
+                              zoom: 16.0,
+                          ),
+                        ),
+                      );
+                      Navigator.pop(context);
+                    }, */
+                    //TODO:Seleccionar barrio del markador
+                    child: Text(
+                      mark.localidad.barrio!.nombre,
+                      style: const TextStyle(
+                          color: Color.fromARGB(255, 216, 214, 214),
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                )),
+              ),
+            ],
           ),
         ],
       );
@@ -396,6 +422,7 @@ class _FechaHoraContacto extends StatelessWidget {
   final Evento mark;
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final barriosInfo = Provider.of<BarriosInfo>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
@@ -545,7 +572,7 @@ class _FechaHoraContacto extends StatelessWidget {
                 onPressed: () async {
                   final Uri _emailLaunchUri = Uri(
                       scheme: 'mailto',
-                      path: 'smith@example.com',
+                      path: mark.contacto.email,
                       queryParameters: {
                         'subject': 'Example Subject & Symbols are allowed!'
                       });
@@ -613,13 +640,16 @@ class _FechaHoraContacto extends StatelessWidget {
                   const SizedBox(
                     height: 3.0,
                   ),
-                  Text(mark.direccion,
+                  SizedBox(
+                    width: size.width * 0.5,
+                    child: Text(
+                      mark.direccion,
                       style: const TextStyle(
-                          fontSize: 13.0, fontWeight: FontWeight.bold)),
+                          fontSize: 13.0, fontWeight: FontWeight.bold),
+                      overflow: TextOverflow.visible,
+                    ),
+                  ),
                 ],
-              ),
-              const SizedBox(
-                width: 110.0,
               ),
               IconButton(
                 onPressed: () {

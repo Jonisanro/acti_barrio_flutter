@@ -41,7 +41,8 @@ class _PageView4State extends State<PageView4> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10.0),
                       child: Image(
-                        height: size.height * 0.5,
+                        width: size.width * 0.7,
+                        height: size.width * 0.7,
                         fit: BoxFit.cover,
                         image: const AssetImage("images/detalles.png"),
                       ),

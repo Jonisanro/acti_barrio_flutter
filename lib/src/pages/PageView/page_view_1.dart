@@ -49,7 +49,7 @@ class _PageView1State extends State<PageView1> {
                             'Omitir',
                             style: TextStyle(
                                 color: Colors.black54,
-                                fontSize: 16.0,
+                                fontSize: 15.0,
                                 fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
@@ -65,6 +65,9 @@ class _PageView1State extends State<PageView1> {
                     ),
                   ),
                 ),
+                const SizedBox(
+                  height: 10.0,
+                ),
                 FadeInRight(
                   child: Container(
                     decoration: BoxDecoration(
@@ -78,9 +81,9 @@ class _PageView1State extends State<PageView1> {
                             offset: Offset(0.0, 8.0)),
                       ],
                     ),
-                    child: const Image(
-                      width: 80,
-                      height: 80,
+                    child: Image(
+                      width: size.width * 0.15,
+                      height: size.width * 0.15,
                       image: AssetImage("images/filtro.png"),
                     ),
                   ),
@@ -96,13 +99,13 @@ class _PageView1State extends State<PageView1> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 19.0,
+                          fontSize: 18.0,
                           height: 1.3),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 30.0,
+                SizedBox(
+                  height: size.height * 0.02,
                 ),
                 FadeInRight(
                   delay: const Duration(milliseconds: 500),
@@ -123,10 +126,11 @@ class _PageView1State extends State<PageView1> {
                                   offset: Offset(0.0, 5.0)),
                             ],
                           ),
-                          child: const Image(
-                            width: 65,
-                            height: 65,
-                            image: AssetImage("images/actibarrio_deporte.png"),
+                          child: Image(
+                            width: size.width * 0.15,
+                            height: size.width * 0.15,
+                            image: const AssetImage(
+                                "images/actibarrio_deporte.png"),
                           ),
                         ),
                       ),
@@ -145,10 +149,11 @@ class _PageView1State extends State<PageView1> {
                                 offset: Offset(0.0, 5.0)),
                           ],
                         ),
-                        child: const Image(
-                          width: 65,
-                          height: 65,
-                          image: AssetImage("images/actibarrio_sociales.png"),
+                        child: Image(
+                          width: size.width * 0.15,
+                          height: size.width * 0.15,
+                          image: const AssetImage(
+                              "images/actibarrio_sociales.png"),
                         ),
                       ),
                       const SizedBox(
@@ -177,10 +182,11 @@ class _PageView1State extends State<PageView1> {
                                   offset: Offset(0.0, 3.0)),
                             ],
                           ),
-                          child: const Image(
-                            width: 65,
-                            height: 65,
-                            image: AssetImage("images/actibarrio_arte.png"),
+                          child: Image(
+                            width: size.width * 0.15,
+                            height: size.width * 0.15,
+                            image:
+                                const AssetImage("images/actibarrio_arte.png"),
                           ),
                         ),
                       ),
@@ -201,10 +207,11 @@ class _PageView1State extends State<PageView1> {
                                   offset: Offset(0.0, 5.0)),
                             ],
                           ),
-                          child: const Image(
-                            width: 65,
-                            height: 65,
-                            image: AssetImage("images/actibarrio_cursos.png"),
+                          child: Image(
+                            width: size.width * 0.15,
+                            height: size.width * 0.15,
+                            image: const AssetImage(
+                                "images/actibarrio_cursos.png"),
                           ),
                         ),
                       ),
@@ -225,13 +232,10 @@ class _PageView1State extends State<PageView1> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 19.0,
+                          fontSize: 18.0,
                           height: 1.3),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 15.0,
                 ),
               ],
             ),

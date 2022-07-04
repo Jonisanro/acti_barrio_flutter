@@ -6,7 +6,6 @@ import 'package:acti_barrio_flutter/src/pages/google_maps_page.dart';
 import 'package:acti_barrio_flutter/src/pages/home_page.dart';
 import 'package:acti_barrio_flutter/src/pages/splash_screen_page.dart';
 import 'package:acti_barrio_flutter/src/pages/sugerencia_page.dart';
-import 'package:acti_barrio_flutter/src/provider/filtros_provider.dart';
 
 import 'package:acti_barrio_flutter/src/provider/mapbox_info.dart';
 import 'package:acti_barrio_flutter/src/provider/markers_provider.dart';
@@ -28,9 +27,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => FiltrosProviders(),
-        ),
         ChangeNotifierProvider(lazy: false, create: (_) => BarriosInfo()),
         ChangeNotifierProvider(
           create: (_) => MarkersProviders(),

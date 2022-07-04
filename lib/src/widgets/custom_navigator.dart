@@ -1,9 +1,8 @@
+import 'package:acti_barrio_flutter/src/provider/markers_provider.dart';
 import 'package:acti_barrio_flutter/src/widgets/custom_buttom_disable_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:provider/provider.dart';
-
-import '../provider/filtros_provider.dart';
 
 class CustomBottonBar extends StatefulWidget {
   const CustomBottonBar({Key? key}) : super(key: key);
@@ -15,19 +14,18 @@ class CustomBottonBar extends StatefulWidget {
 class _CustomBottonBarState extends State<CustomBottonBar> {
   @override
   void initState() {
-    getFiltros();
     super.initState();
   }
   //TODO:Cargar filtros de base de datos
 
   @override
   Widget build(BuildContext context) {
-    final filtrosProviders = Provider.of<FiltrosProviders>(context);
-    final filtros = filtrosProviders.filtros;
+    final size = MediaQuery.of(context).size;
+    final markersProviders = Provider.of<MarkersProviders>(context);
+    final filtros = markersProviders.filters;
     return Padding(
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(10.0),
       child: SpeedDial(
-        spacing: 10.0,
         useRotationAnimation: false,
         activeChild: const Icon(
           Icons.close,
@@ -36,7 +34,7 @@ class _CustomBottonBarState extends State<CustomBottonBar> {
         overlayOpacity: 0.5,
         overlayColor: Colors.grey,
         direction: SpeedDialDirection.up,
-        buttonSize: const Size(65, 65),
+        buttonSize: const Size(60, 60),
         curve: Curves.elasticIn,
         backgroundColor: Colors.transparent,
         animationDuration: const Duration(milliseconds: 100),
@@ -47,21 +45,13 @@ class _CustomBottonBarState extends State<CustomBottonBar> {
           ),
         ),
         children: filtros.map((e) {
-          print(e.nombre);
           return SpeedDialChild(
               backgroundColor: Colors.transparent,
               child: CustomButtonColor(
-                nombreFiltro: e.nombre,
-                assetImage: e.imagen,
+                filtro: e,
               ));
         }).toList(),
       ),
     );
-  }
-
-  void getFiltros() async {
-    final filtrosProviders =
-        Provider.of<FiltrosProviders>(context, listen: false);
-    await filtrosProviders.getFiltros();
   }
 }

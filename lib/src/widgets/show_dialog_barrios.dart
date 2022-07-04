@@ -1,3 +1,4 @@
+import 'package:acti_barrio_flutter/src/provider/markers_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,17 +10,9 @@ import '../helpers/global_functions.dart';
 import '../provider/mapbox_info.dart';
 
 class ShowDialogBarrios {
-  final Map tempListBarrios = {
-    'Valentina Norte,Neuquen': {'lat': -38.928105, 'long': -68.167479},
-    'Naciones Unidas,Neuquen': {'lat': -38.947740, 'long': -68.032358},
-    'Naciones Unidas2,Neuquen': {'lat': -38.947740, 'long': -68.032358},
-    'Naciones Unidas3,Neuquen': {'lat': -38.947740, 'long': -68.032358},
-    'Naciones Unidas4,Neuquen': {'lat': -38.947740, 'long': -68.032358},
-    'Naciones Unidas5,Neuquen': {'lat': -38.947740, 'long': -68.032358},
-    'Naciones Unidas6,Neuquen': {'lat': -38.947740, 'long': -68.032358},
-  };
-
   alerta(BuildContext context) {
+    final markersProvider =
+        Provider.of<MarkersProviders>(context, listen: false);
     final barriosInfo = Provider.of<BarriosInfo>(context, listen: false);
     final size = MediaQuery.of(context).size;
     return showDialog(
@@ -50,33 +43,93 @@ class ShowDialogBarrios {
                         child: ListView(
                             padding: const EdgeInsets.all(0.0),
                             shrinkWrap: false,
-                            children: tempListBarrios.keys.map((e) {
-                              return ListTile(
-                                contentPadding: const EdgeInsets.all(0),
-                                onTap: () {
-                                  final LatLng barrio = LatLng(
-                                      tempListBarrios[e]["lat"],
-                                      tempListBarrios[e]["long"]);
-                                  barriosInfo.mapboxController.animateCamera(
-                                    CameraUpdate.newCameraPosition(
-                                      CameraPosition(
-                                        bearing: 0,
-                                        tilt: 0,
-                                        target: barrio,
-                                        zoom: 16.0,
+                            children: markersProvider.locations.map((e) {
+                              return e.barriosLista.isNotEmpty
+                                  ? ExpansionTile(
+                                      iconColor: Colors.blueAccent,
+                                      collapsedIconColor: Colors.black,
+                                      subtitle: const Text(
+                                        'Barrios',
+                                        style: TextStyle(
+                                          fontSize: 13.0,
+                                          fontWeight: FontWeight.w500,
+                                          height: 1.3,
+                                          color: Colors.black54,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                  Navigator.of(context).pop();
-                                },
-                                title: Text(
-                                  e,
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18.0,
-                                      height: 1.3),
-                                ),
-                              );
+                                      title: Text(
+                                        e.nombre,
+                                        style: const TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w400,
+                                          height: 1.3,
+                                          color: Colors.black87,
+                                        ),
+                                      ),
+                                      children: e.barriosLista
+                                          .map((b) => ListTile(
+                                                title: Text(
+                                                  b.nombre,
+                                                  style: const TextStyle(
+                                                    fontSize: 16.0,
+                                                    height: 1.3,
+                                                    color: Colors.black54,
+                                                  ),
+                                                ),
+                                                onTap: () {
+                                                  final LatLng barrio = LatLng(
+                                                      b.latitud, b.longitud);
+                                                  barriosInfo.mapboxController
+                                                      .animateCamera(
+                                                    CameraUpdate
+                                                        .newCameraPosition(
+                                                      CameraPosition(
+                                                        bearing: 0,
+                                                        tilt: 0,
+                                                        target: barrio,
+                                                        zoom: 16.0,
+                                                      ),
+                                                    ),
+                                                  );
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ))
+                                          .toList(),
+                                    )
+                                  : ListTile(
+                                      onTap: () {
+                                        final LatLng barrio = LatLng(
+                                            markersProvider.locations
+                                                .firstWhere((element) =>
+                                                    e.nombre == element.nombre)
+                                                .latitud,
+                                            markersProvider.locations
+                                                .firstWhere((element) =>
+                                                    e.nombre == element.nombre)
+                                                .longitud);
+                                        barriosInfo.mapboxController
+                                            .animateCamera(
+                                          CameraUpdate.newCameraPosition(
+                                            CameraPosition(
+                                              bearing: 0,
+                                              tilt: 0,
+                                              target: barrio,
+                                              zoom: 16.0,
+                                            ),
+                                          ),
+                                        );
+                                        Navigator.of(context).pop();
+                                      },
+                                      title: Text(
+                                        e.nombre,
+                                        style: const TextStyle(
+                                          color: Colors.black87,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w400,
+                                          height: 1.3,
+                                        ),
+                                      ),
+                                    );
                             }).toList()),
                       ),
                     ))

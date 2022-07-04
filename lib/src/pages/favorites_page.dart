@@ -64,7 +64,6 @@ class _ListEventsState extends State<ListEvents> {
                     },
                     background: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
                         color: Colors.grey[800],
                       ),
                       width: double.infinity,

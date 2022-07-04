@@ -38,12 +38,15 @@ class _PageView2State extends State<PageView2> {
                             offset: Offset(0.0, 5.0)),
                       ],
                     ),
-                    child: const Image(
-                      width: 80,
-                      height: 80,
-                      image: AssetImage("images/actibarrio_barrios.png"),
+                    child: Image(
+                      width: size.width * 0.15,
+                      height: size.width * 0.15,
+                      image: const AssetImage("images/actibarrio_barrios.png"),
                     ),
                   ),
+                ),
+                const SizedBox(
+                  height: 15.0,
                 ),
                 FadeInRight(
                   delay: const Duration(milliseconds: 250),
@@ -61,7 +64,7 @@ class _PageView2State extends State<PageView2> {
                   ),
                 ),
                 const SizedBox(
-                  height: 50.0,
+                  height: 30.0,
                 ),
                 FadeInRight(
                   delay: const Duration(milliseconds: 500),
@@ -84,6 +87,9 @@ class _PageView2State extends State<PageView2> {
                       ),
                     ),
                   ),
+                ),
+                const SizedBox(
+                  height: 15.0,
                 ),
                 FadeInRight(
                   delay: const Duration(milliseconds: 750),
