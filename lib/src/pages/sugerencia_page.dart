@@ -36,7 +36,7 @@ class SugerenciaPage extends StatelessWidget {
   Widget _textDescription(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const Text(
@@ -47,13 +47,13 @@ class SugerenciaPage extends StatelessWidget {
               height: 1.3,
               fontWeight: FontWeight.bold),
         ),
-        const SizedBox(
-          height: 20.0,
+        SizedBox(
+          height: size.height * 0.05,
         ),
         SizedBox(
           width: size.width * 0.9,
           child: const Text(
-            'Et ipsum nostrud esse nostrud. Velit id veniam non cupidatat laborum magna in consequat voluptate officia do. Culpa exercitation amet nostrud minim ad in Lorem adipisicing incididunt. Lorem elit amet laborum dolor ad irure dolore. Ullamco dolore veniam nisi cillum labore ex proident est. Sit proident occaecat minim reprehenderit magna consequat aute nostrud id occaecat mollit aliqua.',
+            'Si nos quieres realizar un comentario o sugerencias de nuestra APP , acerca del contenido,  lo podes realizar al siguiente',
             textAlign: TextAlign.left,
             style: TextStyle(
                 color: Color.fromARGB(187, 16, 16, 16),

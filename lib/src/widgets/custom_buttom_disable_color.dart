@@ -1,16 +1,16 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 
+import '../helpers/global_functions.dart';
+import '../models/markers_response.dart';
 import '../provider/markers_provider.dart';
 
 class CustomButtonColor extends StatefulWidget {
-  final String assetImage;
-  final String nombreFiltro;
+  final Filtro filtro;
 
-  const CustomButtonColor(
-      {Key? key, required this.assetImage, required this.nombreFiltro})
-      : super(key: key);
+  const CustomButtonColor({Key? key, required this.filtro}) : super(key: key);
 
   @override
   State<CustomButtonColor> createState() => _CustomButtonColorState();
@@ -19,41 +19,45 @@ class CustomButtonColor extends StatefulWidget {
 class _CustomButtonColorState extends State<CustomButtonColor> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final markersProvider =
         Provider.of<MarkersProviders>(context, listen: false);
-    dynamic disable = markersProvider.filtrosEstado[widget.nombreFiltro];
 
-    return InkWell(
-      onTap: () async {
-        disable = !disable;
-        markersProvider.filtrosEstado
-            .update(widget.nombreFiltro, (value) => disable);
+    return FutureBuilder<String>(
+      future: getImageFilter(widget.filtro),
+      builder: (context, snapshot) {
+        if (snapshot.data != null) {
+          final Uint8List bytes = base64Decode(snapshot.data!);
 
-        if (disable) {
-          await markersProvider.addMarkers(context, widget.nombreFiltro);
+          return InkWell(
+            onTap: () async {
+              widget.filtro.activo = !widget.filtro.activo;
+              if (widget.filtro.activo) {
+                await markersProvider.addMarkers(context, widget.filtro.nombre);
 
-          setState(() {});
+                setState(() {});
+              } else {
+                await markersProvider.removeMarkers(widget.filtro.nombre);
+                setState(() {});
+              }
+            },
+            child: Container(
+              height: size.height * 0.8,
+              width: size.width * 0.8,
+              foregroundDecoration: widget.filtro.activo
+                  ? null
+                  : BoxDecoration(
+                      borderRadius: BorderRadius.circular(30.0),
+                      color: Colors.grey[200],
+                      backgroundBlendMode: BlendMode.saturation,
+                    ),
+              child: Image.memory(bytes),
+            ),
+          );
         } else {
-          if (!disable) {
-            await markersProvider.removeMarkers(widget.nombreFiltro);
-            setState(() {});
-          }
+          return Container();
         }
       },
-      child: Container(
-        foregroundDecoration: disable
-            ? null
-            : BoxDecoration(
-                borderRadius: BorderRadius.circular(30.0),
-                color: Colors.grey[200],
-                backgroundBlendMode: BlendMode.saturation,
-              ),
-        child: Image(
-          image: AssetImage(widget.assetImage),
-          height: 100,
-          width: 100,
-        ),
-      ),
     );
   }
 }

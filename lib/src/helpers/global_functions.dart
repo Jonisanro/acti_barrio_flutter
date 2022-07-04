@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/markers_response.dart';
 import '../provider/mapbox_info.dart';
 
 //*Obtiene la ubicación actual
@@ -154,4 +156,11 @@ Future<bool> setFavorite(BuildContext context, String id, bool disable) async {
   }
 
   return true;
+}
+
+Future<String> getImageFilter(Filtro filtro) async {
+  final prefs = await SharedPreferences.getInstance();
+  final _base64 = prefs.getString(filtro.nombre)!;
+
+  return _base64;
 }

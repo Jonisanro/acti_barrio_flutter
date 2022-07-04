@@ -46,7 +46,7 @@ class _PageView3State extends State<PageView3> {
                   ),
                 ),
                 FadeInRight(
-                  delay: const Duration(milliseconds: 500),
+                  delay: const Duration(milliseconds: 250),
                   child: SizedBox(
                     width: size.width * 0.8,
                     child: RichText(
@@ -92,7 +92,7 @@ class _PageView3State extends State<PageView3> {
                   ),
                 ),
                 FadeInRight(
-                  delay: const Duration(milliseconds: 1000),
+                  delay: const Duration(milliseconds: 500),
                   child: Container(
                     decoration: const BoxDecoration(
                       boxShadow: [
@@ -113,7 +113,7 @@ class _PageView3State extends State<PageView3> {
                   ),
                 ),
                 FadeInRight(
-                  delay: const Duration(milliseconds: 1500),
+                  delay: const Duration(milliseconds: 750),
                   child: SizedBox(
                     width: size.width * 0.8,
                     child: const Text(

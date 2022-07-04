@@ -23,7 +23,7 @@ class Preferences {
 
   List<String> _favorites = [];
 
-  get favorites {
+  List<String>? get favorites {
     return _prefs.getStringList('favorites');
   }
 
