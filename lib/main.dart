@@ -4,6 +4,7 @@ import 'package:acti_barrio_flutter/src/pages/event_descriptor_page.dart';
 import 'package:acti_barrio_flutter/src/pages/favorites_page.dart';
 import 'package:acti_barrio_flutter/src/pages/google_maps_page.dart';
 import 'package:acti_barrio_flutter/src/pages/home_page.dart';
+import 'package:acti_barrio_flutter/src/pages/no_data_page.dart';
 import 'package:acti_barrio_flutter/src/pages/splash_screen_page.dart';
 import 'package:acti_barrio_flutter/src/pages/sugerencia_page.dart';
 
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
           '/acercaDe': (BuildContext context) => const AcercaDePage(),
           '/favorite': (BuildContext context) => const FavoritesPage(),
           '/sugerencia': (BuildContext context) => const SugerenciaPage(),
+          '/noDataPage': (BuildContext context) => const NoDataPage(),
         },
         debugShowCheckedModeBanner: false,
         title: 'Material App',

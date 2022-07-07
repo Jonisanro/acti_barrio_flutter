@@ -84,7 +84,7 @@ class _PageView1State extends State<PageView1> {
                     child: Image(
                       width: size.width * 0.15,
                       height: size.width * 0.15,
-                      image: AssetImage("images/filtro.png"),
+                      image: const AssetImage("images/filtro.png"),
                     ),
                   ),
                 ),

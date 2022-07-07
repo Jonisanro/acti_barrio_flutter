@@ -20,6 +20,7 @@ class MarkersProviders extends ChangeNotifier {
   List<Localidades> locations = [];
   List<Filtro> filters = [];
   bool? primeraCarga = false;
+  bool? conection = false;
 
 //*Stream para escuchar cambios en el mapa de marcadores
   final StreamController<Map<String, Marker>> _markersStreamController =
@@ -38,6 +39,7 @@ class MarkersProviders extends ChangeNotifier {
           "http://10.0.2.2:3001/api/modules/actibarrio/traerActividades");
       final response = await http.get(url);
       if (response.statusCode == 200) {
+        conection = true;
         prefs.setBool('primeraCarga', true);
         primeraCarga = true;
         String data = response.body;
@@ -55,6 +57,7 @@ class MarkersProviders extends ChangeNotifier {
       primeraCarga = true;
       return markers;
     } else {
+      conection = false;
       if (primeraCarga == true) {
         await readJsonLocal();
         return markers;
@@ -91,7 +94,6 @@ class MarkersProviders extends ChangeNotifier {
       final url = Uri.parse(filters[i].imagen);
       final http.Response response = await http.get(url);
       base64 = base64Encode(response.bodyBytes);
-      print(base64);
       prefs.setString(filters[i].nombre, base64);
     }
   }
