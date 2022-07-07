@@ -1,8 +1,10 @@
 import 'dart:ui';
+import 'package:animate_do/animate_do.dart';
+
 import '../helpers/global_functions.dart';
 import '../models/markers_response.dart';
 import 'package:acti_barrio_flutter/src/provider/markers_provider.dart';
-import 'package:acti_barrio_flutter/src/widgets/custom_navigator.dart';
+import 'package:acti_barrio_flutter/src/widgets/show_dialog_filtros.dart';
 import 'package:acti_barrio_flutter/src/widgets/show_dialog_barrios.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -11,7 +13,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/mapbox_info.dart';
-import '../widgets/no_data_page.dart';
+import 'no_data_page.dart';
 
 class GoogleMapsPage extends StatefulWidget {
   const GoogleMapsPage({Key? key}) : super(key: key);
@@ -42,6 +44,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final markersProviders =
         Provider.of<MarkersProviders>(context, listen: false);
     return SafeArea(
@@ -63,11 +66,10 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                         alignment: Alignment.bottomRight,
                         child: Padding(
                           padding:
-                              const EdgeInsets.only(bottom: 12.0, right: 8.0),
+                              const EdgeInsets.only(bottom: 12.0, right: 10.0),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              const CustomBottonBar(),
                               InkWell(
                                 onTap: () {
                                   ShowDialogBarrios().alerta(context);
@@ -96,32 +98,29 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                             ],
                           ),
                         )),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Align(
-                        alignment: Alignment.topRight,
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: SizedBox(
-                            height: 60.0,
-                            width: 60.0,
-                            child: FloatingActionButton(
-                              elevation: 10.0,
-                              backgroundColor: Colors.white,
-                              onPressed: () async {
-                                determinePermissionPosition(context)
-                                    .then((value) => {
-                                          if (value == true)
-                                            {
-                                              getCurrentLocation(context),
-                                            }
-                                        });
-                              },
-                              child: const Icon(
-                                Icons.my_location,
-                                color: Colors.black54,
-                                size: 25.0,
-                              ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: SizedBox(
+                          height: 60.0,
+                          width: 60.0,
+                          child: FloatingActionButton(
+                            elevation: 10.0,
+                            backgroundColor: Colors.white,
+                            onPressed: () async {
+                              determinePermissionPosition(context)
+                                  .then((value) => {
+                                        if (value == true)
+                                          {
+                                            getCurrentLocation(context),
+                                          }
+                                      });
+                            },
+                            child: const Icon(
+                              Icons.my_location,
+                              color: Colors.black54,
+                              size: 25.0,
                             ),
                           ),
                         ),
@@ -156,6 +155,77 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12.0),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: InkWell(
+                          onTap: () {
+                            ShowDialogFiltros().alerta(context);
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30.0),
+                              color: Colors.grey[200],
+                              backgroundBlendMode: BlendMode.saturation,
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  offset: Offset(0.0, 0.3), //(x,y)
+                                  blurRadius: 1.0,
+                                ),
+                              ],
+                            ),
+                            child: const Image(
+                              image: AssetImage('images/filtro.png'),
+                              height: 65,
+                              width: 65,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    (() {
+                      if (markersProviders.conection == false) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/noDataPage');
+                          },
+                          child: Align(
+                            alignment: Alignment.topCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 25.0, horizontal: 10.0),
+                              child: Pulse(
+                                infinite: true,
+                                duration: const Duration(seconds: 2),
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey,
+                                          blurRadius: 2.0,
+                                          offset: Offset(0.0, 2.0),
+                                        ),
+                                      ]),
+                                  child: Image(
+                                    color: Colors.white.withOpacity(0.8),
+                                    colorBlendMode: BlendMode.modulate,
+                                    image:
+                                        const AssetImage('images/no_wifi.png'),
+                                    width: size.width * 0.065,
+                                    height: size.height * 0.065,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Container();
+                      }
+                    })(),
                   ]);
                 } else {
                   return const NoDataPage();

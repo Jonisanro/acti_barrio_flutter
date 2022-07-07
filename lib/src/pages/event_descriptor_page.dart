@@ -1,7 +1,11 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
+import 'package:palette_generator/palette_generator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../helpers/global_functions.dart';
@@ -105,9 +109,9 @@ class _Tags extends StatelessWidget {
   final Evento mark;
 
   @override
+  //*Si los tags no son tan largos se muestran en linea
   Widget build(BuildContext context) {
-    if (mark.localidad.nombre.length < 10 &&
-        mark.localidad.barrio!.nombre.length < 10) {
+    if (mark.localidad.nombre.length < 8) {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -132,89 +136,48 @@ class _Tags extends StatelessWidget {
           const SizedBox(
             width: 10.0,
           ),
-          InkWell(
-              /* onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PageEventosTipo(
-                  tipo: mark.tipo,
-                ),
-              )), */
-              child: (() {
+          Container(
+            decoration: BoxDecoration(
+                color: const Color.fromRGBO(22, 117, 232, 1),
+                borderRadius: BorderRadius.circular(8)),
+            child: Center(
+                child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+              child: Text(
+                mark.localidad.nombre,
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 216, 214, 214),
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.bold),
+              ),
+            )),
+          ),
+          (() {
             if (mark.localidad.barrio != null) {
               return Container(
-                decoration: BoxDecoration(
-                    color: const Color.fromRGBO(22, 117, 232, 1),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Center(
-                    child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 5.0, horizontal: 15.0),
-                  child: InkWell(
-                    /* onTap: () {
-                    const LatLng barrio = LatLng(-38.947740, -68.032358);
-                    barriosInfo.mapboxController.animateCamera(
-                      CameraUpdate.newCameraPosition(
-                        const CameraPosition(
-                          bearing: 0,
-                          tilt: 0,
-                          target: barrio,
-                          zoom: 16.0,
-                        ),
-                      ),
-                    );
-                    Navigator.pop(context);
-                  }, */
-                    //TODO:Seleccionar barrio del markador
-                    child: Text(
-                      mark.localidad.nombre,
-                      style: const TextStyle(
-                          color: Color.fromARGB(255, 216, 214, 214),
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                )),
-              );
-            }
-
-            return Container();
-          })()),
-        ],
-      );
-    } else {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: const Color.fromRGBO(22, 117, 232, 1),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Center(
-                    child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 5.0, horizontal: 15.0),
-                  child: InkWell(
-                      /* onTap: () => Navigator.push(
+                  decoration: BoxDecoration(
+                      color: const Color.fromRGBO(22, 117, 232, 1),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Center(
+                      child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 5.0, horizontal: 15.0),
+                    child: InkWell(
+                        /* onTap: () => Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => PageEventosTipo(
                   tipo: mark.tipo,
                 ),
               )), */
-                      child: (() {
-                    if (mark.localidad.barrio != null) {
-                      return Container(
-                        decoration: BoxDecoration(
-                            color: const Color.fromRGBO(22, 117, 232, 1),
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Center(
-                            child: InkWell(
-                          /* onTap: () {
+                        child: Container(
+                      decoration: BoxDecoration(
+                          color: const Color.fromRGBO(22, 117, 232, 1),
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Center(
+                          child: InkWell(
+                        /* onTap: () {
                     const LatLng barrio = LatLng(-38.947740, -68.032358);
                     barriosInfo.mapboxController.animateCamera(
                       CameraUpdate.newCameraPosition(
@@ -228,22 +191,77 @@ class _Tags extends StatelessWidget {
                     );
                     Navigator.pop(context);
                   }, */
-                          //TODO:Seleccionar barrio del markador
-                          child: Text(
-                            mark.tipo,
-                            style: const TextStyle(
-                                color: Color.fromARGB(255, 216, 214, 214),
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        )),
-                      );
-                    }
-
-                    return Container();
-                  })()),
-                )),
-              ),
+                        //TODO:Seleccionar barrio del markador
+                        child: Text(
+                          mark.localidad.barrio!.nombre,
+                          style: const TextStyle(
+                              color: Color.fromARGB(255, 216, 214, 214),
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )),
+                    )),
+                  )));
+            }
+            return Container();
+          }()),
+        ],
+      );
+    } else {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                      color: const Color.fromRGBO(22, 117, 232, 1),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Center(
+                      child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 5.0, horizontal: 15.0),
+                    child: InkWell(
+                        /* onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PageEventosTipo(
+                  tipo: mark.tipo,
+                ),
+              )), */
+                        child: Container(
+                      decoration: BoxDecoration(
+                          color: const Color.fromRGBO(22, 117, 232, 1),
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Center(
+                          child: InkWell(
+                        /* onTap: () {
+                    const LatLng barrio = LatLng(-38.947740, -68.032358);
+                    barriosInfo.mapboxController.animateCamera(
+                      CameraUpdate.newCameraPosition(
+                        const CameraPosition(
+                            bearing: 0,
+                            tilt: 0,
+                            target: barrio,
+                            zoom: 16.0,
+                        ),
+                      ),
+                    );
+                    Navigator.pop(context);
+                  }, */
+                        //TODO:Seleccionar barrio del markador
+                        child: Text(
+                          mark.tipo,
+                          style: const TextStyle(
+                              color: Color.fromARGB(255, 216, 214, 214),
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )),
+                    )),
+                  ))),
               Container(
                 decoration: BoxDecoration(
                     color: const Color.fromRGBO(22, 117, 232, 1),
@@ -284,42 +302,60 @@ class _Tags extends StatelessWidget {
             height: 10.0,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: const Color.fromRGBO(22, 117, 232, 1),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Center(
-                    child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 5.0, horizontal: 15.0),
-                  child: InkWell(
-                    /* onTap: () {
-                      const LatLng barrio = LatLng(-38.947740, -68.032358);
-                      barriosInfo.mapboxController.animateCamera(
-                        CameraUpdate.newCameraPosition(
-                          const CameraPosition(
-                              bearing: 0,
-                              tilt: 0,
-                              target: barrio,
-                              zoom: 16.0,
-                          ),
+              (() {
+                if (mark.localidad.barrio != null) {
+                  return Container(
+                      decoration: BoxDecoration(
+                          color: const Color.fromRGBO(22, 117, 232, 1),
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Center(
+                          child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5.0, horizontal: 15.0),
+                        child: InkWell(
+                            /* onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PageEventosTipo(
+                  tipo: mark.tipo,
+                ),
+              )), */
+                            child: Container(
+                          decoration: BoxDecoration(
+                              color: const Color.fromRGBO(22, 117, 232, 1),
+                              borderRadius: BorderRadius.circular(8)),
+                          child: Center(
+                              child: InkWell(
+                            /* onTap: () {
+                    const LatLng barrio = LatLng(-38.947740, -68.032358);
+                    barriosInfo.mapboxController.animateCamera(
+                      CameraUpdate.newCameraPosition(
+                        const CameraPosition(
+                            bearing: 0,
+                            tilt: 0,
+                            target: barrio,
+                            zoom: 16.0,
                         ),
-                      );
-                      Navigator.pop(context);
-                    }, */
-                    //TODO:Seleccionar barrio del markador
-                    child: Text(
-                      mark.localidad.barrio!.nombre,
-                      style: const TextStyle(
-                          color: Color.fromARGB(255, 216, 214, 214),
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                )),
-              ),
+                      ),
+                    );
+                    Navigator.pop(context);
+                  }, */
+                            //TODO:Seleccionar barrio del markador
+                            child: Text(
+                              mark.localidad.barrio!.nombre,
+                              style: const TextStyle(
+                                  color: Color.fromARGB(255, 216, 214, 214),
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          )),
+                        )),
+                      )));
+                }
+                return Container();
+              }()),
             ],
           ),
         ],
@@ -337,16 +373,23 @@ class Background extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return SizedBox(
-      height: size.height * 0.35,
-      child: Image(
-        color: Colors.black.withOpacity(0.12),
-        colorBlendMode: BlendMode.darken,
-        image: AssetImage('images/portada_${mark.tipo}.png'),
-        fit: BoxFit.cover,
-      ),
-    );
+    return FutureBuilder(
+        future: getImagePalette(context, mark.tipo),
+        builder: (context, AsyncSnapshot<Color> snapshot) {
+          if (snapshot.hasData && snapshot.data != null) {
+            final color = snapshot.data;
+            print(color);
+            return SizedBox(
+              child: Image(
+                color: color!.withOpacity(0.8),
+                colorBlendMode: BlendMode.colorBurn,
+                image: const AssetImage('images/portada_generica2.png'),
+              ),
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        });
   }
 }
 
@@ -574,7 +617,9 @@ class _FechaHoraContacto extends StatelessWidget {
                       scheme: 'mailto',
                       path: mark.contacto.email,
                       queryParameters: {
-                        'subject': 'Example Subject & Symbols are allowed!'
+                        'subject': 'Evento: ${mark.nombre}',
+                        'body':
+                            'Hola, me gustaría saber más sobre el evento: ${mark.nombre}',
                       });
                   launchUrl(_emailLaunchUri);
                 },
@@ -710,4 +755,23 @@ class _Descripcion extends StatelessWidget {
       ],
     );
   }
+
+// Calculate dominant color from ImageProvider
+
+}
+
+Future<Color> getImagePalette(BuildContext context, String tipo) async {
+  print(tipo);
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  final imagen = prefs.getString(tipo);
+  final Uint8List bytes = base64Decode(imagen!);
+
+  final PaletteGenerator paletteGenerator =
+      await PaletteGenerator.fromImageProvider(
+    MemoryImage(bytes),
+    size: const Size(200, 200),
+    region: const Rect.fromLTRB(0, 0, 100, 100),
+    maximumColorCount: 2,
+  );
+  return paletteGenerator.dominantColor!.color;
 }

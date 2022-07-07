@@ -30,30 +30,32 @@ class _CustomButtonColorState extends State<CustomButtonColor> {
           final Uint8List bytes = base64Decode(snapshot.data!);
 
           return InkWell(
-            onTap: () async {
-              widget.filtro.activo = !widget.filtro.activo;
-              if (widget.filtro.activo) {
-                await markersProvider.addMarkers(context, widget.filtro.nombre);
+              onTap: () async {
+                widget.filtro.activo = !widget.filtro.activo;
+                if (widget.filtro.activo) {
+                  await markersProvider.addMarkers(
+                      context, widget.filtro.nombre);
 
-                setState(() {});
-              } else {
-                await markersProvider.removeMarkers(widget.filtro.nombre);
-                setState(() {});
-              }
-            },
-            child: Container(
-              height: size.height * 0.8,
-              width: size.width * 0.8,
-              foregroundDecoration: widget.filtro.activo
-                  ? null
-                  : BoxDecoration(
-                      borderRadius: BorderRadius.circular(30.0),
-                      color: Colors.grey[200],
-                      backgroundBlendMode: BlendMode.saturation,
-                    ),
-              child: Image.memory(bytes),
-            ),
-          );
+                  setState(() {});
+                } else {
+                  await markersProvider.removeMarkers(widget.filtro.nombre);
+                  setState(() {});
+                }
+              },
+              child: Container(
+                height: size.height * 0.1,
+                width: size.width * 0.1,
+                foregroundDecoration: widget.filtro.activo
+                    ? null
+                    : BoxDecoration(
+                        borderRadius: BorderRadius.circular(30.0),
+                        color: Colors.grey[200],
+                        backgroundBlendMode: BlendMode.saturation,
+                      ),
+                child: Image(
+                  image: ResizeImage(MemoryImage(bytes), width: 65, height: 65),
+                ),
+              ));
         } else {
           return Container();
         }
