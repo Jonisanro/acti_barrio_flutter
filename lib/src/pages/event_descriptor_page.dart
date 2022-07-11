@@ -163,44 +163,19 @@ class _Tags extends StatelessWidget {
                       child: Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 5.0, horizontal: 15.0),
-                    child: InkWell(
-                        /* onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PageEventosTipo(
-                  tipo: mark.tipo,
-                ),
-              )), */
-                        child: Container(
+                    child: Container(
                       decoration: BoxDecoration(
                           color: const Color.fromRGBO(22, 117, 232, 1),
                           borderRadius: BorderRadius.circular(8)),
                       child: Center(
-                          child: InkWell(
-                        /* onTap: () {
-                    const LatLng barrio = LatLng(-38.947740, -68.032358);
-                    barriosInfo.mapboxController.animateCamera(
-                      CameraUpdate.newCameraPosition(
-                        const CameraPosition(
-                            bearing: 0,
-                            tilt: 0,
-                            target: barrio,
-                            zoom: 16.0,
-                        ),
-                      ),
-                    );
-                    Navigator.pop(context);
-                  }, */
-                        //TODO:Seleccionar barrio del markador
-                        child: Text(
-                          mark.localidad.barrio!.nombre,
-                          style: const TextStyle(
-                              color: Color.fromARGB(255, 216, 214, 214),
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.bold),
-                        ),
+                          child: Text(
+                        mark.localidad.barrio!.nombre,
+                        style: const TextStyle(
+                            color: Color.fromARGB(255, 216, 214, 214),
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold),
                       )),
-                    )),
+                    ),
                   )));
             }
             return Container();
@@ -223,44 +198,19 @@ class _Tags extends StatelessWidget {
                       child: Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 5.0, horizontal: 15.0),
-                    child: InkWell(
-                        /* onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PageEventosTipo(
-                  tipo: mark.tipo,
-                ),
-              )), */
-                        child: Container(
+                    child: Container(
                       decoration: BoxDecoration(
                           color: const Color.fromRGBO(22, 117, 232, 1),
                           borderRadius: BorderRadius.circular(8)),
                       child: Center(
-                          child: InkWell(
-                        /* onTap: () {
-                    const LatLng barrio = LatLng(-38.947740, -68.032358);
-                    barriosInfo.mapboxController.animateCamera(
-                      CameraUpdate.newCameraPosition(
-                        const CameraPosition(
-                            bearing: 0,
-                            tilt: 0,
-                            target: barrio,
-                            zoom: 16.0,
-                        ),
-                      ),
-                    );
-                    Navigator.pop(context);
-                  }, */
-                        //TODO:Seleccionar barrio del markador
-                        child: Text(
-                          mark.tipo,
-                          style: const TextStyle(
-                              color: Color.fromARGB(255, 216, 214, 214),
-                              fontSize: 14.0,
-                              fontWeight: FontWeight.bold),
-                        ),
+                          child: Text(
+                        mark.tipo,
+                        style: const TextStyle(
+                            color: Color.fromARGB(255, 216, 214, 214),
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold),
                       )),
-                    )),
+                    ),
                   ))),
               Container(
                 decoration: BoxDecoration(
@@ -270,29 +220,12 @@ class _Tags extends StatelessWidget {
                     child: Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 5.0, horizontal: 15.0),
-                  child: InkWell(
-                    /* onTap: () {
-                    const LatLng barrio = LatLng(-38.947740, -68.032358);
-                    barriosInfo.mapboxController.animateCamera(
-                      CameraUpdate.newCameraPosition(
-                        const CameraPosition(
-                          bearing: 0,
-                          tilt: 0,
-                          target: barrio,
-                          zoom: 16.0,
-                        ),
-                      ),
-                    );
-                    Navigator.pop(context);
-                  }, */
-
-                    child: Text(
-                      mark.localidad.nombre,
-                      style: const TextStyle(
-                          color: Color.fromARGB(255, 216, 214, 214),
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.bold),
-                    ),
+                  child: Text(
+                    mark.localidad.nombre,
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 216, 214, 214),
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.bold),
                   ),
                 )),
               ),
@@ -314,44 +247,19 @@ class _Tags extends StatelessWidget {
                           child: Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 5.0, horizontal: 15.0),
-                        child: InkWell(
-                            /* onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => PageEventosTipo(
-                  tipo: mark.tipo,
-                ),
-              )), */
-                            child: Container(
+                        child: Container(
                           decoration: BoxDecoration(
                               color: const Color.fromRGBO(22, 117, 232, 1),
                               borderRadius: BorderRadius.circular(8)),
                           child: Center(
-                              child: InkWell(
-                            /* onTap: () {
-                    const LatLng barrio = LatLng(-38.947740, -68.032358);
-                    barriosInfo.mapboxController.animateCamera(
-                      CameraUpdate.newCameraPosition(
-                        const CameraPosition(
-                            bearing: 0,
-                            tilt: 0,
-                            target: barrio,
-                            zoom: 16.0,
-                        ),
-                      ),
-                    );
-                    Navigator.pop(context);
-                  }, */
-                            //TODO:Seleccionar barrio del markador
-                            child: Text(
-                              mark.localidad.barrio!.nombre,
-                              style: const TextStyle(
-                                  color: Color.fromARGB(255, 216, 214, 214),
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
+                              child: Text(
+                            mark.localidad.barrio!.nombre,
+                            style: const TextStyle(
+                                color: Color.fromARGB(255, 216, 214, 214),
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.bold),
                           )),
-                        )),
+                        ),
                       )));
                 }
                 return Container();
@@ -378,7 +286,7 @@ class Background extends StatelessWidget {
         builder: (context, AsyncSnapshot<Color> snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
             final color = snapshot.data;
-            print(color);
+
             return SizedBox(
               child: Image(
                 color: color!.withOpacity(0.8),
@@ -611,15 +519,14 @@ class _FechaHoraContacto extends StatelessWidget {
                 width: 60.0,
               ),
               IconButton(
-                //TODO: Armar funcionabilidad para envio de email
                 onPressed: () async {
                   final Uri _emailLaunchUri = Uri(
                       scheme: 'mailto',
                       path: mark.contacto.email,
                       queryParameters: {
-                        'subject': 'Evento: ${mark.nombre}',
+                        'subject': mark.nombre,
                         'body':
-                            'Hola, me gustaría saber más sobre el evento: ${mark.nombre}',
+                            'Hola,&nbsp;me&nbsp;gustaría&nbsp;saber&nbsp;más&nbsp;sobre&nbsp;el&nbsp;evento:&nbsp;${mark.nombre}',
                       });
                   launchUrl(_emailLaunchUri);
                 },
@@ -761,7 +668,6 @@ class _Descripcion extends StatelessWidget {
 }
 
 Future<Color> getImagePalette(BuildContext context, String tipo) async {
-  print(tipo);
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final imagen = prefs.getString(tipo);
   final Uint8List bytes = base64Decode(imagen!);
@@ -774,4 +680,20 @@ Future<Color> getImagePalette(BuildContext context, String tipo) async {
     maximumColorCount: 2,
   );
   return paletteGenerator.dominantColor!.color;
+}
+
+void setCameraPosition(BuildContext context, Evento mark) {
+  final barriosinfo = Provider.of<BarriosInfo>(context, listen: false);
+  LatLng barrio = LatLng(mark.latitud, mark.latitud);
+  barriosinfo.mapboxController.animateCamera(
+    CameraUpdate.newCameraPosition(
+      CameraPosition(
+        bearing: 0,
+        tilt: 0,
+        target: barrio,
+        zoom: 16.0,
+      ),
+    ),
+  );
+  Navigator.pop(context);
 }

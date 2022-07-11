@@ -1,3 +1,4 @@
+import 'package:acti_barrio_flutter/src/pages/Login/login_page.dart';
 import 'package:acti_barrio_flutter/src/pages/acerca_nuestro_page.dart';
 
 import 'package:acti_barrio_flutter/src/pages/event_descriptor_page.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
           '/favorite': (BuildContext context) => const FavoritesPage(),
           '/sugerencia': (BuildContext context) => const SugerenciaPage(),
           '/noDataPage': (BuildContext context) => const NoDataPage(),
+          '/loginPage': (BuildContext context) => const LoginPage(),
         },
         debugShowCheckedModeBanner: false,
         title: 'Material App',

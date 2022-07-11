@@ -297,13 +297,33 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
           child: Drawer(
               child: ListView(
             children: [
-              const SizedBox(
-                  width: double.infinity,
-                  height: 100.0,
-                  child: Image(
-                    image: AssetImage('images/logo.png'),
-                    fit: BoxFit.cover,
-                  )),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    stops: const [0.1, 0.5, 1],
+                    colors: [
+                      Colors.amberAccent.shade400,
+                      Colors.amber.shade200,
+                      Colors.amberAccent.shade400,
+                    ],
+                  ),
+                ),
+                child: SizedBox(
+                    width: double.infinity,
+                    height: size.height * 0.2,
+                    child: const Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Image(
+                          image: AssetImage(
+                            'images/logo.png',
+                          ),
+                        ),
+                      ),
+                    )),
+              ),
               const SizedBox(
                 height: 10.0,
               ),
