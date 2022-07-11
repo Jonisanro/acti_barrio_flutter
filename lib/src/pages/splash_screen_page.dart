@@ -1,3 +1,4 @@
+import 'package:acti_barrio_flutter/src/pages/Login/login_page.dart';
 import 'package:acti_barrio_flutter/src/pages/home_page.dart';
 import 'package:acti_barrio_flutter/src/pages/google_maps_page.dart';
 
@@ -16,7 +17,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
-  @override
   void initState() {
     super.initState();
   }
@@ -30,9 +30,8 @@ class _SplashScreenState extends State<SplashScreen> {
         width: double.infinity,
         fit: BoxFit.cover,
       ),
-      nextScreen: !Preferences.isTutorialActived
-          ? const HomePage()
-          : const GoogleMapsPage(),
+      nextScreen:
+          !Preferences.isTutorialActived ? const HomePage() : const LoginPage(),
       duration: 2000,
       centered: true,
       splashIconSize: double.infinity,

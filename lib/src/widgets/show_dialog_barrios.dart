@@ -6,7 +6,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:provider/provider.dart';
 
-import '../helpers/global_functions.dart';
 import '../provider/mapbox_info.dart';
 
 class ShowDialogBarrios {
@@ -142,29 +141,7 @@ class ShowDialogBarrios {
                   ),
                   CupertinoDialogAction(
                     child: const Text(
-                      'Donde estoy ahora',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          color: Colors.blueAccent,
-                          fontSize: 18.0,
-                          height: 1.3),
-                    ),
-                    onPressed: () async {
-                      determinePermissionPosition(context).then((value) => {
-                            if (value == true)
-                              {
-                                getCurrentLocation(context),
-                              }
-                          });
-                      Navigator.pop(context);
-                    },
-                  ),
-                  const Divider(
-                    thickness: 1.0,
-                  ),
-                  CupertinoDialogAction(
-                    child: const Text(
-                      'Cancelar',
+                      'Cerrar',
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           color: Colors.blueAccent,
