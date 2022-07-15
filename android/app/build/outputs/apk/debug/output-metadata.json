@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.example.acti_barrio_flutter",
+  "applicationId": "com.mnajc.actibarrio",
   "variantName": "debug",
   "elements": [
     {

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -158,9 +159,27 @@ Future<bool> setFavorite(BuildContext context, String id, bool disable) async {
   return true;
 }
 
+//*Trae la imagen del filtro desde  sharedPreferences
 Future<String> getImageFilter(Filtro filtro) async {
   final prefs = await SharedPreferences.getInstance();
   final _base64 = prefs.getString(filtro.nombre)!;
 
   return _base64;
+}
+
+//*Revisa si se hizo la primera carga y si hay conexion a internet
+Future<bool> getPrimeraCarga() async {
+  final prefs = await SharedPreferences.getInstance();
+  final bool? primeraCarga = prefs.getBool('primeraCarga');
+  bool result = await InternetConnectionChecker().hasConnection;
+
+  if (primeraCarga == null || primeraCarga == false) {
+    return false;
+  }
+
+  if (primeraCarga == true && !result) {
+    return true;
+  }
+
+  return false;
 }

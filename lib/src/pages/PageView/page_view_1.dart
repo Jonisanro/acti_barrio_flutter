@@ -31,7 +31,7 @@ class _PageView1State extends State<PageView1> {
                   child: MaterialButton(
                     onPressed: () {
                       Preferences.isTutorialActived = true;
-                      Navigator.pushReplacementNamed(context, '/google_maps');
+                      Navigator.pushReplacementNamed(context, '/googleMaps');
                     },
                     child: SizedBox(
                       child: Row(
