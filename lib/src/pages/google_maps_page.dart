@@ -1,6 +1,6 @@
 import 'dart:ui';
+import 'package:acti_barrio_flutter/src/loginService/auth_service.dart';
 import 'package:animate_do/animate_do.dart';
-
 import '../helpers/global_functions.dart';
 import '../models/markers_response.dart';
 import 'package:acti_barrio_flutter/src/provider/markers_provider.dart';
@@ -11,7 +11,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:custom_info_window/custom_info_window.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-
 import '../provider/mapbox_info.dart';
 import 'no_data_page.dart';
 
@@ -33,11 +32,13 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
     final markersProviders =
         Provider.of<MarkersProviders>(context, listen: false);
 
-    determinePermissionPosition(context).then((value) async => {
-          await markersProviders.getMarkers(
-            context,
-          ),
-        });
+    determinePermissionPosition(context)
+        .then((value) async => {
+              await markersProviders.getMarkers(
+                context,
+              ),
+            })
+        .then((_) => AuthService().signOut());
 
     super.initState();
   }
@@ -55,8 +56,13 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
             stream: markersProviders.markersStream,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: Image(image: AssetImage('images/map_loading.gif')),
+                return Center(
+                  child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      color: Colors.white.withOpacity(0.5),
+                      child: const Image(
+                          image: AssetImage('images/map_loading.gif'))),
                 );
               } else {
                 if (snapshot.hasData && markersProviders.primeraCarga == true) {
@@ -297,181 +303,274 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
           child: Drawer(
               child: ListView(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    stops: const [0.1, 0.5, 1],
-                    colors: [
-                      Colors.amberAccent.shade400,
-                      Colors.amber.shade200,
-                      Colors.amberAccent.shade400,
-                    ],
-                  ),
-                ),
-                child: SizedBox(
-                    width: double.infinity,
-                    height: size.height * 0.2,
-                    child: const Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Image(
-                          image: AssetImage(
-                            'images/logo.png',
-                          ),
+              Stack(
+                children: [
+                  Column(children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          stops: const [0.1, 0.5, 1],
+                          colors: [
+                            Colors.amberAccent.shade400,
+                            Colors.amber.shade200,
+                            Colors.amberAccent.shade400,
+                          ],
                         ),
                       ),
-                    )),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
-                child: Text(
-                  'Bienvenido a ActiBarrio, este aplicativo te permite saber y conocer lugares, actividades y eventos que se realizan en tu zona.\nDebes seleccionar tu lugar y filtrar tipo de actividad que estas buscando.\nConócela!!',
-                  style: TextStyle(
-                      color: Colors.grey[800], height: 1.35, fontSize: 15.0),
-                  textAlign: TextAlign.left,
-                ),
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              ListTile(
-                minLeadingWidth: 25.0,
-                leading: Icon(
-                  LineAwesomeIcons.question_circle,
-                  color: Colors.grey[600],
-                  size: 30.0,
-                ),
-                title: Text(
-                  "Guia de uso",
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    height: 1.35,
-                    color: Colors.grey[800],
-                  ),
-                ),
-                onTap: () {
-                  Navigator.pushReplacementNamed(context, '/home');
-                },
-              ),
-              ListTile(
-                minLeadingWidth: 25.0,
-                onTap: () => Navigator.pushNamed(context, '/favorite'),
-                leading: Icon(
-                  LineAwesomeIcons.heart,
-                  color: Colors.grey[600],
-                  size: 30.0,
-                ),
-                title: Text(
-                  "Favoritos",
-                  style: TextStyle(
-                    color: Colors.grey[800],
-                    fontSize: 15.0,
-                    height: 1.35,
-                  ),
-                ),
-              ),
-              /* ListTile(
-                  minLeadingWidth: 25.0,
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PageEventosTipo(
-                          tipo: mark.tipo,
+                      child: SizedBox(
+                          width: double.infinity,
+                          height: size.height * 0.12,
+                          child: const Center(
+                            child: Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Image(
+                                image: AssetImage(
+                                  'images/logo_mapa.png',
+                                ),
+                              ),
+                            ),
+                          )),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Text(
+                        'Bienvenido a ActiBarrio, este aplicativo te permite saber y conocer lugares, actividades y eventos que se realizan en tu zona',
+                        style: TextStyle(
+                            color: Colors.grey[800],
+                            height: 1.35,
+                            fontSize: 15.0),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    ListTile(
+                      minLeadingWidth: 25.0,
+                      leading: Icon(
+                        LineAwesomeIcons.question_circle,
+                        color: Colors.grey[600],
+                        size: 30.0,
+                      ),
+                      title: Text(
+                        "Guia de uso",
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          height: 1.35,
+                          color: Colors.grey[800],
                         ),
-                      )),
-                  leading: Icon(
-                    LineAwesomeIcons.shoe_prints,
-                    color: Colors.grey[600],
-                    size: 30.0,
-                  ),
-                  title: Text(
-                    "Eventos",
-                    style: TextStyle(
-                      color: Colors.grey[800],
-                      fontSize: 15.0,
-                      height: 1.35,
+                      ),
+                      onTap: () {
+                        Navigator.pushReplacementNamed(context, '/home');
+                      },
                     ),
-                  ),
-                ), */
-              ListTile(
-                minLeadingWidth: 25.0,
-                leading: Icon(
-                  LineAwesomeIcons.share,
-                  color: Colors.grey[600],
-                  size: 30.0,
-                ),
-                title: Text(
-                  "Comparte Aplicacion",
-                  style: TextStyle(
-                    color: Colors.grey[800],
-                    fontSize: 15.0,
-                    height: 1.35,
-                  ),
-                ),
-                onTap: () {
-                  //TODO: Ver si va quedar el compartir app
-                },
-              ),
-              ListTile(
-                minLeadingWidth: 25.0,
-                onTap: () {
-                  Navigator.pushNamed(context, '/sugerencia');
-                },
-                leading: Icon(
-                  LineAwesomeIcons.comment,
-                  color: Colors.grey[600],
-                  size: 30.0,
-                ),
-                title: Text(
-                  "Dejá tu sugerencia",
-                  style: TextStyle(
-                    color: Colors.grey[800],
-                    fontSize: 15.0,
-                    height: 1.35,
-                  ),
-                ),
-              ),
-              ListTile(
-                  minLeadingWidth: 25.0,
-                  leading: Icon(
-                    LineAwesomeIcons.info,
-                    color: Colors.grey[600],
-                    size: 30.0,
-                  ),
-                  title: Text(
-                    "Acerca Nuestro",
-                    style: TextStyle(
-                      color: Colors.grey[800],
-                      fontSize: 15.0,
-                      height: 1.35,
-                    ),
-                  ),
-                  onTap: () => Navigator.pushNamed(context, '/acercaDe')),
-              SizedBox(
-                height: size.height * 0.08,
-              ),
-              Stack(children: [
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 15.0, right: 15.0),
-                    child: Text(
-                      'Version : 1.0.0',
-                      style: TextStyle(
+                    ListTile(
+                      minLeadingWidth: 25.0,
+                      onTap: () => Navigator.pushNamed(context, '/favorite'),
+                      leading: Icon(
+                        LineAwesomeIcons.heart,
+                        color: Colors.grey[600],
+                        size: 30.0,
+                      ),
+                      title: Text(
+                        "Favoritos",
+                        style: TextStyle(
                           color: Colors.grey[800],
                           fontSize: 15.0,
                           height: 1.35,
-                          fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ]),
+
+                    //TODO: Solucionar vista Usuario
+                    /* ListTile(
+                    minLeadingWidth: 25.0,
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PageEventosTipo(
+                            tipo: mark.tipo,
+                          ),
+                        )),
+                    leading: Icon(
+                      LineAwesomeIcons.shoe_prints,
+                      color: Colors.grey[600],
+                      size: 30.0,
+                    ),
+                    title: Text(
+                      "Eventos",
+                      style: TextStyle(
+                        color: Colors.grey[800],
+                        fontSize: 15.0,
+                        height: 1.35,
+                      ),
+                    ),
+                  ), */
+                    ListTile(
+                      minLeadingWidth: 25.0,
+                      leading: Icon(
+                        LineAwesomeIcons.share,
+                        color: Colors.grey[600],
+                        size: 30.0,
+                      ),
+                      title: Text(
+                        "Comparte Aplicacion",
+                        style: TextStyle(
+                          color: Colors.grey[800],
+                          fontSize: 15.0,
+                          height: 1.35,
+                        ),
+                      ),
+                      onTap: () {
+                        //TODO: Ver si va quedar el compartir app
+                      },
+                    ),
+                    ListTile(
+                      minLeadingWidth: 25.0,
+                      onTap: () {
+                        Navigator.pushNamed(context, '/sugerencia');
+                      },
+                      leading: Icon(
+                        LineAwesomeIcons.comment,
+                        color: Colors.grey[600],
+                        size: 30.0,
+                      ),
+                      title: Text(
+                        "Dejá tu sugerencia",
+                        style: TextStyle(
+                          color: Colors.grey[800],
+                          fontSize: 15.0,
+                          height: 1.35,
+                        ),
+                      ),
+                    ),
+                    ListTile(
+                        minLeadingWidth: 25.0,
+                        leading: Icon(
+                          LineAwesomeIcons.info,
+                          color: Colors.grey[600],
+                          size: 30.0,
+                        ),
+                        title: Text(
+                          "Acerca Nuestro",
+                          style: TextStyle(
+                            color: Colors.grey[800],
+                            fontSize: 15.0,
+                            height: 1.35,
+                          ),
+                        ),
+                        onTap: () => Navigator.pushNamed(context, '/acercaDe')),
+                    ListTile(
+                        minLeadingWidth: 25.0,
+                        leading: Icon(
+                          LineAwesomeIcons.alternate_sign_out,
+                          color: Colors.grey[600],
+                          size: 30.0,
+                        ),
+                        title: Text(
+                          "Salir",
+                          style: TextStyle(
+                            color: Colors.grey[800],
+                            fontSize: 15.0,
+                            height: 1.35,
+                          ),
+                        ),
+                        onTap: () async {
+                          await AuthService().signOut();
+                          Navigator.pushReplacementNamed(context, '/loginPage');
+                        }),
+                    SizedBox(
+                      height: size.height * 0.13,
+                      //TODO:soulucinar ubicacion de la version
+                    ),
+                    Stack(
+                      children: [
+                        /* Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 10.0,
+                              ),
+                              const Divider(
+                                thickness: 1.0,
+                                color: Colors.grey,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  CircleAvatar(
+                                    radius: 25,
+                                    child: ClipOval(
+                                      child: Image.network(FirebaseAuth
+                                          .instance.currentUser!.photoURL!),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(
+                                        width: size.width * 0.45,
+                                        child: Text(
+                                          FirebaseAuth.instance.currentUser!
+                                              .displayName!,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 18.0,
+                                            height: 1.35,
+                                            color: Colors.grey[800],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: size.width * 0.45,
+                                        child: Text(
+                                          FirebaseAuth
+                                              .instance.currentUser!.email!,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 15.0,
+                                            height: 1.35,
+                                            color: Colors.grey[800],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ), */
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 15.0),
+                            child: Text(
+                              'Version : 1.0.0',
+                              style: TextStyle(
+                                  color: Colors.grey[800],
+                                  fontSize: 15.0,
+                                  height: 1.35,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ]),
+                ],
+              ),
             ],
           )),
         ),

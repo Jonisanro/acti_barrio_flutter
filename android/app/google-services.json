@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "135449470580",
+    "project_id": "actibarrioprueba",
+    "storage_bucket": "actibarrioprueba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:135449470580:android:ce1b0c88b278c65def5321",
+        "android_client_info": {
+          "package_name": "com.mnajc.actibarrio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "135449470580-brdmv0nl7m7s2p9bt3oaj3iacbgfgmju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBqRn-T6k0E08hy6AUbxUlt1MTyfFUX3I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "135449470580-brdmv0nl7m7s2p9bt3oaj3iacbgfgmju.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "135449470580-jkomiv32jsmurpaplci4dffsbplp38cj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mnajc.acti-barrio-flutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

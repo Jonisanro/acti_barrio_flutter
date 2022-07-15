@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 
+import '../loginService/auth_service.dart';
 import '../provider/markers_provider.dart';
 
 class NoDataPage extends StatelessWidget {
@@ -116,7 +117,7 @@ class _ContentBody extends StatelessWidget {
                 onPressed: () async {
                   bool result = await InternetConnectionChecker().hasConnection;
                   if (result) {
-                    Navigator.pushReplacementNamed(context, "/google_maps");
+                    AuthService().signInWithGoogle(context);
                   } else {
                     Navigator.pushReplacementNamed(context, "/noDataPage");
                   }

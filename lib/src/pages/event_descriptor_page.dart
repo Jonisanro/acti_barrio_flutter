@@ -319,14 +319,14 @@ class _TituloState extends State<_Titulo> {
     final prefs = Preferences();
     bool disable = prefs.existId(widget.mark.id);
     final size = MediaQuery.of(context).size;
-    return Column(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         //*Titulo
-        Row(
+        Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               width: size.width * 0.75,
@@ -338,28 +338,27 @@ class _TituloState extends State<_Titulo> {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            IconButton(
-              onPressed: () {
-                disable = !disable;
-                setFavorite(context, widget.mark.id, disable);
-                setState(() {});
-              },
-              icon: Icon(
-                disable ? Icons.favorite : Icons.favorite_border,
-                size: disable ? 30.0 : 25.0,
-                color: disable ? Colors.red : Colors.grey,
+            const Padding(
+              padding: EdgeInsets.only(bottom: 8.0),
+              child: Text(
+                '(34 cupos restantes)',
+                style: TextStyle(fontSize: 12.0, color: Colors.black38),
               ),
-            )
+            ),
           ],
         ),
-
-        const Padding(
-          padding: EdgeInsets.only(bottom: 8.0),
-          child: Text(
-            '(34 cupos restantes)',
-            style: TextStyle(fontSize: 12.0, color: Colors.black38),
+        IconButton(
+          onPressed: () {
+            disable = !disable;
+            setFavorite(context, widget.mark.id, disable);
+            setState(() {});
+          },
+          icon: Icon(
+            disable ? Icons.favorite : Icons.favorite_border,
+            size: disable ? 30.0 : 25.0,
+            color: disable ? Colors.red : Colors.grey,
           ),
-        ),
+        )
       ],
     );
   }
@@ -483,73 +482,81 @@ class _FechaHoraContacto extends StatelessWidget {
 
           //*Referente
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: 40.0,
-                height: 40.0,
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 224, 235, 240)),
-                child: const Icon(
-                  Icons.person,
-                  size: 30.0,
-                  color: Color.fromRGBO(22, 117, 232, 1),
-                ),
-              ),
-              const SizedBox(
-                width: 10.0,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Row(
                 children: [
-                  const Text(
-                    'Referente',
-                    style: TextStyle(fontSize: 13.0, color: Colors.black38),
+                  Container(
+                    width: 40.0,
+                    height: 40.0,
+                    decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 224, 235, 240)),
+                    child: const Icon(
+                      Icons.person,
+                      size: 30.0,
+                      color: Color.fromRGBO(22, 117, 232, 1),
+                    ),
                   ),
                   const SizedBox(
-                    height: 3.0,
+                    width: 10.0,
                   ),
-                  Text(mark.contacto.nombreReferente,
-                      style: const TextStyle(
-                          fontSize: 13.0, fontWeight: FontWeight.bold)),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Referente',
+                        style: TextStyle(fontSize: 13.0, color: Colors.black38),
+                      ),
+                      const SizedBox(
+                        height: 3.0,
+                      ),
+                      Text(mark.contacto.nombreReferente,
+                          style: const TextStyle(
+                              fontSize: 13.0, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
                 ],
               ),
               const SizedBox(
                 width: 60.0,
               ),
-              IconButton(
-                onPressed: () async {
-                  final Uri _emailLaunchUri = Uri(
-                      scheme: 'mailto',
-                      path: mark.contacto.email,
-                      queryParameters: {
-                        'subject': mark.nombre,
-                        'body':
-                            'Hola,&nbsp;me&nbsp;gustaría&nbsp;saber&nbsp;más&nbsp;sobre&nbsp;el&nbsp;evento:&nbsp;${mark.nombre}',
-                      });
-                  launchUrl(_emailLaunchUri);
-                },
-                icon: const Icon(
-                  Icons.email,
-                  size: 30.0,
-                  color: Color.fromRGBO(22, 117, 232, 1),
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  final Uri _phoneLaunchUri = Uri(
-                    scheme: 'tel',
-                    path: '+5411341234567',
-                  );
-                  launchUrl(_phoneLaunchUri);
-                },
-                icon: const Icon(
-                  Icons.phone,
-                  size: 30.0,
-                  color: Color.fromRGBO(22, 117, 232, 1),
-                ),
-              ),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () async {
+                      final Uri _emailLaunchUri = Uri(
+                          scheme: 'mailto',
+                          path: mark.contacto.email,
+                          queryParameters: {
+                            'subject': mark.nombre,
+                            'body':
+                                'Hola,&nbsp;me&nbsp;gustaría&nbsp;saber&nbsp;más&nbsp;sobre&nbsp;el&nbsp;evento:&nbsp;${mark.nombre}',
+                          });
+                      launchUrl(_emailLaunchUri);
+                    },
+                    icon: const Icon(
+                      Icons.email,
+                      size: 30.0,
+                      color: Color.fromRGBO(22, 117, 232, 1),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      final Uri _phoneLaunchUri = Uri(
+                        scheme: 'tel',
+                        path: '+5411341234567',
+                      );
+                      launchUrl(_phoneLaunchUri);
+                    },
+                    icon: const Icon(
+                      Icons.phone,
+                      size: 30.0,
+                      color: Color.fromRGBO(22, 117, 232, 1),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
           const SizedBox(
@@ -565,65 +572,73 @@ class _FechaHoraContacto extends StatelessWidget {
 
           //*Ubicacion
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: 40.0,
-                height: 40.0,
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 224, 235, 240)),
-                child: const Icon(
-                  Icons.person,
-                  size: 30.0,
-                  color: Color.fromRGBO(22, 117, 232, 1),
-                ),
-              ),
-              const SizedBox(
-                width: 10.0,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Row(
                 children: [
-                  const Text(
-                    'Ubicación',
-                    style: TextStyle(fontSize: 13.0, color: Colors.black38),
+                  Container(
+                    width: 40.0,
+                    height: 40.0,
+                    decoration: const BoxDecoration(
+                        color: Color.fromARGB(255, 224, 235, 240)),
+                    child: const Icon(
+                      Icons.person,
+                      size: 30.0,
+                      color: Color.fromRGBO(22, 117, 232, 1),
+                    ),
                   ),
                   const SizedBox(
-                    height: 3.0,
+                    width: 10.0,
                   ),
-                  SizedBox(
-                    width: size.width * 0.5,
-                    child: Text(
-                      mark.direccion,
-                      style: const TextStyle(
-                          fontSize: 13.0, fontWeight: FontWeight.bold),
-                      overflow: TextOverflow.visible,
-                    ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Ubicación',
+                        style: TextStyle(fontSize: 13.0, color: Colors.black38),
+                      ),
+                      const SizedBox(
+                        height: 3.0,
+                      ),
+                      SizedBox(
+                        width: size.width * 0.5,
+                        child: Text(
+                          mark.direccion,
+                          style: const TextStyle(
+                              fontSize: 13.0, fontWeight: FontWeight.bold),
+                          overflow: TextOverflow.visible,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-              IconButton(
-                onPressed: () {
-                  LatLng barrio = LatLng(mark.latitud, mark.longitud);
-                  barriosInfo.mapboxController.animateCamera(
-                    CameraUpdate.newCameraPosition(
-                      CameraPosition(
-                        bearing: 0,
-                        tilt: 0,
-                        target: barrio,
-                        zoom: 17.0,
-                      ),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      LatLng barrio = LatLng(mark.latitud, mark.longitud);
+                      barriosInfo.mapboxController.animateCamera(
+                        CameraUpdate.newCameraPosition(
+                          CameraPosition(
+                            bearing: 0,
+                            tilt: 0,
+                            target: barrio,
+                            zoom: 17.0,
+                          ),
+                        ),
+                      );
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.location_on_rounded,
+                      size: 30.0,
+                      color: Color.fromRGBO(22, 117, 232, 1),
                     ),
-                  );
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Icons.location_on_rounded,
-                  size: 30.0,
-                  color: Color.fromRGBO(22, 117, 232, 1),
-                ),
-              ),
+                  ),
+                ],
+              )
             ],
           ),
         ],

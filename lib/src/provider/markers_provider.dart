@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
 import 'package:acti_barrio_flutter/src/models/markers_response.dart';
@@ -37,7 +38,11 @@ class MarkersProviders extends ChangeNotifier {
     if (result == true) {
       final url = Uri.parse(
           "http://10.0.2.2:3001/api/modules/actibarrio/traerActividades");
-      final response = await http.get(url);
+      final response = await http.get(url, headers: {
+        HttpHeaders.contentTypeHeader: "application/json",
+        HttpHeaders.authorizationHeader: "Bearer ${prefs.getString('token')}"
+      });
+
       if (response.statusCode == 200) {
         conection = true;
         prefs.setBool('primeraCarga', true);
