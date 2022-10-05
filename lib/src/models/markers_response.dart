@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final markersResponse = markersResponseFromMap(jsonString);
-
 import 'dart:convert';
 
 class MarkersResponse {
@@ -39,6 +35,7 @@ class MarkersResponse {
 class Evento {
   Evento({
     required this.localidad,
+    required this.fechas,
     required this.contacto,
     required this.usuarioCreador,
     required this.usuarioResponsable,
@@ -46,16 +43,18 @@ class Evento {
     required this.nombre,
     required this.direccion,
     required this.descripcion,
+    required this.altura,
     required this.latitud,
     required this.longitud,
-    required this.activo,
+    required this.estado,
     required this.tipo,
-    required this.fechaInicio,
-    required this.fechaFin,
+    required this.createdAt,
+    required this.updatedAt,
     required this.v,
   });
 
   Localidad localidad;
+  Fechas fechas;
   Contacto contacto;
   UsuarioCreador usuarioCreador;
   UsuarioResponsable usuarioResponsable;
@@ -63,12 +62,13 @@ class Evento {
   String nombre;
   String direccion;
   String descripcion;
+  int altura;
   double latitud;
   double longitud;
-  bool activo;
+  String estado;
   String tipo;
-  String fechaInicio;
-  String fechaFin;
+  String createdAt;
+  String updatedAt;
   int v;
 
   factory Evento.fromJson(String str) => Evento.fromMap(json.decode(str));
@@ -77,6 +77,7 @@ class Evento {
 
   factory Evento.fromMap(Map<String, dynamic> json) => Evento(
         localidad: Localidad.fromMap(json["localidad"]),
+        fechas: Fechas.fromMap(json["fechas"]),
         contacto: Contacto.fromMap(json["Contacto"]),
         usuarioCreador: UsuarioCreador.fromMap(json["UsuarioCreador"]),
         usuarioResponsable:
@@ -85,17 +86,19 @@ class Evento {
         nombre: json["nombre"],
         direccion: json["direccion"],
         descripcion: json["descripcion"],
+        altura: json["altura"],
         latitud: json["latitud"].toDouble(),
         longitud: json["longitud"].toDouble(),
-        activo: json["activo"],
+        estado: json["estado"],
         tipo: json["tipo"],
-        fechaInicio: json["fecha_inicio"],
-        fechaFin: json["fecha_fin"],
+        createdAt: json["createdAt"],
+        updatedAt: json["updatedAt"],
         v: json["__v"],
       );
 
   Map<String, dynamic> toMap() => {
         "localidad": localidad.toMap(),
+        "fechas": fechas.toMap(),
         "Contacto": contacto.toMap(),
         "UsuarioCreador": usuarioCreador.toMap(),
         "UsuarioResponsable": usuarioResponsable.toMap(),
@@ -103,12 +106,13 @@ class Evento {
         "nombre": nombre,
         "direccion": direccion,
         "descripcion": descripcion,
+        "altura": altura,
         "latitud": latitud,
         "longitud": longitud,
-        "activo": activo,
+        "activo": estado,
         "tipo": tipo,
-        "fecha_inicio": fechaInicio,
-        "fecha_fin": fechaFin,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
         "__v": v,
       };
 }
@@ -141,6 +145,107 @@ class Contacto {
       };
 }
 
+class Fechas {
+  Fechas({
+    required this.tipo,
+    required this.fechaInicio,
+    required this.fechaFin,
+    required this.fechas,
+  });
+
+  String tipo;
+  String fechaInicio;
+  String fechaFin;
+  List<dynamic> fechas;
+
+  factory Fechas.fromJson(String str) => Fechas.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Fechas.fromMap(Map<String, dynamic> json) => Fechas(
+        tipo: json["tipo"],
+        fechaInicio: json["fechaInicio"],
+        fechaFin: json["fechaFin"],
+        fechas: List<dynamic>.from(json["fechas"].map((x) => x)),
+      );
+
+  Map<String, dynamic> toMap() => {
+        "tipo": tipo,
+        "fechaInicio": fechaInicio,
+        "fechaFin": fechaFin,
+        "fechas": List<dynamic>.from(fechas.map((x) => x)),
+      };
+}
+
+class FechaClass {
+  FechaClass({
+    required this.lunes,
+    required this.martes,
+    required this.mircoles,
+    required this.jueves,
+    required this.viernes,
+    required this.sbado,
+    required this.domingo,
+  });
+
+  Domingo lunes;
+  Domingo martes;
+  Domingo mircoles;
+  Domingo jueves;
+  Domingo viernes;
+  Domingo sbado;
+  Domingo domingo;
+
+  factory FechaClass.fromJson(String str) =>
+      FechaClass.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory FechaClass.fromMap(Map<String, dynamic> json) => FechaClass(
+        lunes: Domingo.fromMap(json["lunes"]),
+        martes: Domingo.fromMap(json["martes"]),
+        mircoles: Domingo.fromMap(json["miércoles"]),
+        jueves: Domingo.fromMap(json["jueves"]),
+        viernes: Domingo.fromMap(json["viernes"]),
+        sbado: Domingo.fromMap(json["sábado"]),
+        domingo: Domingo.fromMap(json["domingo"]),
+      );
+
+  Map<String, dynamic> toMap() => {
+        "lunes": lunes.toMap(),
+        "martes": martes.toMap(),
+        "miércoles": mircoles.toMap(),
+        "jueves": jueves.toMap(),
+        "viernes": viernes.toMap(),
+        "sábado": sbado.toMap(),
+        "domingo": domingo.toMap(),
+      };
+}
+
+class Domingo {
+  Domingo({
+    required this.inicio,
+    required this.fin,
+  });
+
+  String inicio;
+  String fin;
+
+  factory Domingo.fromJson(String str) => Domingo.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Domingo.fromMap(Map<String, dynamic> json) => Domingo(
+        inicio: json["inicio"],
+        fin: json["fin"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "inicio": inicio,
+        "fin": fin,
+      };
+}
+
 class Localidad {
   Localidad({
     required this.barrio,
@@ -149,7 +254,7 @@ class Localidad {
     required this.longitud,
   });
 
-  Barrio? barrio;
+  Barrio barrio;
   String nombre;
   double latitud;
   double longitud;
@@ -159,14 +264,14 @@ class Localidad {
   String toJson() => json.encode(toMap());
 
   factory Localidad.fromMap(Map<String, dynamic> json) => Localidad(
-        barrio: json["barrio"] == null ? null : Barrio.fromMap(json["barrio"]),
+        barrio: Barrio.fromMap(json["barrio"]),
         nombre: json["nombre"],
         latitud: json["latitud"].toDouble(),
         longitud: json["longitud"].toDouble(),
       );
 
   Map<String, dynamic> toMap() => {
-        "barrio": barrio == null ? null : barrio!.toMap(),
+        "barrio": barrio.toMap(),
         "nombre": nombre,
         "latitud": latitud,
         "longitud": longitud,
@@ -266,6 +371,8 @@ class Filtro {
     required this.nombre,
     required this.imagen,
     required this.activo,
+    required this.descripcion,
+    required this.publicId,
     required this.v,
   });
 
@@ -273,6 +380,8 @@ class Filtro {
   String nombre;
   String imagen;
   bool activo;
+  String descripcion;
+  String publicId;
   int v;
 
   factory Filtro.fromJson(String str) => Filtro.fromMap(json.decode(str));
@@ -284,6 +393,8 @@ class Filtro {
         nombre: json["nombre"],
         imagen: json["imagen"],
         activo: json["activo"],
+        descripcion: json["descripcion"],
+        publicId: json["public_id"],
         v: json["__v"],
       );
 
@@ -292,6 +403,8 @@ class Filtro {
         "nombre": nombre,
         "imagen": imagen,
         "activo": activo,
+        "descripcion": descripcion,
+        "public_id": publicId,
         "__v": v,
       };
 }

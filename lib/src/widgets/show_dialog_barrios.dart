@@ -77,7 +77,8 @@ class ShowDialogBarrios {
                                                 ),
                                                 onTap: () {
                                                   final LatLng barrio = LatLng(
-                                                      b.latitud, b.longitud);
+                                                      b.latitud.toDouble(),
+                                                      b.longitud.toDouble());
                                                   barriosInfo.mapboxController
                                                       .animateCamera(
                                                     CameraUpdate

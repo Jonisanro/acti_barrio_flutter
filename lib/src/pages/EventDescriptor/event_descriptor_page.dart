@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:acti_barrio_flutter/src/models/markers_response.dart';
+import 'package:acti_barrio_flutter/src/pages/EventDescriptor/widgets/blue_container.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -8,10 +11,10 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../helpers/global_functions.dart';
-import '../models/markers_response.dart';
-import '../provider/mapbox_info.dart';
-import '../share_preferences/preferences.dart';
+import '../../helpers/global_functions.dart';
+import '../../models/markers_response.dart';
+import '../../provider/mapbox_info.dart';
+import '../../share_preferences/preferences.dart';
 
 class EventDescriptor extends StatelessWidget {
   const EventDescriptor({Key? key})
@@ -22,7 +25,6 @@ class EventDescriptor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Evento mark = ModalRoute.of(context)!.settings.arguments as Evento;
-    //TODO Cambiar cosas hardcodeadas
     return Scaffold(
         floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
         floatingActionButton: FloatingActionButton(
@@ -111,75 +113,23 @@ class _Tags extends StatelessWidget {
   @override
   //*Si los tags no son tan largos se muestran en linea
   Widget build(BuildContext context) {
-    if (mark.localidad.nombre.length < 8) {
+    if (mark.localidad.nombre.length < 8 &&
+        mark.localidad.barrio.nombre.length < 8) {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            decoration: BoxDecoration(
-                color: const Color.fromRGBO(22, 117, 232, 1),
-                borderRadius: BorderRadius.circular(8)),
-            child: Center(
-                child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
-              child: Text(
-                mark.tipo,
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 216, 214, 214),
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold),
-              ),
-            )),
-          ),
+          blueContainer(mark.tipo),
           const SizedBox(
             width: 10.0,
           ),
-          Container(
-            decoration: BoxDecoration(
-                color: const Color.fromRGBO(22, 117, 232, 1),
-                borderRadius: BorderRadius.circular(8)),
-            child: Center(
-                child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
-              child: Text(
-                mark.localidad.nombre,
-                style: const TextStyle(
-                    color: Color.fromARGB(255, 216, 214, 214),
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.bold),
-              ),
-            )),
+          blueContainer(mark.localidad.nombre),
+          const SizedBox(
+            width: 10.0,
           ),
-          (() {
-            if (mark.localidad.barrio != null) {
-              return Container(
-                  decoration: BoxDecoration(
-                      color: const Color.fromRGBO(22, 117, 232, 1),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Center(
-                      child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 5.0, horizontal: 15.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: const Color.fromRGBO(22, 117, 232, 1),
-                          borderRadius: BorderRadius.circular(8)),
-                      child: Center(
-                          child: Text(
-                        mark.localidad.barrio!.nombre,
-                        style: const TextStyle(
-                            color: Color.fromARGB(255, 216, 214, 214),
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.bold),
-                      )),
-                    ),
-                  )));
-            }
-            return Container();
-          }()),
+          mark.localidad.barrio.nombre != ''
+              ? blueContainer(mark.localidad.barrio.nombre)
+              : Container(),
         ],
       );
     } else {
@@ -188,82 +138,21 @@ class _Tags extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(
-                  decoration: BoxDecoration(
-                      color: const Color.fromRGBO(22, 117, 232, 1),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Center(
-                      child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 5.0, horizontal: 15.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: const Color.fromRGBO(22, 117, 232, 1),
-                          borderRadius: BorderRadius.circular(8)),
-                      child: Center(
-                          child: Text(
-                        mark.tipo,
-                        style: const TextStyle(
-                            color: Color.fromARGB(255, 216, 214, 214),
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.bold),
-                      )),
-                    ),
-                  ))),
-              Container(
-                decoration: BoxDecoration(
-                    color: const Color.fromRGBO(22, 117, 232, 1),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Center(
-                    child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 5.0, horizontal: 15.0),
-                  child: Text(
-                    mark.localidad.nombre,
-                    style: const TextStyle(
-                        color: Color.fromARGB(255, 216, 214, 214),
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.bold),
-                  ),
-                )),
-              ),
+              blueContainer(mark.tipo),
+              blueContainer(mark.localidad.nombre),
             ],
           ),
           const SizedBox(
             height: 10.0,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              (() {
-                if (mark.localidad.barrio != null) {
-                  return Container(
-                      decoration: BoxDecoration(
-                          color: const Color.fromRGBO(22, 117, 232, 1),
-                          borderRadius: BorderRadius.circular(8)),
-                      child: Center(
-                          child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 5.0, horizontal: 15.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: const Color.fromRGBO(22, 117, 232, 1),
-                              borderRadius: BorderRadius.circular(8)),
-                          child: Center(
-                              child: Text(
-                            mark.localidad.barrio!.nombre,
-                            style: const TextStyle(
-                                color: Color.fromARGB(255, 216, 214, 214),
-                                fontSize: 14.0,
-                                fontWeight: FontWeight.bold),
-                          )),
-                        ),
-                      )));
-                }
-                return Container();
-              }()),
+              mark.localidad.barrio.nombre != ''
+                  ? blueContainer(mark.localidad.barrio.nombre)
+                  : Container(),
             ],
           ),
         ],
@@ -338,13 +227,13 @@ class _TituloState extends State<_Titulo> {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            const Padding(
+            /* const Padding(
               padding: EdgeInsets.only(bottom: 8.0),
               child: Text(
                 '(34 cupos restantes)',
                 style: TextStyle(fontSize: 12.0, color: Colors.black38),
               ),
-            ),
+            ), */
           ],
         ),
         IconButton(
@@ -370,8 +259,10 @@ class _FechaHoraContacto extends StatelessWidget {
     required this.mark,
   }) : super(key: key);
   final Evento mark;
+
   @override
   Widget build(BuildContext context) {
+    final fechas = mark.fechas.fechas[0];
     final size = MediaQuery.of(context).size;
     final barriosInfo = Provider.of<BarriosInfo>(context, listen: false);
     return Padding(
@@ -379,43 +270,69 @@ class _FechaHoraContacto extends StatelessWidget {
       child: Column(
         children: [
           //*Fecha
-          Row(
-            children: [
-              Container(
-                width: 40.0,
-                height: 40.0,
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 224, 235, 240)),
-                child: const Icon(
-                  Icons.calendar_month_outlined,
-                  size: 30.0,
-                  color: Color.fromRGBO(22, 117, 232, 1),
-                ),
-              ),
-              const SizedBox(
-                width: 10.0,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Desde / Hasta',
-                    style: TextStyle(fontSize: 13.0, color: Colors.black38),
-                  ),
-                  const SizedBox(
-                    height: 3.0,
-                  ),
-                  Text(mark.fechaInicio,
-                      style: const TextStyle(
-                          fontSize: 13.0, fontWeight: FontWeight.bold)),
-                  Text(mark.fechaFin,
-                      style: const TextStyle(
-                          fontSize: 13.0, fontWeight: FontWeight.bold))
-                ],
-              ),
-            ],
-          ),
+          mark.fechas.tipo == 'temporal'
+              ? Row(
+                  children: [
+                    Container(
+                      width: 40.0,
+                      height: 40.0,
+                      decoration: const BoxDecoration(
+                          color: Color.fromARGB(255, 224, 235, 240)),
+                      child: const Icon(
+                        Icons.calendar_month_outlined,
+                        size: 30.0,
+                        color: Color.fromRGBO(22, 117, 232, 1),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10.0,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Desde / Hasta',
+                          style:
+                              TextStyle(fontSize: 13.0, color: Colors.black38),
+                        ),
+                        const SizedBox(
+                          height: 3.0,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              formatDate(
+                                  DateTime.parse(mark.fechas.fechaInicio),
+                                  [dd, '/', mm, '/', yyyy]),
+                              style: const TextStyle(
+                                  fontSize: 15.0, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(
+                              width: 5.0,
+                            ),
+                            const Text(
+                              '-',
+                              style: TextStyle(
+                                  fontSize: 15.0, fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(
+                              width: 5.0,
+                            ),
+                            Text(
+                              formatDate(DateTime.parse(mark.fechas.fechaFin),
+                                  [dd, '-', mm, '-', yyyy]),
+                              style: const TextStyle(
+                                  fontSize: 15.0, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        )
+                      ],
+                    )
+                  ],
+                )
+              : Container(),
+
           const SizedBox(
             height: 10.0,
           ),
@@ -443,30 +360,130 @@ class _FechaHoraContacto extends StatelessWidget {
               const SizedBox(
                 width: 10.0,
               ),
-
-              //TODO: Cargar desde el json horarios, fechas y datos de contacto
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Dias / Horas',
-                    style: TextStyle(fontSize: 13.0, color: Colors.black38),
-                  ),
-                  SizedBox(
-                    height: 3.0,
-                  ),
-                  Text('Lunes 13:00hs - 14:00 hs',
-                      style: TextStyle(
-                          fontSize: 13.0, fontWeight: FontWeight.bold)),
-                  Text('Miercoles 13:00hs - 14:00 hs',
-                      style: TextStyle(
-                          fontSize: 13.0, fontWeight: FontWeight.bold)),
-                  Text('Viernes 13:00hs - 14:00 hs',
-                      style: TextStyle(
-                          fontSize: 13.0, fontWeight: FontWeight.bold))
-                ],
-              ),
+              mark.fechas.tipo == 'temporal'
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Dias / Horas',
+                          style:
+                              TextStyle(fontSize: 13.0, color: Colors.black38),
+                        ),
+                        const SizedBox(
+                          height: 3.0,
+                        ),
+                        Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              fechas['lunes']['inicio'] != ''
+                                  ? Text(
+                                      'Lunes: ${fechas['lunes']['inicio']} hs'
+                                      ' - '
+                                      '${fechas['lunes']['fin']} hs',
+                                      style: const TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  : Container(),
+                              fechas['martes']['inicio'] != ''
+                                  ? Text(
+                                      'Martes: ${fechas['martes']['inicio']} hs'
+                                      ' - '
+                                      '${fechas['martes']['fin']} hs',
+                                      style: const TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  : Container(),
+                              fechas['miércoles']['inicio'] != ''
+                                  ? Text(
+                                      'Miércoles: ${fechas['miércoles']['inicio']} hs'
+                                      ' - '
+                                      '${fechas['miércoles']['fin']} hs',
+                                      style: const TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  : Container(),
+                              fechas['jueves']['inicio'] != ''
+                                  ? Text(
+                                      'Jueves: ${fechas['jueves']['inicio']} hs'
+                                      ' - '
+                                      '${fechas['jueves']['fin']} hs',
+                                      style: const TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  : Container(),
+                              fechas['viernes']['inicio'] != ''
+                                  ? Text(
+                                      'Viernes: ${fechas['viernes']['inicio']} hs'
+                                      ' - '
+                                      '${fechas['viernes']['fin']} hs',
+                                      style: const TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  : Container(),
+                              fechas['sábado']['inicio'] != ''
+                                  ? Text(
+                                      'Sábado: ${fechas['sábado']['inicio']} hs'
+                                      ' - '
+                                      '${fechas['sábado']['fin']} hs',
+                                      style: const TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  : Container(),
+                              fechas['domingo']['inicio'] != ''
+                                  ? Text(
+                                      'Domingo: ${fechas['domingo']['inicio']} hs'
+                                      ' - '
+                                      '${fechas['domingo']['fin']} hs',
+                                      style: const TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  : Container(),
+                            ])
+                      ],
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Dias / Horas',
+                          style:
+                              TextStyle(fontSize: 13.0, color: Colors.black38),
+                        ),
+                        const SizedBox(
+                          height: 3.0,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: mark.fechas.fechas
+                              .map((i) => Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(width: 10.0),
+                                      Text(
+                                        i,
+                                        style: const TextStyle(
+                                            fontSize: 15.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ))
+                              .toList(),
+                        )
+                      ],
+                    ),
             ],
           ),
           const SizedBox(
@@ -604,7 +621,7 @@ class _FechaHoraContacto extends StatelessWidget {
                       SizedBox(
                         width: size.width * 0.5,
                         child: Text(
-                          mark.direccion,
+                          "${mark.direccion} ${mark.altura}",
                           style: const TextStyle(
                               fontSize: 13.0, fontWeight: FontWeight.bold),
                           overflow: TextOverflow.visible,

@@ -51,72 +51,91 @@ class _ListEventsState extends State<ListEvents> {
             final List<Evento> listEvents = snapshot.data!;
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ListView.builder(
-                padding: const EdgeInsets.all(0),
-                itemCount: listEvents.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Dismissible(
-                    key: UniqueKey(),
-                    direction: DismissDirection.startToEnd,
-                    onDismissed: (direction) async {
-                      await setFavorite(
-                          context, listEvents[index].id.toString(), false);
-                    },
-                    background: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey[800],
-                      ),
-                      width: double.infinity,
-                      height: double.infinity,
-                      child: BounceInDown(
-                        from: 50.0,
-                        child: const Center(
-                          child: ListTile(
-                            leading: Icon(
-                              Icons.delete_forever,
-                              color: Colors.white,
-                              size: 35.0,
+              child: Stack(
+                children: [
+                  const Align(
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      'Deslize para eliminar',
+                      style: TextStyle(
+                          fontSize: 17,
+                          height: 1.3,
+                          color: Colors.black54,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 35.0),
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(0),
+                      itemCount: listEvents.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Dismissible(
+                          key: UniqueKey(),
+                          direction: DismissDirection.startToEnd,
+                          onDismissed: (direction) async {
+                            await setFavorite(context,
+                                listEvents[index].id.toString(), false);
+                          },
+                          background: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey[800],
+                            ),
+                            width: double.infinity,
+                            height: double.infinity,
+                            child: BounceInDown(
+                              from: 50.0,
+                              child: const Center(
+                                child: ListTile(
+                                  leading: Icon(
+                                    Icons.delete_forever,
+                                    color: Colors.white,
+                                    size: 35.0,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: ListTile(
+                                  leading: Image(
+                                      width: 45.0,
+                                      height: 45.0,
+                                      image: Image.asset(
+                                              'images/actibarrio_deporte.png')
+                                          .image),
+                                  title: SizedBox(
+                                      width: size.width * 0.8,
+                                      child: Text(listEvents[index].nombre)),
+                                  subtitle: Text(listEvents[index].direccion),
+                                  trailing: const Icon(
+                                      Icons.arrow_forward_ios_outlined),
+                                  onTap: () async {
+                                    Navigator.pushReplacementNamed(
+                                            context, '/eventDescriptor',
+                                            arguments: listEvents[index])
+                                        .then((_) => {
+                                              setState(() {
+                                                // Call setState to refresh the page.
+                                              })
+                                            });
+                                  },
+                                ),
+                              )
+                            ],
                           ),
-                          child: ListTile(
-                            leading: Image(
-                                width: 45.0,
-                                height: 45.0,
-                                image:
-                                    Image.asset('images/actibarrio_deporte.png')
-                                        .image),
-                            title: SizedBox(
-                                width: size.width * 0.8,
-                                child: Text(listEvents[index].nombre)),
-                            subtitle: Text(listEvents[index].direccion),
-                            trailing:
-                                const Icon(Icons.arrow_forward_ios_outlined),
-                            onTap: () async {
-                              Navigator.pushNamed(context, '/eventDescriptor',
-                                      arguments: listEvents[index])
-                                  .then((_) => {
-                                        setState(() {
-                                          // Call setState to refresh the page.
-                                        })
-                                      });
-                            },
-                          ),
-                        )
-                      ],
+                        );
+                      },
                     ),
-                  );
-                },
+                  ),
+                ],
               ),
             );
           } else {

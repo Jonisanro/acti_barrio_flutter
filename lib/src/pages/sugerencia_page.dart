@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SugerenciaPage extends StatelessWidget {
   const SugerenciaPage({Key? key}) : super(key: key);
@@ -53,7 +54,7 @@ class SugerenciaPage extends StatelessWidget {
         SizedBox(
           width: size.width * 0.9,
           child: const Text(
-            'Si nos quieres realizar un comentario o sugerencias de nuestra APP , acerca del contenido,  lo podes realizar al siguiente',
+            'Si nos quieres realizar un comentario o sugerencias de nuestra APP , acerca del contenido,  lo podes realizar a traves de este boton.',
             textAlign: TextAlign.left,
             style: TextStyle(
                 color: Color.fromARGB(187, 16, 16, 16),
@@ -82,7 +83,10 @@ class SugerenciaPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              _launchUrl(
+                  'mailto:mail@neuquen.gov.ar?subject=Tengo una sugerencia&body=<body>');
+            },
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.transparent),
               elevation: MaterialStateProperty.all(0.0),
@@ -100,5 +104,12 @@ class SugerenciaPage extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+Future<void> _launchUrl(String url) async {
+  final uri = Uri.parse(url);
+  if (!await launchUrl(uri)) {
+    throw 'Could not launch $url';
   }
 }

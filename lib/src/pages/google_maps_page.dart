@@ -365,7 +365,8 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                     ),
                     ListTile(
                       minLeadingWidth: 25.0,
-                      onTap: () => Navigator.pushNamed(context, '/favorite'),
+                      onTap: () =>
+                          Navigator.popAndPushNamed(context, '/favorite'),
                       leading: Icon(
                         LineAwesomeIcons.heart,
                         color: Colors.grey[600],
@@ -380,31 +381,6 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                         ),
                       ),
                     ),
-
-                    //TODO: Solucionar vista Usuario
-                    /* ListTile(
-                    minLeadingWidth: 25.0,
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PageEventosTipo(
-                            tipo: mark.tipo,
-                          ),
-                        )),
-                    leading: Icon(
-                      LineAwesomeIcons.shoe_prints,
-                      color: Colors.grey[600],
-                      size: 30.0,
-                    ),
-                    title: Text(
-                      "Eventos",
-                      style: TextStyle(
-                        color: Colors.grey[800],
-                        fontSize: 15.0,
-                        height: 1.35,
-                      ),
-                    ),
-                  ), */
                     ListTile(
                       minLeadingWidth: 25.0,
                       leading: Icon(
@@ -427,7 +403,7 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                     ListTile(
                       minLeadingWidth: 25.0,
                       onTap: () {
-                        Navigator.pushNamed(context, '/sugerencia');
+                        Navigator.popAndPushNamed(context, '/sugerencia');
                       },
                       leading: Icon(
                         LineAwesomeIcons.comment,
@@ -458,7 +434,8 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                             height: 1.35,
                           ),
                         ),
-                        onTap: () => Navigator.pushNamed(context, '/acercaDe')),
+                        onTap: () =>
+                            Navigator.popAndPushNamed(context, '/acercaDe')),
                     ListTile(
                         minLeadingWidth: 25.0,
                         leading: Icon(
@@ -480,7 +457,6 @@ class _GoogleMapsPageState extends State<GoogleMapsPage> {
                         }),
                     SizedBox(
                       height: size.height * 0.13,
-                      //TODO:soulucinar ubicacion de la version
                     ),
                     Stack(
                       children: [

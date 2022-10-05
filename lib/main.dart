@@ -1,6 +1,6 @@
 import 'package:acti_barrio_flutter/src/pages/Login/login_page.dart';
 import 'package:acti_barrio_flutter/src/pages/acerca_nuestro_page.dart';
-import 'package:acti_barrio_flutter/src/pages/event_descriptor_page.dart';
+import 'package:acti_barrio_flutter/src/pages/EventDescriptor/event_descriptor_page.dart';
 import 'package:acti_barrio_flutter/src/pages/favorites_page.dart';
 import 'package:acti_barrio_flutter/src/pages/google_maps_page.dart';
 import 'package:acti_barrio_flutter/src/pages/home_page.dart';

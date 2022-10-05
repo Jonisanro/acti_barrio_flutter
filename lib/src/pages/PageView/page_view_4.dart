@@ -73,8 +73,8 @@ class _PageView4State extends State<PageView4> {
                         height: 15.0,
                       ),
                       ElevatedButton(
-                          onPressed: () async => Navigator.popAndPushNamed(
-                              context, '/google_maps'),
+                          onPressed: () async =>
+                              Navigator.popAndPushNamed(context, '/googleMaps'),
                           child: const Padding(
                             padding: EdgeInsets.all(15.0),
                             child: Text('Ir al mapa'),

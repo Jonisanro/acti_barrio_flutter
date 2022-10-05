@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../loginService/auth_service.dart';
 import '../provider/markers_provider.dart';
+import '../widgets/show_dialog_no_connection.dart';
 
 class NoDataPage extends StatelessWidget {
   const NoDataPage({Key? key}) : super(key: key);
@@ -119,7 +120,7 @@ class _ContentBody extends StatelessWidget {
                   if (result) {
                     AuthService().signInWithGoogle(context);
                   } else {
-                    Navigator.pushReplacementNamed(context, "/noDataPage");
+                    ShowDialogNoConnection().alerta(context);
                   }
                 },
                 child: SizedBox(

@@ -1,8 +1,9 @@
 import 'package:acti_barrio_flutter/src/loginService/auth_service.dart';
-import 'package:acti_barrio_flutter/src/provider/loading_provider.dart';
+
+import 'package:acti_barrio_flutter/src/widgets/show_dialog_no_connection.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:provider/provider.dart';
+
 import '../../helpers/global_functions.dart';
 
 class LoginPage extends StatefulWidget {
@@ -12,7 +13,15 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+bool loadingProvicer = false;
+
 class _LoginPageState extends State<LoginPage> {
+  @override
+  void dispose() {
+    loadingProvicer = false;
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +52,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _loginGoogle(BuildContext context) {
-    final loadingProvicer = Provider.of<LoadingProvider>(context);
     final size = MediaQuery.of(context).size;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -53,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
             image: const AssetImage("images/logo.png"),
             width: size.width * 0.5,
             height: size.height * 0.5),
-        SizedBox(height: size.height * 0.05),
+        SizedBox(height: size.height * 0.2),
         SizedBox(
           width: size.width * 0.9,
           child: Column(
@@ -62,6 +70,11 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               ElevatedButton(
                   style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                      ),
+                    ),
                     backgroundColor: MaterialStateProperty.all(
                         Colors.white.withOpacity(0.8)),
                   ),
@@ -69,27 +82,13 @@ class _LoginPageState extends State<LoginPage> {
                     bool result =
                         await InternetConnectionChecker().hasConnection;
                     if (result) {
-                      loadingProvicer.loadingOn = true;
+                      setState(() {
+                        loadingProvicer = true;
+                      });
 
                       AuthService().signInWithGoogle(context);
                     } else {
-                      showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          title: const Text("Error"),
-                          content: const Text(
-                              "No hay conexión a internet, intente nuevamente"),
-                          actions: [
-                            TextButton(
-                              child: const Text("Aceptar"),
-                              onPressed: () => Navigator.of(context).pop(),
-                            )
-                          ],
-                        ),
-                      );
+                      ShowDialogNoConnection().alerta(context);
                     }
                   },
                   child: Padding(
@@ -100,13 +99,13 @@ class _LoginPageState extends State<LoginPage> {
                       children: const [
                         Image(
                           image: AssetImage("images/google.png"),
-                          height: 35.0,
-                          width: 35.0,
+                          height: 25.0,
+                          width: 25.0,
                         ),
                         SizedBox(width: 20.0),
                         Text(
                           'Ingresar con Google',
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(color: Colors.black, fontSize: 15.0),
                         ),
                       ],
                     ),
@@ -125,6 +124,9 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: () async {
                             Navigator.pushReplacementNamed(
                                 context, '/googleMaps');
+                            setState(() {
+                              loadingProvicer = false;
+                            });
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(12.0),
@@ -151,10 +153,9 @@ class _LoginPageState extends State<LoginPage> {
                   },
                 );
               })(),
-              if (loadingProvicer.loadingOn)
-                const Center(child: CircularProgressIndicator())
-              else
-                Container(),
+              loadingProvicer
+                  ? const Center(child: CircularProgressIndicator())
+                  : Container(),
             ],
           ),
         ),

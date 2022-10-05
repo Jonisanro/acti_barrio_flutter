@@ -26,7 +26,7 @@ class AuthService {
     } else {
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
-
+      /*  final url = Uri.parse("http://201.231.47.177:3002/api/auth/login"); */
       final url = Uri.parse(
           "http://10.0.2.2:3001/api/auth/login"); //TODO:Cambiar por url de producción
 
@@ -45,7 +45,9 @@ class AuthService {
         }).timeout(const Duration(seconds: 30));
 
         final result = json.decode(response.body);
+
         final token = await result['token'];
+
         final respuesta = await result['ok'];
 
         if (respuesta) {
@@ -56,6 +58,13 @@ class AuthService {
               : Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) => const GoogleMapsPage()));
           return [];
+        } else {
+          loadingProvicer.loadingOn = false;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('No se pudo iniciar sesión'),
+            ),
+          );
         }
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(

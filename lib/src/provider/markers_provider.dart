@@ -36,8 +36,11 @@ class MarkersProviders extends ChangeNotifier {
     primeraCarga = prefs.getBool('primeraCarga');
     bool result = await InternetConnectionChecker().hasConnection;
     if (result == true) {
+      //TODO:CAMBIAR AL DE PRODUCCION
+      /*  final url = Uri.parse(
+          "http://201.231.47.177:3002/api/modules/actibarrio/traerActividadesApp"); */
       final url = Uri.parse(
-          "http://10.0.2.2:3001/api/modules/actibarrio/traerActividades");
+          "http://10.0.2.2:3001/api/modules/actibarrio/traerActividadesApp");
       final response = await http.get(url, headers: {
         HttpHeaders.contentTypeHeader: "application/json",
         HttpHeaders.authorizationHeader: "Bearer ${prefs.getString('token')}"
@@ -49,6 +52,7 @@ class MarkersProviders extends ChangeNotifier {
         primeraCarga = true;
         String data = response.body;
         final jsonResult = MarkersResponse.fromJson(data);
+
         locations = jsonResult.localidades;
         markers = jsonResult.eventos;
         filters = jsonResult.filtros;
