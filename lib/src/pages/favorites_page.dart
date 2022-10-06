@@ -106,26 +106,28 @@ class _ListEventsState extends State<ListEvents> {
                                 ),
                                 child: ListTile(
                                   leading: Image(
-                                      width: 45.0,
-                                      height: 45.0,
-                                      image: Image.asset(
-                                              'images/actibarrio_deporte.png')
-                                          .image),
+                                    width: size.width * 0.12,
+                                    height: size.height * 0.12,
+                                    image: NetworkImage(markers.filters
+                                        .where((element) =>
+                                            element.nombre ==
+                                            listEvents[index].tipo)
+                                        .first
+                                        .imagen),
+                                  ),
                                   title: SizedBox(
                                       width: size.width * 0.8,
                                       child: Text(listEvents[index].nombre)),
-                                  subtitle: Text(listEvents[index].direccion),
+                                  subtitle: Text(listEvents[index].direccion +
+                                      ' ' +
+                                      listEvents[index].altura.toString()),
                                   trailing: const Icon(
                                       Icons.arrow_forward_ios_outlined),
                                   onTap: () async {
                                     Navigator.pushReplacementNamed(
                                             context, '/eventDescriptor',
                                             arguments: listEvents[index])
-                                        .then((_) => {
-                                              setState(() {
-                                                // Call setState to refresh the page.
-                                              })
-                                            });
+                                        .then((_) => {setState(() {})});
                                   },
                                 ),
                               )

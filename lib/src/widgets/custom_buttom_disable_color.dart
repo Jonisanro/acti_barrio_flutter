@@ -28,11 +28,11 @@ class _CustomButtonColorState extends State<CustomButtonColor> {
       builder: (context, snapshot) {
         if (snapshot.data != null) {
           final Uint8List bytes = base64Decode(snapshot.data!);
-
+          //TODO:Solucionar el error de la imagen DESACTIVADA
           return InkWell(
               onTap: () async {
-                widget.filtro.activo = !widget.filtro.activo;
-                if (widget.filtro.activo) {
+                widget.filtro.estado = !widget.filtro.estado;
+                if (widget.filtro.estado) {
                   await markersProvider.addMarkers(
                       context, widget.filtro.nombre);
 
@@ -45,7 +45,7 @@ class _CustomButtonColorState extends State<CustomButtonColor> {
               child: Container(
                 height: size.height * 0.1,
                 width: size.width * 0.1,
-                foregroundDecoration: widget.filtro.activo
+                foregroundDecoration: widget.filtro.estado
                     ? null
                     : BoxDecoration(
                         borderRadius: BorderRadius.circular(30.0),

@@ -6,7 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:http/http.dart' as http;
 import '../models/markers_response.dart';
 import '../provider/mapbox_info.dart';
 
@@ -152,7 +152,20 @@ Future<bool> setFavorite(BuildContext context, String id, bool disable) async {
   final prefs = Preferences();
   if (disable) {
     prefs.addFavorite(id);
+    final urlAdd = Uri.parse(
+        "http://10.0.2.2:3001/api/modules/actibarrio/agregarFavorito");
+    final response = await http.patch(urlAdd, body: {
+      'idUser': prefs.userId,
+      "id": id,
+    });
   } else {
+    final urlDelete = Uri.parse(
+        "http://10.0.2.2:3001/api/modules/actibarrio/eliminarFavorito");
+    final response = await http.patch(urlDelete, body: {
+      'idUser': prefs.userId,
+      "id": id,
+    });
+
     prefs.removeFavorite(id);
   }
 

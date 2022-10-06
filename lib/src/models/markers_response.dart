@@ -366,15 +366,15 @@ class UsuarioResponsable {
 }
 
 class Filtro {
-  Filtro({
-    required this.id,
-    required this.nombre,
-    required this.imagen,
-    required this.activo,
-    required this.descripcion,
-    required this.publicId,
-    required this.v,
-  });
+  Filtro(
+      {required this.id,
+      required this.nombre,
+      required this.imagen,
+      required this.activo,
+      required this.descripcion,
+      required this.publicId,
+      required this.v,
+      required this.estado});
 
   String id;
   String nombre;
@@ -383,6 +383,7 @@ class Filtro {
   String descripcion;
   String publicId;
   int v;
+  bool estado;
 
   factory Filtro.fromJson(String str) => Filtro.fromMap(json.decode(str));
 
@@ -396,6 +397,7 @@ class Filtro {
         descripcion: json["descripcion"],
         publicId: json["public_id"],
         v: json["__v"],
+        estado: json["estado"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -406,6 +408,7 @@ class Filtro {
         "descripcion": descripcion,
         "public_id": publicId,
         "__v": v,
+        "estado": estado,
       };
 }
 

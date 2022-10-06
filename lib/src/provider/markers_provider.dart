@@ -295,7 +295,7 @@ class _CustomInfoWindow extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Color.fromARGB(255, 65, 125, 135))),
                   const SizedBox(height: 1),
-                  Text(e.direccion,
+                  Text(e.direccion + ' ' + e.altura.toString(),
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                       style:

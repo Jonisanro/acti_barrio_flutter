@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
   static late SharedPreferences _prefs;
-
+  static const String _userId = '';
   static bool _isTutorialActived = false;
 
   static Future<void> init() async {
@@ -12,6 +12,10 @@ class Preferences {
 
   static bool get isTutorialActived {
     return _prefs.getBool('isTutorialActived') ?? _isTutorialActived;
+  }
+
+  String get userId {
+    return _prefs.getString('userId') ?? _userId;
   }
 
   static set isTutorialActived(bool value) {

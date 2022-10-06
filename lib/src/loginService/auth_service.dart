@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'dart:io';
 import 'package:acti_barrio_flutter/src/pages/google_maps_page.dart';
 
@@ -28,7 +29,7 @@ class AuthService {
           await googleUser.authentication;
       /*  final url = Uri.parse("http://201.231.47.177:3002/api/auth/login"); */
       final url = Uri.parse(
-          "http://10.0.2.2:3001/api/auth/login"); //TODO:Cambiar por url de producción
+          "http://10.0.2.2:3001/api/auth/login"); //TODO:CAMBIAR AL DE PRODUCCION
 
       final body = {
         "token": googleAuth.idToken,
@@ -49,9 +50,14 @@ class AuthService {
         final token = await result['token'];
 
         final respuesta = await result['ok'];
+        final userId = await result['userId'];
+        final List<String> favorites = await result['favorites'].cast<String>();
 
         if (respuesta) {
           prefs.setString('token', token);
+          prefs.setString('userId', userId);
+          prefs.remove('favorites');
+          prefs.setStringList('favorites', favorites);
 
           !Preferences.isTutorialActived
               ? Navigator.pushReplacementNamed(context, '/home')
@@ -78,9 +84,6 @@ class AuthService {
         );
         loadingProvicer.loadingOn = false;
       }
-
-//*Revisamos respuesta del servidor
-
     }
   }
 
