@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:acti_barrio_flutter/src/loginService/auth_service.dart';
 
 import 'package:acti_barrio_flutter/src/widgets/show_dialog_no_connection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 import '../../helpers/global_functions.dart';
@@ -110,6 +113,54 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   )),
+              SizedBox(height: size.height * 0.02),
+              Platform.isAndroid
+                  ? ElevatedButton(
+                      style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                          ),
+                        ),
+                        backgroundColor: MaterialStateProperty.all(
+                            Colors.white.withOpacity(0.8)),
+                      ),
+                      onPressed: () async {
+                        bool result =
+                            await InternetConnectionChecker().hasConnection;
+                        if (result) {
+                          setState(() {
+                            loadingProvicer = true;
+                          });
+
+                          AuthService().signInWithApple(context);
+                        } else {
+                          ShowDialogNoConnection().alerta(context);
+                        }
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(
+                              'images/logo_apple.svg',
+                              width: 25,
+                              height: 25,
+                              fit: BoxFit.contain,
+                            ),
+                            const SizedBox(width: 20.0),
+                            const Text(
+                              'Ingresar con Apple',
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 15.0),
+                            ),
+                          ],
+                        ),
+                      ))
+                  : Container(),
               SizedBox(height: size.height * 0.05),
               (() {
                 return FutureBuilder(
