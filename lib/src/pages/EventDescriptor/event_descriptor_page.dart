@@ -227,13 +227,6 @@ class _TituloState extends State<_Titulo> {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            /* const Padding(
-              padding: EdgeInsets.only(bottom: 8.0),
-              child: Text(
-                '(34 cupos restantes)',
-                style: TextStyle(fontSize: 12.0, color: Colors.black38),
-              ),
-            ), */
           ],
         ),
         IconButton(
@@ -473,7 +466,7 @@ class _FechaHoraContacto extends StatelessWidget {
                                     children: [
                                       const SizedBox(width: 10.0),
                                       Text(
-                                        i,
+                                        i + 'hs',
                                         style: const TextStyle(
                                             fontSize: 15.0,
                                             fontWeight: FontWeight.bold),

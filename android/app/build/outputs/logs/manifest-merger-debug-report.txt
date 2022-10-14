@@ -8,6 +8,7 @@ MERGED from C:\Users\Administrador\Documents\GitHub\Infotecnologia\acti_barrio_f
 MERGED from [:shared_preferences_android] C:\Users\Administrador\Documents\GitHub\Infotecnologia\acti_barrio_flutter\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:firebase_auth] C:\Users\Administrador\Documents\GitHub\Infotecnologia\acti_barrio_flutter\build\firebase_auth\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-15:12
 MERGED from [:firebase_core] C:\Users\Administrador\Documents\GitHub\Infotecnologia\acti_barrio_flutter\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-15:12
+MERGED from [:sign_in_with_apple] C:\Users\Administrador\Documents\GitHub\Infotecnologia\acti_barrio_flutter\build\sign_in_with_apple\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:geolocator_android] C:\Users\Administrador\Documents\GitHub\Infotecnologia\acti_barrio_flutter\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-17:12
 MERGED from [:google_maps_flutter] C:\Users\Administrador\Documents\GitHub\Infotecnologia\acti_barrio_flutter\build\google_maps_flutter\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:flutter_plugin_android_lifecycle] C:\Users\Administrador\Documents\GitHub\Infotecnologia\acti_barrio_flutter\build\flutter_plugin_android_lifecycle\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
@@ -59,8 +60,8 @@ MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Administrador\.gradl
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\2ebb65266d3a99dd140af3578ffa5966\transformed\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\316b2689fac4a7e2bfc73d54fbb3e062\transformed\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\baa425716a063e3b476c7741f43399d5\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\6b99217c9062eaa66671c0056700f35d\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Administrador\.gradle\caches\transforms-3\e52a6a0eea7e74070f61ce030081570e\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\6b99217c9062eaa66671c0056700f35d\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\fd1c04f8bc398d3e89af3198f6aa6c88\transformed\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\8261fd2933cb39606ab1de3e9359afd6\transformed\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Administrador\.gradle\caches\transforms-3\f6a6fc35e8d6a8b7af113cf33468954c\transformed\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:17:1-22:12
@@ -246,6 +247,8 @@ MERGED from [:firebase_auth] C:\Users\Administrador\Documents\GitHub\Infotecnolo
 MERGED from [:firebase_auth] C:\Users\Administrador\Documents\GitHub\Infotecnologia\acti_barrio_flutter\build\firebase_auth\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:firebase_core] C:\Users\Administrador\Documents\GitHub\Infotecnologia\acti_barrio_flutter\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:firebase_core] C:\Users\Administrador\Documents\GitHub\Infotecnologia\acti_barrio_flutter\build\firebase_core\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:sign_in_with_apple] C:\Users\Administrador\Documents\GitHub\Infotecnologia\acti_barrio_flutter\build\sign_in_with_apple\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:sign_in_with_apple] C:\Users\Administrador\Documents\GitHub\Infotecnologia\acti_barrio_flutter\build\sign_in_with_apple\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:geolocator_android] C:\Users\Administrador\Documents\GitHub\Infotecnologia\acti_barrio_flutter\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:geolocator_android] C:\Users\Administrador\Documents\GitHub\Infotecnologia\acti_barrio_flutter\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:google_maps_flutter] C:\Users\Administrador\Documents\GitHub\Infotecnologia\acti_barrio_flutter\build\google_maps_flutter\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
@@ -348,10 +351,10 @@ MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Administ
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\316b2689fac4a7e2bfc73d54fbb3e062\transformed\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\baa425716a063e3b476c7741f43399d5\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\baa425716a063e3b476c7741f43399d5\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\6b99217c9062eaa66671c0056700f35d\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\6b99217c9062eaa66671c0056700f35d\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Administrador\.gradle\caches\transforms-3\e52a6a0eea7e74070f61ce030081570e\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Administrador\.gradle\caches\transforms-3\e52a6a0eea7e74070f61ce030081570e\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\6b99217c9062eaa66671c0056700f35d\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\6b99217c9062eaa66671c0056700f35d\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\fd1c04f8bc398d3e89af3198f6aa6c88\transformed\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\fd1c04f8bc398d3e89af3198f6aa6c88\transformed\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Administrador\.gradle\caches\transforms-3\8261fd2933cb39606ab1de3e9359afd6\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44

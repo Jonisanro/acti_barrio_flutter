@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   )),
               SizedBox(height: size.height * 0.02),
-              Platform.isAndroid
+              Platform.isIOS
                   ? ElevatedButton(
                       style: ButtonStyle(
                         shape:
